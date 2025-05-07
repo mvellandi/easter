@@ -1,0 +1,19 @@
+{
+  "staff-grid": {
+    "name": "Staff Grid",
+    "version": "1.0.0",
+    "description": "Displays a grid of staff members",
+    "keyCombination": ["Option", "Shift", "S"],
+    "componentExportName": "StaffGridEggComponent",
+    "script": "/src/eggs/default/staff-grid/index.js",
+    "props": {
+      "title": "Our Team",
+      "theme": "light",
+      "assetConfig": {
+        "fallbackUrl": "assets/images/avatar.png",
+        "version": "1.0.0"
+      },
+      "dataUrl": "staff-data.json"
+    }
+  }
+}

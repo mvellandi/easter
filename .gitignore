@@ -1,0 +1,41 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# dotenv environment variables file
+.env
+.env*.local
+.env*.development
+.env*.test
+.env*.production
+!/.env.example
+!/.env.ci
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Vite
+dist
+dist-ssr
+*.local
+/coverage # Test coverage reports
+
+# Easter Egg Core App specific
+src/dev-registry-sources.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Virtual environment
+.venv
+venv/
+ENV/
+env/
+migrations/ 

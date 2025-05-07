@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Custom theme variables */
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #10b981;
+}
+
+/* Custom styles */
+.ee-modal-base {
+  --ee-modal-bg: rgba(0, 0, 0, 0.5);
+  --ee-modal-z-index: 9999;
+  --ee-animation-duration: 0.3s;
+}
