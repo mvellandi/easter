@@ -229,6 +229,9 @@ class EasterEggLoader {
         // Clone the config to modify paths without altering the original registryData object
         const eggConfig = JSON.parse(JSON.stringify(originalEggConfig));
 
+        // Ensure uiOptions is part of the eggConfig
+        eggConfig.uiOptions = originalEggConfig.uiOptions || {};
+
         console.log(
           `Loader: Processing egg '${eggId}' from ${registryPathOrUrl}`
         );
@@ -416,6 +419,7 @@ class EasterEggLoader {
         keyCombination: eggConfig.keyCombination,
         component: component, // Pass the actual imported component
         props: finalProps, // Pass potentially modified props
+        uiOptions: eggConfig.uiOptions, // Pass uiOptions to the core
       });
 
       console.log(`Successfully registered Easter egg: ${eggId}`);

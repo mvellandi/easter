@@ -10,6 +10,12 @@ import {
 
 import tailwindAndCustomCssString from "../styles/main.css?inline"; // Import CSS as string
 
+// Import the new CoreModalShell component
+import CoreModalShell from "./components/CoreModalShell.vue";
+
+// Import styles for CoreModalShell to be injected manually
+import coreModalShellCssString from "./components/CoreModalShell.css?inline";
+
 // Use Vue from the global scope instead of importing
 // import Modal from "./components/Modal.vue";
 
@@ -21,76 +27,6 @@ import {
 import { KeyHandler } from "./key-handler.js";
 
 const coreStructuralStyles = `
-  /* --- Styles for .ee-container, .ee-backdrop, .ee-content, .ee-close-button --- */
-  /* --- These ensure the container/backdrop/modal structure works --- */
-  .ee-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    pointer-events: none;
-    /* Ensure it captures space even if backdrop is hidden */
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-  }
-
-  .ee-backdrop {
-    position: absolute; /* Position within container */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: auto;
-  }
-
-  .ee-content {
-    position: relative; /* Needed for absolute positioning of the close button */
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow: auto;
-    pointer-events: auto; /* Allow interaction with content */
-  }
-
-  .ee-close-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #333;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    z-index: 10; /* Ensure it's above content if needed */
-  }
-
-  .ee-close-button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    color: #000;
-  }
-
-  .ee-close-button svg {
-    width: 16px;
-    height: 16px;
-    stroke: currentColor;
-    stroke-width: 2;
-  }
-
   ${ErrorModalStyles}
 `;
 
@@ -119,7 +55,7 @@ class EasterEggCore {
 
     // 1. Create the reactive state object FIRST
     this.reactiveState = reactive({
-      activeEgg: null, // Stores wrapper { id, component, props }
+      activeEgg: null, // Will store { id, component, props, uiOptions }
       activeEggComponent: null, // Stores the actual Vue component definition
       errorModal: {
         show: false,
@@ -153,73 +89,23 @@ class EasterEggCore {
       "EasterEggCore: Inlined Tailwind/Custom styles injected into Shadow DOM."
     );
 
+    // Inject CoreModalShell.css styles
+    const coreModalShellStyleElement = document.createElement("style");
+    coreModalShellStyleElement.textContent = coreModalShellCssString;
+    shadowRoot.appendChild(coreModalShellStyleElement);
+    console.log(
+      "EasterEggCore: CoreModalShell.css styles injected into Shadow DOM."
+    );
+
     // (Optional: If ErrorModalStyles were separate and needed, inject them too)
     // const errorModalStyleElement = document.createElement('style');
     // errorModalStyleElement.textContent = ErrorModalStyles;
     // shadowRoot.appendChild(errorModalStyleElement);
 
-    // Create Vue app (template remains the same, renders inside shadow)
-    this.vueApp = createApp({
-      components: {
-        ErrorModal: ErrorModalComponent,
-      },
-      template: `
-        <div class="ee-container">
-          <div v-if="state.activeEggComponent" class="ee-backdrop" @click="handleBackdropClick">
-            <div class="ee-content">
-              <button 
-                class="ee-close-button" 
-                @click="closeActiveEgg" 
-                aria-label="Close Easter Egg"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-              <component :is="state.activeEggComponent" v-bind="state.activeEgg?.props" />
-            </div>
-          </div>
-          <ErrorModal 
-            :show="state.errorModal.show"
-            :message="state.errorModal.message"
-            @close="closeErrorModal"
-          />
-        </div>
-      `,
-      setup: () => {
-        // Arrow function to maintain 'this' context if needed, though we pass state directly
-        // 2. Use the pre-defined reactive state
-        const state = coreInstance.reactiveState;
-
-        const handleBackdropClick = (event) => {
-          if (event.target === event.currentTarget) {
-            const eggIdToToggle = state.activeEgg?.id;
-            if (eggIdToToggle) {
-              coreInstance.unmount();
-            }
-          }
-        };
-
-        const closeErrorModal = () => {
-          state.errorModal.show = false;
-        };
-
-        const closeActiveEgg = () => {
-          console.log(
-            "EasterEggCore: Close button clicked, unmounting active egg."
-          );
-          coreInstance.unmount();
-        };
-
-        // Expose the state and methods needed by the template
-        return {
-          state,
-          handleBackdropClick,
-          closeErrorModal,
-          closeActiveEgg,
-        };
-      },
+    // Create Vue app using the new CoreModalShell component
+    this.vueApp = createApp(CoreModalShell, {
+      reactiveState: this.reactiveState, // Pass the reactive state object
+      onUnmountRequest: this.unmount, // Pass the core's unmount method
     });
 
     // Initialize error handler (ensure it works with shadow DOM if needed)
@@ -255,7 +141,10 @@ class EasterEggCore {
     }
 
     this.eggs.set(eggId, {
-      ...config,
+      component: config.component,
+      props: config.props || {},
+      keyCombination: config.keyCombination,
+      uiOptions: config.uiOptions || {}, // Store uiOptions, defaulting to empty object
       isVisible: false,
     });
 
@@ -351,6 +240,7 @@ class EasterEggCore {
       id: eggId,
       component: markRaw(egg.component),
       props: egg.props || {},
+      uiOptions: egg.uiOptions || {}, // Include uiOptions here
     };
     const rawComponent = markRaw(egg.component);
 
@@ -365,6 +255,8 @@ class EasterEggCore {
       );
       return; // Prevent further issues
     }
+
+    this.activeEgg = eggData; // Set the internal class property for active egg tracking
 
     console.log(`EasterEggCore: Successfully mounted egg ${eggId}`);
   }
