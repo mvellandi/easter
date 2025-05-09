@@ -1,60 +1,56 @@
 <template>
   <div class="ee-container">
     <!-- 1. Overlay (if shown) -->
-    <div
-      v-if="
-        reactiveState.activeEggComponent &&
-        !reactiveState.activeEgg?.uiOptions?.hideCoreOverlay
+    <CoreOverlay
+      :show="
+        !!(
+          reactiveState.activeEggComponent &&
+          !reactiveState.activeEgg?.uiOptions?.hideCoreOverlay
+        )
       "
-      class="ee-backdrop"
-      @click="handleBackdropClick"
+      @backdropClick="handleBackdropClick"
     >
       <!-- Egg content within backdrop if container is hidden (and overlay is shown) -->
-      <template v-if="reactiveState.activeEgg?.uiOptions?.hideCoreContainer">
+      <template
+        v-if="
+          reactiveState.activeEgg?.uiOptions?.hideCoreContainer &&
+          !reactiveState.activeEgg?.uiOptions?.hideCoreOverlay
+        "
+      >
         <component
           :is="reactiveState.activeEggComponent"
           v-bind="reactiveState.activeEgg?.props"
           :coreInterface="props.coreInterface"
         />
       </template>
-    </div>
+    </CoreOverlay>
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
-    <div
-      v-if="
-        reactiveState.activeEggComponent &&
-        !reactiveState.activeEgg?.uiOptions?.hideCoreContainer
+    <CoreModalContent
+      :show="
+        !!(
+          reactiveState.activeEggComponent &&
+          !reactiveState.activeEgg?.uiOptions?.hideCoreContainer
+        )
       "
-      class="ee-content"
-      :class="{
-        'no-overlay-content':
-          reactiveState.activeEgg?.uiOptions?.hideCoreOverlay,
-      }"
+      :applyNoOverlayEffect="
+        reactiveState.activeEgg?.uiOptions?.hideCoreOverlay === true
+      "
     >
-      <!-- Default Close Button (inside .ee-content) -->
-      <button
-        v-if="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
-        class="ee-close-button"
-        @click="closeActiveEgg"
-        aria-label="Close Easter Egg"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-      <component
-        :is="reactiveState.activeEggComponent"
-        v-bind="reactiveState.activeEgg?.props"
-        :coreInterface="props.coreInterface"
-      />
-    </div>
+      <template #closeButton>
+        <CoreDefaultCloseButton
+          :show="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
+          @closeClick="closeActiveEgg"
+        />
+      </template>
+      <template #default>
+        <component
+          :is="reactiveState.activeEggComponent"
+          v-bind="reactiveState.activeEgg?.props"
+          :coreInterface="props.coreInterface"
+        />
+      </template>
+    </CoreModalContent>
 
     <!-- 3. Floating Elements (if container is hidden) -->
     <template
@@ -64,23 +60,10 @@
       "
     >
       <!-- Floating Close Button (fixed to viewport) -->
-      <button
-        v-if="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
-        class="floating-close"
-        @click="closeActiveEgg"
-        aria-label="Close Easter Egg"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+      <CoreFloatingCloseButton
+        :show="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
+        @closeClick="closeActiveEgg"
+      />
       <!-- Egg component rendered "bare" if container AND overlay are hidden -->
       <component
         v-if="reactiveState.activeEgg?.uiOptions?.hideCoreOverlay"
@@ -105,6 +88,10 @@ import { defineProps } from "vue";
 // From ee-core.js, it's imported as './components/ErrorModal.js'.
 // So, if CoreModalShell.vue is in src/core/components, this path should be correct.
 import { ErrorModalComponent as ErrorModal } from "./ErrorModal.js";
+import CoreOverlay from "./CoreOverlay.vue"; // Import the new component
+import CoreModalContent from "./CoreModalContent.vue"; // Import the new component
+import CoreFloatingCloseButton from "./CoreFloatingCloseButton.vue"; // Import the new component
+import CoreDefaultCloseButton from "./CoreDefaultCloseButton.vue"; // Import the new component
 
 const props = defineProps({
   reactiveState: {
@@ -122,11 +109,13 @@ const props = defineProps({
   },
 });
 
-const handleBackdropClick = (event) => {
-  // Only close if the click is directly on the backdrop, not on its children
-  if (event.target === event.currentTarget) {
-    props.onUnmountRequest();
-  }
+const handleBackdropClick = () => {
+  // The CoreOverlay component has already confirmed it was a direct click on the backdrop.
+  // No need to check event.target here.
+  console.log(
+    "CoreModalShell: Valid backdrop click received, requesting unmount."
+  );
+  props.onUnmountRequest();
 };
 
 const closeErrorModal = () => {
@@ -143,6 +132,7 @@ const closeActiveEgg = () => {
 </script>
 
 <style scoped>
-/* All styles previously here (for .floating-close and .no-overlay-content) have been moved to CoreModalShell.css */
-/* This block is now empty. */
+/* All specific component styles (like .floating-close and .no-overlay-content) have been moved to their respective .css files or are part of their components. */
+/* This block should ideally be empty now, or only contain styles truly unique to the shell IF any remain. */
+/* .no-overlay-content was part of .ee-content logic, so it's in CoreModalContent.css */
 </style>

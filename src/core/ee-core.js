@@ -15,6 +15,14 @@ import CoreModalShell from "./components/CoreModalShell.vue";
 
 // Import styles for CoreModalShell to be injected manually
 import coreModalShellCssString from "./components/CoreModalShell.css?inline";
+// Import styles for CoreOverlay to be injected manually
+import coreOverlayCssString from "./components/CoreOverlay.css?inline";
+// Import styles for CoreModalContent to be injected manually
+import coreModalContentCssString from "./components/CoreModalContent.css?inline";
+// Import styles for CoreFloatingCloseButton to be injected manually
+import coreFloatingCloseButtonCssString from "./components/CoreFloatingCloseButton.css?inline";
+// Import styles for CoreDefaultCloseButton to be injected manually
+import coreDefaultCloseButtonCssString from "./components/CoreDefaultCloseButton.css?inline";
 
 // Use Vue from the global scope instead of importing
 // import Modal from "./components/Modal.vue";
@@ -95,6 +103,40 @@ class EasterEggCore {
     shadowRoot.appendChild(coreModalShellStyleElement);
     console.log(
       "EasterEggCore: CoreModalShell.css styles injected into Shadow DOM."
+    );
+
+    // Inject CoreOverlay.css styles
+    const coreOverlayStyleElement = document.createElement("style");
+    coreOverlayStyleElement.textContent = coreOverlayCssString;
+    shadowRoot.appendChild(coreOverlayStyleElement);
+    console.log(
+      "EasterEggCore: CoreOverlay.css styles injected into Shadow DOM."
+    );
+
+    // Inject CoreModalContent.css styles
+    const coreModalContentStyleElement = document.createElement("style");
+    coreModalContentStyleElement.textContent = coreModalContentCssString;
+    shadowRoot.appendChild(coreModalContentStyleElement);
+    console.log(
+      "EasterEggCore: CoreModalContent.css styles injected into Shadow DOM."
+    );
+
+    // Inject CoreFloatingCloseButton.css styles
+    const coreFloatingCloseButtonStyleElement = document.createElement("style");
+    coreFloatingCloseButtonStyleElement.textContent =
+      coreFloatingCloseButtonCssString;
+    shadowRoot.appendChild(coreFloatingCloseButtonStyleElement);
+    console.log(
+      "EasterEggCore: CoreFloatingCloseButton.css styles injected into Shadow DOM."
+    );
+
+    // Inject CoreDefaultCloseButton.css styles
+    const coreDefaultCloseButtonStyleElement = document.createElement("style");
+    coreDefaultCloseButtonStyleElement.textContent =
+      coreDefaultCloseButtonCssString;
+    shadowRoot.appendChild(coreDefaultCloseButtonStyleElement);
+    console.log(
+      "EasterEggCore: CoreDefaultCloseButton.css styles injected into Shadow DOM."
     );
 
     // (Optional: If ErrorModalStyles were separate and needed, inject them too)
