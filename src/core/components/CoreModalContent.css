@@ -1,8 +1,8 @@
 .ee-content {
   position: relative; /* Needed for absolute positioning of the close button within it */
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+  background: var(--color-ee-modal-bg);
+  padding: var(--ee-sys-modal-padding);
+  border-radius: var(--radius-ee-modal);
   max-width: 90%;
   max-height: 90%;
   overflow: auto;
@@ -11,5 +11,5 @@
 
 .ee-content.no-overlay-content {
   /* Styles for .ee-content if it's shown without an overlay */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-ee-modal);
 }

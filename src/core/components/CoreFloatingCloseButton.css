@@ -2,30 +2,31 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: rgba(255, 255, 255, 0.8); /* Slightly more opaque */
-  z-index: 20000; /* Very high z-index to be above everything including other fixed elements */
+  background-color: var(--color-ee-floating-close-bg);
+  z-index: var(--ee-sys-z-index-floating-close-button);
   pointer-events: auto;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  border-radius: var(--radius-ee-close-button);
+  width: var(--ee-sys-close-button-size);
+  height: var(--ee-sys-close-button-size);
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
-  color: #333;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Added shadow for better visibility */
+  color: var(--color-ee-floating-close-icon);
+  transition: background-color var(--ee-sys-animation-duration-fast) ease,
+    color var(--ee-sys-animation-duration-fast) ease;
+  box-shadow: var(--shadow-ee-floating-close);
 }
 
 .floating-close:hover {
-  background: rgba(230, 230, 230, 0.9); /* Adjusted hover */
-  color: #000;
+  background: var(--color-ee-floating-close-bg-hover);
+  color: var(--color-ee-floating-close-icon-hover);
 }
 
 .floating-close svg {
-  width: 16px;
-  height: 16px;
+  width: var(--ee-sys-close-button-icon-size);
+  height: var(--ee-sys-close-button-icon-size);
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: var(--ee-sys-close-button-icon-stroke-width);
 }
