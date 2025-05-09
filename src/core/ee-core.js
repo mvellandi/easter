@@ -102,10 +102,17 @@ class EasterEggCore {
     // errorModalStyleElement.textContent = ErrorModalStyles;
     // shadowRoot.appendChild(errorModalStyleElement);
 
+    const coreInterfaceForEggs = {
+      // Bind 'this' to ensure 'unmount' is called on the coreInstance
+      requestClose: coreInstance.unmount.bind(coreInstance),
+      // We can add other functions here later if eggs need more ways to interact with the core
+    };
+
     // Create Vue app using the new CoreModalShell component
     this.vueApp = createApp(CoreModalShell, {
       reactiveState: this.reactiveState, // Pass the reactive state object
-      onUnmountRequest: this.unmount, // Pass the core's unmount method
+      onUnmountRequest: this.unmount, // Pass the core's unmount method (for shell's own close)
+      coreInterface: coreInterfaceForEggs, // Pass the interface for the egg itself
     });
 
     // Initialize error handler (ensure it works with shadow DOM if needed)

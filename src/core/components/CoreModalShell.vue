@@ -14,6 +14,7 @@
         <component
           :is="reactiveState.activeEggComponent"
           v-bind="reactiveState.activeEgg?.props"
+          :coreInterface="props.coreInterface"
         />
       </template>
     </div>
@@ -51,6 +52,7 @@
       <component
         :is="reactiveState.activeEggComponent"
         v-bind="reactiveState.activeEgg?.props"
+        :coreInterface="props.coreInterface"
       />
     </div>
 
@@ -84,6 +86,7 @@
         v-if="reactiveState.activeEgg?.uiOptions?.hideCoreOverlay"
         :is="reactiveState.activeEggComponent"
         v-bind="reactiveState.activeEgg?.props"
+        :coreInterface="props.coreInterface"
       />
     </template>
 
@@ -111,6 +114,10 @@ const props = defineProps({
   // This prop will be the 'unmount' method from the EasterEggCore instance
   onUnmountRequest: {
     type: Function,
+    required: true,
+  },
+  coreInterface: {
+    type: Object,
     required: true,
   },
 });
