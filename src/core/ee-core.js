@@ -48,6 +48,7 @@ class EasterEggCore {
     this.keyHandler = new KeyHandler();
     this.errorHandlers = new Map();
     this.reactiveState = null;
+    this.activeEggStyleLinkElement = null;
 
     // Bind methods
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -60,6 +61,7 @@ class EasterEggCore {
   initialize() {
     console.log("EasterEggCore: Initializing with Shadow DOM...");
     const coreInstance = this;
+    // this.shadowRoot = this.container.attachShadow({ mode: "open" }); // MOVED DOWN
 
     // 1. Create the reactive state object FIRST
     this.reactiveState = reactive({
@@ -78,21 +80,21 @@ class EasterEggCore {
     document.body.appendChild(this.container);
     console.log("EasterEggCore: Root container appended to body");
 
-    // 1. Attach Shadow DOM
-    const shadowRoot = this.container.attachShadow({ mode: "open" });
+    // Attach Shadow DOM AFTER container is created
+    this.shadowRoot = this.container.attachShadow({ mode: "open" });
     console.log("EasterEggCore: Shadow DOM attached.");
 
     // 2. Inject ALL Styles into Shadow DOM
     const coreStyleElement = document.createElement("style");
     coreStyleElement.textContent = coreStructuralStyles;
-    shadowRoot.appendChild(coreStyleElement);
+    this.shadowRoot.appendChild(coreStyleElement);
     console.log(
       "EasterEggCore: Core structural styles injected into Shadow DOM."
     );
 
     const tailwindStyleElement = document.createElement("style");
     tailwindStyleElement.textContent = tailwindAndCustomCssString;
-    shadowRoot.appendChild(tailwindStyleElement);
+    this.shadowRoot.appendChild(tailwindStyleElement);
     console.log(
       "EasterEggCore: Inlined Tailwind/Custom styles injected into Shadow DOM."
     );
@@ -100,7 +102,7 @@ class EasterEggCore {
     // Inject CoreModalShell.css styles
     const coreModalShellStyleElement = document.createElement("style");
     coreModalShellStyleElement.textContent = coreModalShellCssString;
-    shadowRoot.appendChild(coreModalShellStyleElement);
+    this.shadowRoot.appendChild(coreModalShellStyleElement);
     console.log(
       "EasterEggCore: CoreModalShell.css styles injected into Shadow DOM."
     );
@@ -108,7 +110,7 @@ class EasterEggCore {
     // Inject CoreOverlay.css styles
     const coreOverlayStyleElement = document.createElement("style");
     coreOverlayStyleElement.textContent = coreOverlayCssString;
-    shadowRoot.appendChild(coreOverlayStyleElement);
+    this.shadowRoot.appendChild(coreOverlayStyleElement);
     console.log(
       "EasterEggCore: CoreOverlay.css styles injected into Shadow DOM."
     );
@@ -116,7 +118,7 @@ class EasterEggCore {
     // Inject CoreModalContent.css styles
     const coreModalContentStyleElement = document.createElement("style");
     coreModalContentStyleElement.textContent = coreModalContentCssString;
-    shadowRoot.appendChild(coreModalContentStyleElement);
+    this.shadowRoot.appendChild(coreModalContentStyleElement);
     console.log(
       "EasterEggCore: CoreModalContent.css styles injected into Shadow DOM."
     );
@@ -125,7 +127,7 @@ class EasterEggCore {
     const coreFloatingCloseButtonStyleElement = document.createElement("style");
     coreFloatingCloseButtonStyleElement.textContent =
       coreFloatingCloseButtonCssString;
-    shadowRoot.appendChild(coreFloatingCloseButtonStyleElement);
+    this.shadowRoot.appendChild(coreFloatingCloseButtonStyleElement);
     console.log(
       "EasterEggCore: CoreFloatingCloseButton.css styles injected into Shadow DOM."
     );
@@ -134,7 +136,7 @@ class EasterEggCore {
     const coreDefaultCloseButtonStyleElement = document.createElement("style");
     coreDefaultCloseButtonStyleElement.textContent =
       coreDefaultCloseButtonCssString;
-    shadowRoot.appendChild(coreDefaultCloseButtonStyleElement);
+    this.shadowRoot.appendChild(coreDefaultCloseButtonStyleElement);
     console.log(
       "EasterEggCore: CoreDefaultCloseButton.css styles injected into Shadow DOM."
     );
@@ -162,7 +164,7 @@ class EasterEggCore {
     this.errorHandler = new ErrorHandler(this.reactiveState.errorModal);
 
     // 3. Mount Vue app INSIDE the Shadow Root
-    this.vueApp.mount(shadowRoot);
+    this.vueApp.mount(this.shadowRoot);
     console.log("EasterEggCore: Vue app mounted inside Shadow DOM.");
 
     // Add keyboard event listeners (remain on document)
@@ -193,7 +195,9 @@ class EasterEggCore {
       component: config.component,
       props: config.props || {},
       keyCombination: config.keyCombination,
-      uiOptions: config.uiOptions || {}, // Store uiOptions, defaulting to empty object
+      uiOptions: config.uiOptions || {},
+      scriptUrl: config.scriptUrl,
+      styleUrl: config.styleUrl,
       isVisible: false,
     });
 
@@ -262,69 +266,92 @@ class EasterEggCore {
   }
 
   mount(eggId) {
-    console.log(`EasterEggCore: Mounting egg ${eggId}`);
-    const egg = this.eggs.get(eggId);
-    if (!egg) {
-      console.warn(`EasterEggCore: Egg ${eggId} not found for mounting`);
+    const eggToMount = this.eggs.get(eggId);
+    if (!eggToMount) {
+      console.error(`EasterEggCore: Attempted to mount unknown egg ${eggId}`);
       return;
     }
 
-    // Make sure the component is available
-    if (!egg.component) {
-      console.error(
-        `EasterEggCore: Component for egg ${eggId} is not available`
-      );
-      // Optionally trigger error handler
-      this.handleError(
-        eggId,
-        "componentMissing",
-        new Error(`Component for ${eggId} not found`),
-        { config: egg }
-      );
-      return;
+    // Unmount any currently active egg first
+    if (this.activeEgg && this.activeEgg.id !== eggId) {
+      this.unmount(); // This will also clear its specific stylesheet
     }
 
-    // Create the wrapper object with the raw component
-    const eggData = {
-      id: eggId,
-      component: markRaw(egg.component),
-      props: egg.props || {},
-      uiOptions: egg.uiOptions || {}, // Include uiOptions here
-    };
-    const rawComponent = markRaw(egg.component);
+    console.log(`EasterEggCore: Mounting egg ${eggId}`, eggToMount);
+    this.activeEgg = { ...eggToMount, id: eggId }; // Store a copy with id
 
-    // 3. Update the shared reactive state directly
-    if (this.reactiveState) {
-      this.reactiveState.activeEgg = eggData;
-      this.reactiveState.activeEggComponent = rawComponent;
-      console.log("EasterEggCore: Shared reactive state updated for mount");
+    // --- NEW: Manage egg-specific stylesheet in Shadow DOM ---
+    // Remove previous egg's stylesheet if it exists and belongs to a different egg
+    if (
+      this.activeEggStyleLinkElement &&
+      this.activeEggStyleLinkElement.parentNode === this.shadowRoot
+    ) {
+      this.shadowRoot.removeChild(this.activeEggStyleLinkElement);
+      this.activeEggStyleLinkElement = null;
+      console.log("EasterEggCore: Removed previous egg specific stylesheet.");
+    }
+
+    // If the new egg has a styleUrl, create and append its <link> tag
+    if (eggToMount.styleUrl) {
+      console.log(
+        `EasterEggCore: Loading stylesheet for egg ${eggId} from ${eggToMount.styleUrl}`
+      );
+      this.activeEggStyleLinkElement = document.createElement("link");
+      this.activeEggStyleLinkElement.setAttribute("rel", "stylesheet");
+      this.activeEggStyleLinkElement.setAttribute("href", eggToMount.styleUrl);
+      this.activeEggStyleLinkElement.onload = () => {
+        console.log(
+          `EasterEggCore: Successfully loaded stylesheet for egg ${eggId}: ${eggToMount.styleUrl}`
+        );
+      };
+      this.activeEggStyleLinkElement.onerror = () => {
+        console.error(
+          `EasterEggCore: Failed to load stylesheet for egg ${eggId}: ${eggToMount.styleUrl}`
+        );
+      };
+      this.shadowRoot.appendChild(this.activeEggStyleLinkElement);
     } else {
-      console.error(
-        "EasterEggCore: Reactive state not initialized during mount!"
+      console.log(
+        `EasterEggCore: Egg ${eggId} does not have a specific stylesheet.`
       );
-      return; // Prevent further issues
     }
+    // --- END NEW ---
 
-    this.activeEgg = eggData; // Set the internal class property for active egg tracking
+    // Update reactive state for Vue to render the component
+    this.reactiveState.activeEgg = this.activeEgg;
+    this.reactiveState.activeEggComponent = markRaw(this.activeEgg.component);
 
-    console.log(`EasterEggCore: Successfully mounted egg ${eggId}`);
+    this.isVisible = true;
+    // this.container.style.display = "block"; // Visibility handled by CoreModalShell based on reactiveState
+    console.log(
+      `EasterEggCore: Egg ${eggId} is now active and visible (pending Vue render).`
+    );
   }
 
   unmount() {
-    console.log("EasterEggCore: Unmounting active egg");
-    // 4. Update the shared reactive state directly
-    if (this.reactiveState) {
-      this.reactiveState.activeEgg = null;
-      this.reactiveState.activeEggComponent = null;
-      console.log("EasterEggCore: Shared reactive state updated for unmount");
-    } else {
-      console.error(
-        "EasterEggCore: Reactive state not initialized during unmount!"
+    if (!this.activeEgg) return;
+    console.log(`EasterEggCore: Unmounting active egg ${this.activeEgg.id}`);
+
+    // --- NEW: Remove active egg's specific stylesheet ---
+    if (
+      this.activeEggStyleLinkElement &&
+      this.activeEggStyleLinkElement.parentNode === this.shadowRoot
+    ) {
+      this.shadowRoot.removeChild(this.activeEggStyleLinkElement);
+      this.activeEggStyleLinkElement = null;
+      console.log(
+        "EasterEggCore: Removed active egg specific stylesheet during unmount."
       );
     }
+    // --- END NEW ---
 
-    this.activeEgg = null; // Clear internal class reference too
-    console.log("EasterEggCore: Active egg cleared");
+    this.activeEgg = null;
+    this.reactiveState.activeEgg = null;
+    this.reactiveState.activeEggComponent = null;
+    this.isVisible = false;
+    // this.container.style.display = "none"; // Visibility handled by CoreModalShell
+    this.keyHandler.reset(); // Reset key sequence on unmount
+    console.log("EasterEggCore: Active egg unmounted and hidden.");
   }
 
   destroy() {

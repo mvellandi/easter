@@ -248,11 +248,36 @@ class EasterEggLoader {
             `Loader: Resolved script for ${eggId} to: ${eggConfig.script}`
           );
         } else {
-          console.error(
-            `Loader: Missing 'script' for egg ${eggId} in ${registryPathOrUrl}. Skipping registration.`
+          console.error(`Loader: Egg '${eggId}' has no script defined.`);
+          easterEgg.handleError(
+            "loader",
+            "configError",
+            new Error("No script defined"),
+            { eggId, file: registryPathOrUrl }
           );
-          continue;
+          continue; // Skip this egg
         }
+
+        // --- NEW: Resolve style path ---
+        if (
+          originalEggConfig.style &&
+          typeof originalEggConfig.style === "string" &&
+          originalEggConfig.style.trim() !== ""
+        ) {
+          eggConfig.styleUrl = _resolveAssetPath(
+            originalEggConfig.style,
+            eggAssetBaseUrlOrPath
+          );
+          console.log(
+            `Loader: Resolved style for ${eggId} to: ${eggConfig.styleUrl}`
+          );
+        } else {
+          eggConfig.styleUrl = null; // Explicitly set to null if not defined or invalid
+          console.log(
+            `Loader: Egg '${eggId}' has no specific style sheet defined or path is invalid.`
+          );
+        }
+        // --- END NEW ---
 
         let absoluteDataUrlOrPath = null;
         if (eggConfig.props && eggConfig.props.dataUrl) {
@@ -420,6 +445,8 @@ class EasterEggLoader {
         component: component, // Pass the actual imported component
         props: finalProps, // Pass potentially modified props
         uiOptions: eggConfig.uiOptions, // Pass uiOptions to the core
+        scriptUrl: eggConfig.script, // Pass along for context
+        styleUrl: eggConfig.styleUrl, // Pass the resolved style URL
       });
 
       console.log(`Successfully registered Easter egg: ${eggId}`);
