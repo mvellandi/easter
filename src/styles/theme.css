@@ -1,0 +1,67 @@
+@theme {
+  /* Easter Egg System Theme Variables */
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   Colors                                   */
+  /* -------------------------------------------------------------------------- */
+  /* TODO: Replace hex values with OKLCH equivalents for brand colors */
+  --color-ee-primary: #3b82f6; /* Placeholder OKLCH: oklch(L C H) */
+  --color-ee-secondary: #10b981; /* Placeholder OKLCH: oklch(L C H) */
+
+  /* General UI Colors */
+  --color-ee-overlay-bg: oklch(0 0 0 / 0.5); /* Black @ 50% alpha */
+  --color-ee-modal-bg: oklch(1 0 0); /* White */
+  --color-ee-modal-text: var(--color-neutral-800); /* Tailwind's Neutral 800 */
+
+  /* Default Close Button Colors */
+  --color-ee-default-close-bg: oklch(0 0 0 / 0.1); /* Black @ 10% alpha */
+  --color-ee-default-close-bg-hover: oklch(0 0 0 / 0.2); /* Black @ 20% alpha */
+  --color-ee-default-close-icon: var(
+    --color-ee-modal-text
+  ); /* Inherits from modal text (Neutral 800) */
+  --color-ee-default-close-icon-hover: oklch(0 0 0); /* Black */
+
+  /* Floating Close Button Colors */
+  --color-ee-floating-close-bg: oklch(1 0 0 / 0.8); /* White @ 80% alpha */
+  --color-ee-floating-close-bg-hover: oklch(
+    0.985 0 0 / 0.95
+  ); /* Tailwind's Neutral 50 (LCH) @ 95% alpha */
+  --color-ee-floating-close-icon: var(
+    --color-neutral-800
+  ); /* Tailwind's Neutral 800 */
+  --color-ee-floating-close-icon-hover: oklch(0 0 0); /* Black */
+
+  /* -------------------------------------------------------------------------- */
+  /*                                Borders & Radii                             */
+  /* -------------------------------------------------------------------------- */
+  --radius-ee-modal: 8px;
+  --radius-ee-close-button: 50%;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   Shadows                                  */
+  /* -------------------------------------------------------------------------- */
+  --shadow-ee-modal: 0 0 15px rgba(0, 0, 0, 0.15);
+  --shadow-ee-floating-close: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  /* -------------------------------------------------------------------------- */
+  /*                       Layout, Spacing & Sizing (System)                    */
+  /* -------------------------------------------------------------------------- */
+  --ee-sys-modal-padding: 20px;
+  --ee-sys-close-button-size: 32px;
+  --ee-sys-close-button-icon-size: 16px;
+  --ee-sys-close-button-icon-stroke-width: 2px;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                 Z-Indexes (System)                         */
+  /* -------------------------------------------------------------------------- */
+  --ee-sys-z-index-overlay: 9990;
+  --ee-sys-z-index-modal: 9995;
+  --ee-sys-z-index-default-close-button: 10; /* Local to modal content */
+  --ee-sys-z-index-floating-close-button: 10000;
+
+  /* -------------------------------------------------------------------------- */
+  /*                             Animations (System)                            */
+  /* -------------------------------------------------------------------------- */
+  --ee-sys-animation-duration-fast: 0.2s;
+  --ee-sys-animation-duration-normal: 0.3s;
+}

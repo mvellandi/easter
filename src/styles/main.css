@@ -1,51 +1,5 @@
 @import "tailwindcss";
-
-@theme {
-  /* Easter Egg System Theme Variables */
-
-  /* Colors (following Tailwind conventions for potential utility generation) */
-  --color-ee-primary: #3b82f6; /* Was --color-primary */
-  --color-ee-secondary: #10b981; /* Was --color-secondary */
-
-  --color-ee-overlay-bg: rgba(0, 0, 0, 0.5);
-  --color-ee-modal-bg: white;
-  --color-ee-modal-text: #333333;
-
-  --color-ee-default-close-bg: rgba(0, 0, 0, 0.1);
-  --color-ee-default-close-bg-hover: rgba(0, 0, 0, 0.2);
-  --color-ee-default-close-icon: var(
-    --color-ee-modal-text
-  ); /* Default to modal text */
-  --color-ee-default-close-icon-hover: #000000;
-
-  --color-ee-floating-close-bg: rgba(255, 255, 255, 0.8);
-  --color-ee-floating-close-bg-hover: rgba(250, 250, 250, 0.95);
-  --color-ee-floating-close-icon: #333333;
-  --color-ee-floating-close-icon-hover: #000000;
-
-  /* Border Radius (following Tailwind conventions) */
-  --radius-ee-modal: 8px;
-  --radius-ee-close-button: 50%;
-
-  /* Shadows (following Tailwind conventions) */
-  --shadow-ee-modal: 0 0 15px rgba(0, 0, 0, 0.15);
-  --shadow-ee-floating-close: 0 2px 5px rgba(0, 0, 0, 0.2);
-
-  /* Easter Egg System - Structural/System Variables (for var() usage) */
-  --ee-sys-modal-padding: 20px;
-
-  --ee-sys-z-index-overlay: 9990;
-  --ee-sys-z-index-modal: 9995;
-  --ee-sys-z-index-default-close-button: 10; /* Local to modal content, relative to its stacking context */
-  --ee-sys-z-index-floating-close-button: 10000; /* Highest, for viewport-fixed elements */
-
-  --ee-sys-animation-duration-fast: 0.2s;
-  --ee-sys-animation-duration-normal: 0.3s; /* General modal animations if any */
-
-  --ee-sys-close-button-size: 32px;
-  --ee-sys-close-button-icon-size: 16px;
-  --ee-sys-close-button-icon-stroke-width: 2px;
-}
+@import "./theme.css";
 
 /* Custom styles */
 /* The .ee-modal-base class was previously used to set some global modal defaults.
