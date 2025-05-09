@@ -26,6 +26,64 @@ The core system consists of several key parts:
     *   When a combination is detected, it mounts and displays the corresponding Vue component as a modal.
     *   Handles the lifecycle of the displayed egg.
 
+### Styling and Theming Architecture
+
+The Core Application and its dynamically loaded eggs employ a layered styling strategy designed for encapsulation, theming, and maintainability.
+
+#### 1. Core Application Styling (Tailwind CSS & Custom Properties)
+
+*   **Core UI Components:** The Core Application's own UI elements (modal shell, overlay, default close button, etc., found in `src/core/components/`) are styled using standard CSS in their respective `.css` files. These styles primarily define structure and base appearance and utilize the core's CSS custom properties for theming.
+*   **Tailwind CSS for Core (Internal Use & Base):** The Core Application itself uses Tailwind CSS.
+    *   The full Tailwind CSS (base/preflight, components, and utilities needed by the core) and the custom theme variables are bundled into the main `easter-egg-system.iife.js`.
+    *   These styles are injected directly into the Shadow DOM that hosts the active egg.
+*   **Global Styles & Theme Definition (`src/styles/main.css` & `src/styles/theme.css`):**
+    *   `src/styles/main.css` imports Tailwind's base styles and `src/styles/theme.css`.
+    *   `src/styles/theme.css` defines a comprehensive set of CSS Custom Properties (variables) within an `@theme {}` block (compatible with Tailwind's engine). These variables cover:
+        *   Colors (e.g., `--color-ee-primary`, `--color-ee-modal-bg`, `--color-ee-overlay-bg`) using OKLCH where appropriate for modern color definitions.
+        *   Spacing, radii, shadows (e.g., `--ee-sys-modal-padding`, `--radius-ee-modal`, `--shadow-ee-modal`).
+        *   Font properties (though primarily relying on Tailwind's default font stack).
+        *   Z-indexes (e.g., `--ee-sys-z-index-overlay`).
+    *   These styles, including the theme variables and Tailwind's base/preflight, are injected by `ee-core.js` into the Shadow DOM created for each egg instance. This provides a consistent baseline styling environment and makes all theme variables available to the loaded egg.
+
+#### 2. Egg Styling (Independent & Themed)
+
+*   **Shadow DOM Encapsulation:** Each egg's content is rendered within the Core's Shadow DOM. This isolates the egg's styles from the main page and other eggs, and vice-versa.
+*   **Egg-Specific Tailwind CSS:**
+    *   Each egg is responsible for including the Tailwind utilities it uses. This is achieved by having a `src/style.css` in the egg (or similar, as defined in its registry) containing `@import "tailwindcss";`. This CSS file is then imported by the egg's main JavaScript module.
+    *   The egg's Vite build process, utilizing the `@tailwindcss/vite` plugin, scans the egg's own component templates and generates a CSS file. This file contains *only* the Tailwind base styles (to ensure consistency if the egg were viewed in isolation, though usually overridden by core's base in the Shadow DOM) and the *specific utility classes used by that particular egg*.
+    *   The `prepare-dist-registry.js` script in the egg's repository identifies this generated, hashed CSS file (e.g., `assets/[egg-name]-[hash].css`) and updates the egg's `dist/[egg-id]-registry.json` to include a `style` property pointing to this file (relative to its `dist` directory).
+    *   This generated, scoped CSS file is then dynamically linked by `ee-core.js` into the Shadow DOM when the egg is activated.
+    *   This ensures eggs are self-contained and only contribute the CSS for the utilities they actually use, preventing the core from needing to provide an exhaustive list of all possible Tailwind utilities.
+*   **Consuming Core Theme Variables:**
+    *   Due to CSS variable inheritance, the CSS Custom Properties defined in the Core Application's `theme.css` (and injected into the Shadow DOM) are directly usable by the egg in its own stylesheets (both in `<style>` tags of Vue components and in its linked Tailwind-generated CSS) or inline styles.
+    *   Example: An egg's CSS can use `background-color: var(--color-ee-modal-bg);` or a Tailwind class like `bg-[var(--color-ee-modal-bg)]`.
+    *   This allows eggs to adhere to the overall theme provided by the Core Application while maintaining control over their specific component styling with their own set of Tailwind utilities.
+
+#### 3. Style Injection Order in Shadow DOM
+
+When an egg is activated, the styles are effectively layered within the Shadow DOM by `ee-core.js` as follows:
+1.  **Core Component Styles:** Dedicated CSS files for `CoreModalShell`, `CoreOverlay`, `CoreModalContent`, `CoreDefaultCloseButton`, `CoreFloatingCloseButton` are injected.
+2.  **Core Inlined Tailwind & Theme Variables:** The content of the Core's `main.css` (which includes Tailwind base/preflight and `theme.css` with all custom properties).
+3.  **Egg-Specific Stylesheet (if provided):** The `<link>` tag pointing to the egg's own generated CSS (e.g., `assets/[egg-name]-[hash].css`), which contains its used Tailwind utilities and potentially its own custom styles.
+
+This layered approach ensures that core structure and theming are established, and then the egg's specific styles are applied within its encapsulated environment, scoped by the Shadow DOM.
+
+#### 4. Asset Referencing (Fonts & Images)
+
+*   **Fonts:**
+    *   The Core Application defines its base font stack (typically via Tailwind's defaults, potentially customized in `theme.css` with variables like `--font-sans`). These are inherited by eggs in the Shadow DOM.
+    *   If the Core uses custom web fonts (e.g., via `@font-face` for `--font-family-display`), these rules are part of the core's main CSS injected into the Shadow DOM, making the font families available.
+    *   Eggs needing unique fonts not provided by the core are responsible for their own `@font-face` definitions and font file bundling.
+*   **Images:**
+    *   **Core's Internal Images:** Images used internally by the Core Application's CSS (e.g., `background-image: url(...)` within `CoreModalShell.css`) are relative to the core's own asset structure and are not directly reusable by eggs' CSS.
+    *   **Exposing Core Images to Eggs (via CSS Variables):** To provide a shared UI asset (e.g., a standard icon) for eggs to use, the Core can define a CSS custom property in `theme.css` containing an **absolute URL** to that asset:
+        ```css
+        /* In src/styles/theme.css */
+        /* :root { --icon-standard-close: url('https://your-cdn.com/assets/core/standard-close-icon.svg'); } */
+        ```
+        Eggs can then use `var(--icon-standard-close)` in their CSS. The use of absolute URLs is critical here for reliable path resolution.
+    *   **Egg-Specific Images:** Eggs manage and bundle their own images. Vite processes these, making paths relative to the egg's `dist` output. The `ee-loader.js` further resolves any image paths passed as props (like `fallbackUrl` or paths within `dataUrl` JSON) to absolute URLs before passing them to the egg component.
+
 ### UI Customization for Eggs
 
 The core system provides a default modal UI (overlay, content container, and close button) for displaying Easter eggs. However, individual eggs can customize this appearance and behavior through `uiOptions` in their `registry.json` file:

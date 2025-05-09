@@ -5,7 +5,13 @@
     "description": "Displays a grid of staff members",
     "keyCombination": ["Option", "Shift", "S"],
     "componentExportName": "StaffGridEggComponent",
-    "script": "/src/eggs/default/staff-grid/index.js",
+    "script": "src/index.js",
+    "style": "src/style.css",
+    "uiOptions": {
+      "hideCoreContainer": false,
+      "hideCoreOverlay": false,
+      "prefersCustomClose": false
+    },
     "props": {
       "title": "Our Team",
       "theme": "light",

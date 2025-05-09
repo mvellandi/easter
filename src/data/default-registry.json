@@ -1,0 +1,10 @@
+{
+  "registries": [
+    {
+      "id": "staff-grid",
+      "path": "https://easter-eggs.fly.storage.tigris.dev/eggs/default/staff-grid/staff-grid-registry.json",
+      "enabled": true,
+      "comment": "Lists Boot.dev staff members in a table grid with names, photos, titles"
+    }
+  ]
+}

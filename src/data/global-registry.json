@@ -1,0 +1,10 @@
+{
+  "registries": [
+    {
+      "id": "default",
+      "path": "https://easter-eggs.fly.storage.tigris.dev/eggs/default/default-registry.json",
+      "enabled": true,
+      "comment": "All eggs available by default"
+    }
+  ]
+}

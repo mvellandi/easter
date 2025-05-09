@@ -117,7 +117,7 @@ class EasterEggLoader {
               }
             }
 
-            await this.loadRegistry(nextPathOrUrl);
+            await this.loadRegistry(nextPathOrUrl, true);
           } else {
             console.log(`Skipping disabled registry: ${registryRef.id}`);
           }
@@ -131,8 +131,10 @@ class EasterEggLoader {
     }
   }
 
-  async loadRegistry(registryPathOrUrl) {
-    console.log("Loading individual registry from:", registryPathOrUrl);
+  async loadRegistry(registryPathOrUrl, isTopLevelRegistry = false) {
+    console.log(
+      `Loading individual registry from: ${registryPathOrUrl} (isTopLevel: ${isTopLevelRegistry})`
+    );
     try {
       const response = await fetch(registryPathOrUrl);
       if (!response.ok) {
@@ -140,7 +142,7 @@ class EasterEggLoader {
       }
       if (!response.headers.get("content-type")?.includes("application/json")) {
         console.warn(
-          `Warning: Registry response is not JSON. Content-Type: ${response.headers.get(
+          `Warning: Registry response from ${registryPathOrUrl} is not JSON. Content-Type: ${response.headers.get(
             "content-type"
           )}`
         );
@@ -155,7 +157,10 @@ class EasterEggLoader {
           parseError
         );
         const textResponse = await response.text(); // Get text for logging
-        console.error("Raw response text:", textResponse);
+        console.error(
+          `Raw response text from ${registryPathOrUrl}:`,
+          textResponse
+        );
         easterEgg.handleError("loader", "parseError", parseError, {
           file: registryPathOrUrl,
           responseText: textResponse,
@@ -163,13 +168,81 @@ class EasterEggLoader {
         return; // Stop processing this registry
       }
 
+      console.log(`Loaded data from ${registryPathOrUrl}:`, registryData);
+
+      // --- Enhanced Logging ---
       console.log(
-        `Loaded registry data from ${registryPathOrUrl}:`,
-        registryData
+        `Checking structure for ${registryPathOrUrl}. Has .registries: ${!!registryData.registries}, IsArray: ${Array.isArray(
+          registryData.registries
+        )}`
       );
 
-      // Determine the base path for all assets defined in this registry.
-      // This base path is the directory containing the registry.json file itself.
+      // --- NEW: Check for nested "registries" array ---
+      if (registryData.registries && Array.isArray(registryData.registries)) {
+        console.log(
+          `CORRECT PATH: Detected nested "registries" array in ${registryPathOrUrl}. Processing as a collection.`
+        );
+        for (const registryRef of registryData.registries) {
+          if (registryRef.enabled !== false) {
+            // Process if enabled or enabled is not defined (default to true)
+            const relativeOrAbsolutePath = registryRef.path;
+            if (
+              !relativeOrAbsolutePath ||
+              typeof relativeOrAbsolutePath !== "string"
+            ) {
+              console.warn(
+                `Skipping nested registry reference due to missing or invalid path in ${registryPathOrUrl}:`,
+                registryRef
+              );
+              continue;
+            }
+            let nextRegistryUrl;
+
+            if (
+              relativeOrAbsolutePath.startsWith("http://") ||
+              relativeOrAbsolutePath.startsWith("https://")
+            ) {
+              nextRegistryUrl = relativeOrAbsolutePath;
+            } else {
+              try {
+                nextRegistryUrl = new URL(
+                  relativeOrAbsolutePath,
+                  registryPathOrUrl
+                ).href;
+              } catch (urlError) {
+                console.error(
+                  `Error constructing URL for nested registry: path='${relativeOrAbsolutePath}', base='${registryPathOrUrl}'`,
+                  urlError
+                );
+                easterEgg.handleError("loader", "urlError", urlError, {
+                  file: registryPathOrUrl,
+                  nestedPath: relativeOrAbsolutePath,
+                });
+                continue; // Skip this invalid path
+              }
+            }
+            console.log(
+              `Collection ${registryPathOrUrl} -> points to ${nextRegistryUrl}`
+            );
+            // Recursively call loadRegistry. Pass 'false' for isTopLevelRegistry.
+            await this.loadRegistry(nextRegistryUrl, false);
+          } else {
+            console.log(
+              `Skipping disabled nested registry reference: ${
+                registryRef.id || registryRef.path
+              } in ${registryPathOrUrl}`
+            );
+          }
+        }
+        // After processing the nested registries, this path is done.
+        return;
+      }
+      // --- END NEW ---
+
+      // If not a nested "registries" array, process as an egg-defining registry (existing logic)
+      console.log(
+        `WRONG PATH: Processing ${registryPathOrUrl} as an egg-defining registry.`
+      );
       let eggAssetBaseUrlOrPath;
       const isRegistryAUrl =
         registryPathOrUrl.startsWith("http://") ||

@@ -1,9 +1,0 @@
-{
-  "registries": [
-    {
-      "id": "default",
-      "path": "default-registry.json",
-      "enabled": true
-    }
-  ]
-}

@@ -264,10 +264,17 @@ export class KeyHandler {
    * @param {KeyboardEvent} event - The keyboard event
    */
   handleKeyUp(event) {
-    this.pressedKeys.delete(event.key);
-    console.log("KeyHandler: Key released:", {
-      key: event.key,
-      pressedKeys: Array.from(this.pressedKeys),
-    });
+    const normalizedKey = this.normalizeKey(event.key);
+    this.pressedKeys.delete(normalizedKey);
+    // console.log("KeyHandler: Key up - ", normalizedKey, " Pressed: ", [...this.pressedKeys]);
+  }
+
+  /**
+   * Resets the currently pressed keys.
+   * Called when an egg is unmounted or when a sequence is broken.
+   */
+  reset() {
+    this.pressedKeys.clear();
+    // console.log("KeyHandler: Keystroke history reset.");
   }
 }
