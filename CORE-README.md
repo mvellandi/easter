@@ -25,6 +25,21 @@ The core system consists of several key parts:
     *   Listens for keyboard combinations.
     *   When a combination is detected, it mounts and displays the corresponding Vue component as a modal.
     *   Handles the lifecycle of the displayed egg.
+
+### UI Customization for Eggs
+
+The core system provides a default modal UI (overlay, content container, and close button) for displaying Easter eggs. However, individual eggs can customize this appearance and behavior through `uiOptions` in their `registry.json` file:
+
+*   **`uiOptions.hideCoreOverlay` (boolean):** If `true`, the default semi-transparent overlay is not rendered.
+*   **`uiOptions.hideCoreContainer` (boolean):** If `true`, the default content container (the "box" of the modal) is not rendered. The egg is then responsible for its own layout and background if this is hidden.
+*   **`uiOptions.prefersCustomClose` (boolean):** If `true`, the core system's default close button is not rendered. The egg is then responsible for providing its own close mechanism.
+
+To facilitate custom closing, the core system passes a `coreInterface` prop to the egg's main Vue component. This object currently contains:
+
+*   **`coreInterface.requestClose()` (function):** The egg should call this function to signal to the core system that it should be closed and unmounted.
+
+This allows eggs to range from using the full default core UI to providing a completely custom presentation layer.
+
 4.  **Individual Easter Eggs (External)**:
     *   Each Easter egg is expected to be a self-contained unit, typically managed in its own repository.
     *   An egg consists of:
