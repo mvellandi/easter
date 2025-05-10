@@ -3,31 +3,32 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: var(--color-ee-default-close-bg);
+  background: var(--color-ee-default-close-bg, rgba(0, 0, 0, 0.1));
   border: none;
-  border-radius: var(--radius-ee-close-button);
-  width: var(--ee-sys-close-button-size);
-  height: var(--ee-sys-close-button-size);
+  border-radius: var(--radius-ee-close-button, 50%);
+  width: var(--ee-sys-close-button-size, 32px);
+  height: var(--ee-sys-close-button-size, 32px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-ee-default-close-icon);
-  transition: background-color var(--ee-sys-animation-duration-fast) ease,
-    color var(--ee-sys-animation-duration-fast) ease;
-  z-index: var(
-    --ee-sys-z-index-default-close-button
-  ); /* Ensure it's above content within its parent (.ee-content) */
+  color: var(--color-ee-default-close-icon, #1f2937);
+  transition: background-color var(--ee-sys-animation-duration-fast, 0.2s) ease,
+    color var(--ee-sys-animation-duration-fast, 0.2s) ease;
+  z-index: var(--ee-sys-z-index-default-close-button, 10);
+
+  /* Debug styles - will be removed after fixing */
+  outline: 2px solid red;
 }
 
 .ee-close-button:hover {
-  background: var(--color-ee-default-close-bg-hover);
-  color: var(--color-ee-default-close-icon-hover);
+  background: var(--color-ee-default-close-bg-hover, rgba(0, 0, 0, 0.2));
+  color: var(--color-ee-default-close-icon-hover, #000000);
 }
 
 .ee-close-button svg {
-  width: var(--ee-sys-close-button-icon-size);
-  height: var(--ee-sys-close-button-icon-size);
+  width: var(--ee-sys-close-button-icon-size, 16px);
+  height: var(--ee-sys-close-button-icon-size, 16px);
   stroke: currentColor;
-  stroke-width: var(--ee-sys-close-button-icon-stroke-width);
+  stroke-width: var(--ee-sys-close-button-icon-stroke-width, 2px);
 }

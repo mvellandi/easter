@@ -8,7 +8,8 @@ import {
   markRaw,
 } from "vue";
 
-import tailwindAndCustomCssString from "../styles/main.css?inline"; // Import CSS as string
+// Import styles in order of specificity
+import masterCssString from "../styles/index.css?inline"; // Master CSS file for all styles
 
 // Import the new CoreModalShell component
 import CoreModalShell from "./components/CoreModalShell.vue";
@@ -85,6 +86,7 @@ class EasterEggCore {
     console.log("EasterEggCore: Shadow DOM attached.");
 
     // 2. Inject ALL Styles into Shadow DOM
+    // 2.1 Core structural styles (error modal)
     const coreStyleElement = document.createElement("style");
     coreStyleElement.textContent = coreStructuralStyles;
     this.shadowRoot.appendChild(coreStyleElement);
@@ -92,13 +94,15 @@ class EasterEggCore {
       "EasterEggCore: Core structural styles injected into Shadow DOM."
     );
 
-    const tailwindStyleElement = document.createElement("style");
-    tailwindStyleElement.textContent = tailwindAndCustomCssString;
-    this.shadowRoot.appendChild(tailwindStyleElement);
+    // 2.2 Master CSS (Tailwind base, baseline, theme, custom)
+    const masterStyleElement = document.createElement("style");
+    masterStyleElement.textContent = masterCssString;
+    this.shadowRoot.appendChild(masterStyleElement);
     console.log(
-      "EasterEggCore: Inlined Tailwind/Custom styles injected into Shadow DOM."
+      "EasterEggCore: Master CSS (Tailwind, baseline, theme, custom) injected into Shadow DOM."
     );
 
+    // 2.3 Component-specific styles
     // Inject CoreModalShell.css styles
     const coreModalShellStyleElement = document.createElement("style");
     coreModalShellStyleElement.textContent = coreModalShellCssString;

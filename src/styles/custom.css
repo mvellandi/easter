@@ -1,7 +1,4 @@
-@import "tailwindcss";
-@import "./theme.css";
-
-/* Custom styles */
+/* Custom styles for the Easter Egg System */
 /* The .ee-modal-base class was previously used to set some global modal defaults.
    These are now largely covered by the more specific variables in @theme.
    If .ee-modal-base is applied to a root container of the modal system, 
