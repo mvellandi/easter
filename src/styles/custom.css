@@ -1,16 +1,18 @@
-/* Custom styles for the Easter Egg System */
-/* The .ee-modal-base class was previously used to set some global modal defaults.
-   These are now largely covered by the more specific variables in @theme.
-   If .ee-modal-base is applied to a root container of the modal system, 
-   it could set some foundational styles or use some of the new system variables.
-   The exact usage depends on how it's applied in the Vue components.
-   For now, updating it to use new variables as examples.
-*/
-.ee-modal-base {
-  /* If .ee-modal-base is on the main overlay/container: */
-  /* background-color: var(--color-ee-overlay-bg); */ /* Example: If it IS the overlay */
-  /* z-index: var(--ee-sys-z-index-overlay); */ /* Example: If it IS the overlay */
+/* @layer is a tailwind-only keyword
+The names (base, components, utilities) are special Tailwind layer names.
+They control the order in which styles are applied:
 
-  /* If it's a general wrapper, it might not need a background or high z-index itself. */
-  /* Properties like --ee-animation-duration would be applied to specific animated elements. */
+@layer base { ... } — for resets and base styles (lowest specificity)
+@layer components { ... } — for custom component classes (medium specificity)
+@layer utilities { ... } — for custom utility classes (highest specificity)
+
+This helps you avoid specificity issues and ensures your custom styles are merged in the right place in the final CSS. Example:
+
+@layer components {
+  .my-modal {
+    @apply p-4 rounded bg-[var(--color-ee-modal-bg)];
+  }
 }
+
+This will be merged into Tailwind’s components layer, so it’s applied after base styles but before utilities.
+ */

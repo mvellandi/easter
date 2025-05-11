@@ -5,8 +5,8 @@
     "description": "Displays a grid of staff members",
     "keyCombination": ["Option", "Shift", "S"],
     "componentExportName": "StaffGridEggComponent",
-    "script": "src/index.js",
-    "style": "src/style.css",
+    "script": "staff-grid-egg.es.js",
+    "style": "assets/staff-grid-D4MuOwHt.css",
     "uiOptions": {
       "hideCoreContainer": false,
       "hideCoreOverlay": false,

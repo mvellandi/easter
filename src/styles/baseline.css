@@ -11,6 +11,7 @@
   --app-line-height-base: 1.5;
   --app-text-color: #333;
   --app-bg-color: #fff;
+  color-scheme: light;
 }
 
 /* App-wide defaults that extend Tailwind's preflight */

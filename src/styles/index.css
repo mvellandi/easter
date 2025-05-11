@@ -1,4 +1,16 @@
-/* Master CSS file for the Easter Egg System */
+/*
+  Easter Egg System Master CSS
+  ===========================
+  - This file is the single entry point for all styles in the system.
+  - All styles are processed by Tailwind CSS (including theme variables, baseline, and custom styles).
+  - Import order:
+      1. Tailwind base styles (preflight, utilities, etc.)
+      2. Baseline styles (resets, structure)
+      3. Theme variables (using @theme for Tailwind v4)
+      4. Custom styles (optionally using @layer for Tailwind custom utilities/components)
+  - Only import this file (index.css) in your JS for style injection.
+  - All theme variables are defined in theme.css using @theme and are available for use in arbitrary value utilities (e.g., bg-[var(--color-ee-modal-bg)]).
+*/
 @import "tailwindcss";
 @import "./baseline.css";
 @import "./theme.css";
