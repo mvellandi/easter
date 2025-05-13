@@ -11,6 +11,7 @@
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
+      v-if="isVisible"
       class="ee-content bg-image-blue p-8 border border-yellow-700"
       :class="{ 'ee-content-visible': isVisible }"
     >
@@ -21,11 +22,7 @@
       <slot name="close-button"></slot>
 
       <!-- Default slot for the egg component -->
-      <component
-        v-if="activeEgg?.component"
-        :is="activeEgg.component"
-        v-bind="activeEgg.props || {}"
-      />
+      <component :is="activeEgg?.component" v-bind="activeEgg?.props || {}" />
     </div>
 
     <!-- 3. Floating Elements (if container is hidden) -->
