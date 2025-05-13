@@ -15,7 +15,7 @@ export const StaffGridEggComponent = defineComponent({
     assetConfig: {
       type: Object,
       default: () => ({
-        fallbackUrl: "./eggs/staff-grid/images/fallback.webp",
+        fallbackUrl: "images/fallback.webp",
       }),
     },
     staffData: {
@@ -33,12 +33,12 @@ export const StaffGridEggComponent = defineComponent({
     console.log("Staff Grid: Component setup with props:", props);
 
     const getAssetUrl = (member) => {
-      if (!member || !member.remoteImage) {
-        return props.assetConfig.fallbackUrl;
+      if (!member || !member.image) {
+        // Prepend the staff-grid directory to the fallback image path
+        return `./eggs/staff-grid/${props.assetConfig.fallbackUrl}`;
       }
-      // Extract just the filename from the path if it's a full path
-      const filename = member.remoteImage.split("/").pop();
-      return `./eggs/staff-grid/images/${filename}`;
+      // Prepend the staff-grid directory to the image path from JSON
+      return `./eggs/staff-grid/${member.image}`;
     };
 
     const handleImageError = (member) => {

@@ -2,36 +2,36 @@
   {
     "name": "Alexandre Faria",
     "role": "Animator / Video Editor",
-    "remoteImage": "./eggs/staff-grid/images/alexandre_faria.webp"
+    "image": "images/alexandre_faria.webp"
   },
   {
     "name": "Allan Lires",
     "role": "Director of Engineering",
-    "remoteImage": "./eggs/staff-grid/images/allan_lires.webp"
+    "image": "images/allan_lires.webp"
   },
   {
     "name": "Daniel Hjartland",
     "role": "Software Engineer",
-    "remoteImage": "./eggs/staff-grid/images/daniel_hjartland.webp"
+    "image": "images/daniel_hjartland.webp"
   },
   {
     "name": "Hunter Beckmann",
     "role": "Software Engineering Manager",
-    "remoteImage": "./eggs/staff-grid/images/hunter_beckmann.webp"
+    "image": "images/hunter_beckmann.webp"
   },
   {
     "name": "Lane Wagner",
     "role": "Founder",
-    "remoteImage": "./eggs/staff-grid/images/lane_wagner.webp"
+    "image": "images/lane_wagner.webp"
   },
   {
     "name": "Matt",
     "role": "Backend Developer",
-    "remoteImage": "./eggs/staff-grid/images/matt_unknown.webp"
+    "image": "images/matt_unknown.webp"
   },
   {
     "name": "Stass",
     "role": "Animator / Video Editor",
-    "remoteImage": "./eggs/staff-grid/images/stass_editor.webp"
+    "image": "images/stass_editor.webp"
   }
 ]
