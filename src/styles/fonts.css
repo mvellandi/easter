@@ -7,14 +7,15 @@
   font-family: "Arcuata Trial";
   font-style: italic;
   font-weight: 500;
-  src: url(@/assets/fonts/Arcuata/ArcuataTrial-MediumItalic.otf) format("otf");
+  src: url(../assets/fonts/Arcuata/ArcuataTrial-MediumItalic.otf)
+    format("opentype");
   text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: "Arcuata Trial";
   font-style: normal;
   font-weight: 500;
-  src: url(@/assets/fonts/Arcuata/ArcuataTrial-Medium.otf) format("otf");
+  src: url(../assets/fonts/Arcuata/ArcuataTrial-Medium.otf) format("opentype");
   text-rendering: optimizeLegibility;
 }
 
@@ -22,27 +23,27 @@
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
-  src: url(@/assets/fonts/DMSans/DMSans-Regular.otf) format("otf");
+  src: url(../assets/fonts/DMSans/DMSans-Regular.otf) format("opentype");
   text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 400;
-  src: url(@/assets/fonts/DMSans/DMSans-Bold.otf) format("otf");
+  src: url(../assets/fonts/DMSans/DMSans-Bold.otf) format("opentype");
   text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
-  src: url(@/assets/fonts/DMSans/DMSans-Bold.otf) format("otf");
+  src: url(../assets/fonts/DMSans/DMSans-Bold.otf) format("opentype");
   text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: "DM Sans";
   font-style: italic;
   font-weight: 700;
-  src: url(@/assets/fonts/DMSans/DMSans-BoldItalic.otf) format("otf");
+  src: url(../assets/fonts/DMSans/DMSans-BoldItalic.otf) format("opentype");
   text-rendering: optimizeLegibility;
 }

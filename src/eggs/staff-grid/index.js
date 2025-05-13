@@ -88,20 +88,20 @@ export const StaffGridEggComponent = defineComponent({
     },
   },
   template: `
-    <div class="staff-grid">
-      <h2>{{ title }}</h2>
-      <div class="staff-grid-container">
-        <div v-for="member in staffData" :key="member.name" class="staff-member">
-          <div class="staff-image-container">
+    <div class="flex flex-col gap-4 items-center">
+      <h2 class="text-3xl">{{ title }}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div v-for="member in staffData" :key="member.name" class="flex flex-col items-center  max-w-[250px]">
+          <div class="">
             <img
               :src="getAssetUrl(member)"
               :alt="member.name"
               @error="handleImageError(member)"
-              class="staff-image"
+              class="rounded-full max-w-[100px] mb-1.5"
             />
           </div>
-          <h3>{{ member.name }}</h3>
-          <p>{{ member.role }}</p>
+          <h3 class="text-xl">{{ member.name }}</h3>
+          <p class="text-md leading-4">{{ member.role }}</p>
         </div>
       </div>
     </div>

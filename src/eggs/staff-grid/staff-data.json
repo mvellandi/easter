@@ -1,7 +1,7 @@
 [
   {
     "name": "Alexandre Faria",
-    "role": "Animator / Video Editor",
+    "role": "Animator / Editor",
     "image": "images/alexandre_faria.webp"
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "name": "Hunter Beckmann",
-    "role": "Software Engineering Manager",
+    "role": "Engineering Manager",
     "image": "images/hunter_beckmann.webp"
   },
   {
@@ -31,7 +31,7 @@
   },
   {
     "name": "Stass",
-    "role": "Animator / Video Editor",
+    "role": "Animator / Editor",
     "image": "images/stass_editor.webp"
   }
 ]

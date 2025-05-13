@@ -1,6 +1,6 @@
 .bg-image-blue {
   background-blend-mode: overlay;
-  background-image: url(@/assets/img/maptexture2.webp),
+  background-image: url(../assets/img/maptexture2.webp),
     linear-gradient(var(--gray-950), var(--gray-900));
 }
 
@@ -13,14 +13,14 @@
 
 .bg-image-black {
   background-blend-mode: overlay;
-  background-image: url(@/assets/img/maptexture2.webp),
-    url(@/assets/img/bg-black.webp);
+  background-image: url(../assets/img/maptexture2.webp),
+    url(../assets/img/bg-black.webp);
 }
 
 .bg-image-blue-gray {
   background-blend-mode: overlay;
-  background-image: url(@/assets/img/maptexture2.webp),
-    url(@/assets/img/bg-blue-gray.webp);
+  background-image: url(../assets/img/maptexture2.webp),
+    url(../assets/img/bg-blue-gray.webp);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -30,7 +30,7 @@
   background-blend-mode: hue, hard-light, normal;
   background-image: linear-gradient(0deg, #5562f6a3, #5562f6a3),
     linear-gradient(0deg, #0000008f, #0000008f),
-    url(@/assets/img/bootslost.webp);
+    url(../assets/img/bootslost.webp);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -41,15 +41,15 @@
   background-color: #8aa8b5;
   background-image: linear-gradient(0deg, #5562f6a3, #5562f6a3),
     linear-gradient(0deg, #0000008f, #0000008f),
-    url(@/assets/img/bootsballanfull.webp),
-    url(@/assets/img/bootsballanmin.webp);
+    url(../assets/img/bootsballanfull.webp),
+    url(../assets/img/bootsballanmin.webp);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .bg-texture-yellow[data-v-5041f3af] {
-  background-image: url(@/assets/img/smalltexturestone.ChOpSlRw.webp),
+  background-image: url(../assets/img/smalltexturestone.ChOpSlRw.webp),
     radial-gradient(
       circle at bottom right,
       var(--gray-50) 10%,
@@ -65,7 +65,7 @@
   border-color: var(--yellow-200);
 }
 .bg-texture-blue[data-v-5041f3af] {
-  background-image: url(@/assets/img/smalltexturestone.ChOpSlRw.webp),
+  background-image: url(../assets/img/smalltexturestone.ChOpSlRw.webp),
     radial-gradient(
       circle at bottom right,
       var(--gray-50) 10%,
