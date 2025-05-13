@@ -1,29 +1,62 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import tailwindcss from "@tailwindcss/vite";
+import { resolve } from "path";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
-  resolve: {
-    alias: {
-      vue: "vue/dist/vue.esm-bundler.js",
-    },
+  // Base public path when served in development or production
+  base: "/",
+
+  // Project root directory
+  root: "src",
+
+  // Plugins
+  plugins: [
+    tailwindcss(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith("ee-"),
+        },
+      },
+    }),
+  ],
+
+  // Development server options
+  server: {
+    port: 5173,
+    open: false,
+    host: true,
+    hmr: true,
   },
-  define: {
-    "process.env.NODE_ENV": JSON.stringify("production"),
-  },
+
+  // Build options
   build: {
-    lib: {
-      entry: "src/main.js",
-      formats: ["iife"],
-      name: "EasterEggSystem",
-      fileName: (format) => `easter-egg-system.${format}.js`,
-    },
+    outDir: "dist",
+    emptyOutDir: true,
+    sourcemap: false,
     rollupOptions: {
-      external: [],
+      input: {
+        main: resolve(__dirname, "index.html"),
+      },
       output: {
-        globals: {},
+        manualChunks: {
+          vue: ["vue"],
+          core: ["./src/core/core.js"],
+        },
       },
     },
   },
+
+  // Resolve options
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+      vue: "vue/dist/vue.esm-bundler.js",
+    },
+  },
+
+  // Public directory for static assets
+  publicDir: "public",
 });

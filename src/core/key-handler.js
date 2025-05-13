@@ -3,6 +3,7 @@
  */
 export class KeyHandler {
   constructor() {
+    this.activeCombinations = new Map();
     this.pressedKeys = new Set();
   }
 
@@ -158,13 +159,7 @@ export class KeyHandler {
       ɋ: "q",
     };
 
-    // Check if the key is in our special mapping
-    if (specialKeyMap[key]) {
-      return specialKeyMap[key];
-    }
-
-    // For other keys, just convert to lowercase
-    return key.toLowerCase();
+    return specialKeyMap[key] || key.toLowerCase();
   }
 
   /**
@@ -174,10 +169,10 @@ export class KeyHandler {
    */
   normalizeModifierKey(key) {
     const modifierMap = {
-      Alt: "Option", // macOS uses "Option" instead of "Alt"
-      Option: "Alt", // Handle both ways
-      Meta: "Command", // macOS uses "Command" instead of "Meta"
-      Command: "Meta", // Handle both ways
+      Alt: "Option",
+      Option: "Alt",
+      Meta: "Command",
+      Command: "Meta",
     };
     return modifierMap[key] || key;
   }
@@ -185,62 +180,22 @@ export class KeyHandler {
   /**
    * Checks if a key combination matches the current event
    * @param {KeyboardEvent} event - The keyboard event
-   * @param {string[]} combination - The key combination to check against
+   * @param {Object} trigger - The trigger configuration
    * @returns {boolean} - Whether the combination matches
    */
-  isKeyCombinationMatch(event, combination) {
-    // Check if all required modifier keys are pressed
-    const hasAlt =
-      combination.includes("Alt") || combination.includes("Option")
-        ? event.altKey
-        : !event.altKey;
-    const hasShift = combination.includes("Shift")
-      ? event.shiftKey
-      : !event.shiftKey;
-    const hasCtrl = combination.includes("Control")
-      ? event.ctrlKey
-      : !event.ctrlKey;
-    const hasMeta =
-      combination.includes("Meta") || combination.includes("Command")
-        ? event.metaKey
-        : !event.metaKey;
+  isKeyCombinationMatch(event, trigger) {
+    if (!trigger || trigger.type !== "keyboard") return false;
 
-    // Get the main key (non-modifier key)
-    const mainKey = combination.find(
-      (key) =>
-        !["Alt", "Option", "Shift", "Control", "Meta", "Command"].includes(key)
-    );
+    // Check if the pressed key matches
+    if (event.key.toLowerCase() !== trigger.key.toLowerCase()) return false;
 
-    // Check if the main key is pressed (normalized)
-    const mainKeyPressed = mainKey
-      ? this.normalizeKey(event.key) === this.normalizeKey(mainKey)
-      : true;
+    // Check modifier keys
+    if (trigger.ctrlKey && !event.ctrlKey) return false;
+    if (trigger.shiftKey && !event.shiftKey) return false;
+    if (trigger.altKey && !event.altKey) return false;
+    if (trigger.metaKey && !event.metaKey) return false;
 
-    // Only check for modifier keys that are in the combination
-    const result =
-      mainKeyPressed &&
-      ((!combination.includes("Alt") && !combination.includes("Option")) ||
-        hasAlt) &&
-      (!combination.includes("Shift") || hasShift) &&
-      (!combination.includes("Control") || hasCtrl) &&
-      ((!combination.includes("Meta") && !combination.includes("Command")) ||
-        hasMeta);
-
-    console.log("KeyHandler: Key combination match result:", {
-      hasAlt,
-      hasShift,
-      hasCtrl,
-      hasMeta,
-      mainKeyPressed,
-      pressedKey: event.key,
-      expectedKey: mainKey,
-      normalizedPressedKey: this.normalizeKey(event.key),
-      normalizedExpectedKey: mainKey ? this.normalizeKey(mainKey) : null,
-      combination,
-      result,
-    });
-
-    return result;
+    return true;
   }
 
   /**
@@ -249,14 +204,6 @@ export class KeyHandler {
    */
   handleKeyDown(event) {
     this.pressedKeys.add(event.key);
-    console.log("KeyHandler: Key pressed:", {
-      key: event.key,
-      altKey: event.altKey,
-      shiftKey: event.shiftKey,
-      ctrlKey: event.ctrlKey,
-      metaKey: event.metaKey,
-      pressedKeys: Array.from(this.pressedKeys),
-    });
   }
 
   /**
@@ -264,17 +211,30 @@ export class KeyHandler {
    * @param {KeyboardEvent} event - The keyboard event
    */
   handleKeyUp(event) {
-    const normalizedKey = this.normalizeKey(event.key);
-    this.pressedKeys.delete(normalizedKey);
-    // console.log("KeyHandler: Key up - ", normalizedKey, " Pressed: ", [...this.pressedKeys]);
+    this.pressedKeys.delete(event.key);
   }
 
   /**
-   * Resets the currently pressed keys.
-   * Called when an egg is unmounted or when a sequence is broken.
+   * Resets the currently pressed keys
    */
   reset() {
     this.pressedKeys.clear();
-    // console.log("KeyHandler: Keystroke history reset.");
+  }
+
+  /**
+   * Registers a key combination for an egg
+   * @param {string} id - The egg ID
+   * @param {Object} combination - The key combination configuration
+   */
+  registerCombination(id, combination) {
+    this.activeCombinations.set(id, combination);
+  }
+
+  /**
+   * Unregisters a key combination for an egg
+   * @param {string} id - The egg ID
+   */
+  unregisterCombination(id) {
+    this.activeCombinations.delete(id);
   }
 }

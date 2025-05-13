@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Easter Egg Demo</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="p-8 text-gray-400">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl mb-4">Easter Egg Demo</h1>
+      <div class="space-y-4">
+        <p>
+          Press <kbd class="px-2 py-1 bg-gray-200 rounded">Ctrl</kbd> +
+          <kbd class="px-2 py-1 bg-gray-200 rounded">H</kbd> to trigger the
+          Hello World egg.
+        </p>
+        <p>
+          Press <kbd class="px-2 py-1 bg-gray-200 rounded">Ctrl</kbd> +
+          <kbd class="px-2 py-1 bg-gray-200 rounded">S</kbd> to trigger the
+          Staff Grid egg.
+        </p>
+      </div>
+    </div>
+
+    <!-- Easter Egg System Mount Point -->
+    <div id="easter-egg-root-container"></div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

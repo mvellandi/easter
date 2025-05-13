@@ -1,0 +1,555 @@
+code[class*="language-"],
+pre code,
+pre[class*="language-"] {
+  color: var(--prism-color-light-blue);
+  direction: ltr;
+  font-family: Menlo, Monaco, Consolas, Andale Mono, Ubuntu Mono, Courier New,
+    monospace;
+  font-size: 0.9rem;
+  -webkit-hyphens: none;
+  hyphens: none;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  text-align: left;
+  text-shadow: none;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+}
+pre[class*="language-"] {
+  overflow: auto;
+  padding: 1em;
+}
+:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  padding: 0.1em;
+}
+.namespace {
+  opacity: 0.7;
+}
+.token.doctype .token.doctype-tag {
+  color: var(--prism-color-blue);
+}
+.token.doctype .token.name {
+  color: var(--prism-color-light-blue);
+}
+.token.cdata,
+.token.comment,
+.token.prolog {
+  color: var(--prism-color-green);
+}
+.token.punctuation {
+  color: var(--prism-color-gold);
+}
+.token.boolean,
+.token.constant,
+.token.delimiter,
+.token.inserted,
+.token.number,
+.token.property,
+.token.symbol,
+.token.tag,
+.token.unit {
+  color: var(--prism-color-light-green);
+}
+.token.attr-name,
+.token.char,
+.token.deleted,
+.token.important,
+.token.selector,
+.token.string {
+  color: var(--prism-color-orange);
+}
+.token.builtin {
+  color: var(--prism-color-turquoise);
+}
+.language-css .token.string.url {
+  text-decoration: underline;
+}
+.token.entity,
+.token.operator,
+.token.operator.arrow {
+  color: var(--prism-color-blue);
+}
+.token.atrule {
+  color: var(--prism-color-orange);
+}
+.token.atrule .token.rule {
+  color: var(--prism-color-purple);
+}
+.token.atrule .token.url {
+  color: var(--prism-color-light-blue);
+}
+.token.atrule .token.url .token.function {
+  color: var(--prism-color-yellow);
+}
+.token.atrule .token.url .token.punctuation {
+  color: var(--prism-color-white);
+}
+.token.keyword {
+  color: var(--prism-color-purple);
+}
+.token.keyword-print {
+  color: var(--prism-color-yellow);
+}
+.token.keyword.control-flow,
+.token.keyword.module {
+  color: var(--prism-color-purple);
+}
+.token.function,
+.token.function .token.maybe-class-name {
+  color: var(--prism-color-yellow);
+}
+.token.regex {
+  color: var(--prism-color-red);
+}
+.token.important {
+  color: var(--prism-color-blue);
+}
+.token.italic {
+  font-style: italic;
+}
+.token.constant {
+  color: var(--prism-color-light-blue);
+}
+.token.class-name,
+.token.maybe-class-name {
+  color: var(--prism-color-turquoise);
+}
+.token.console,
+.token.interpolation,
+.token.parameter {
+  color: var(--prism-color-light-blue);
+}
+.token.boolean,
+.token.punctuation.interpolation-punctuation {
+  color: var(--prism-color-blue);
+}
+.token.exports .token.maybe-class-name,
+.token.imports .token.maybe-class-name,
+.token.property,
+.token.variable {
+  color: var(--prism-color-light-blue);
+}
+.token.escape,
+.token.selector {
+  color: var(--prism-color-light-orange);
+}
+.token.tag {
+  color: var(--prism-color-blue);
+}
+.token.tag .token.punctuation {
+  color: var(--prism-color-gray);
+}
+.token.attr-name {
+  color: var(--prism-color-light-blue);
+}
+.token.attr-value,
+.token.attr-value .token.punctuation {
+  color: var(--prism-color-orange);
+}
+.token.attr-value .token.punctuation.attr-equals {
+  color: var(--prism-color-white);
+}
+.token.entity {
+  color: var(--prism-color-blue);
+}
+.token.namespace {
+  color: var(--prism-color-turquoise);
+}
+code[class*="language-javascript"],
+code[class*="language-jsx"],
+code[class*="language-tsx"],
+code[class*="language-typescript"],
+pre[class*="language-javascript"],
+pre[class*="language-jsx"],
+pre[class*="language-tsx"],
+pre[class*="language-typescript"] {
+  color: var(--prism-color-light-blue);
+}
+code[class*="language-css"],
+pre[class*="language-css"] {
+  color: var(--prism-color-orange);
+}
+code[class*="language-html"],
+pre[class*="language-html"] {
+  color: var(--prism-color-white);
+}
+.language-regex .token.anchor {
+  color: var(--prism-color-yellow);
+}
+.language-html .token.punctuation {
+  color: var(--prism-color-gray);
+}
+.language-sql .keyword {
+  color: var(--prism-color-blue);
+}
+.language-c .token.keyword {
+  color: var(--prism-color-turquoise);
+}
+.language-c .token.keyword-return {
+  color: var(--prism-color-purple);
+}
+.language-ts .token.keyword,
+.language-typescript .token.keyword {
+  color: var(--prism-color-blue);
+}
+.language-ts .token.keyword-export,
+.language-ts .token.keyword-import,
+.language-typescript .token.keyword-export,
+.language-typescript .token.keyword-import {
+  color: var(--prism-color-purple);
+}
+.language-javascript .token.keyword-const,
+.language-javascript .token.keyword-let,
+.language-javascript .token.keyword-typeof,
+.language-javascript .token.keyword-var,
+.language-js .token.keyword-const,
+.language-js .token.keyword-let,
+.language-js .token.keyword-typeof,
+.language-js .token.keyword-var {
+  color: var(--prism-color-blue);
+}
+.language-sql .keyword-array,
+.language-sql .keyword-binary,
+.language-sql .keyword-bit,
+.language-sql .keyword-boolean,
+.language-sql .keyword-char,
+.language-sql .keyword-character,
+.language-sql .keyword-clob,
+.language-sql .keyword-date,
+.language-sql .keyword-decimal,
+.language-sql .keyword-double,
+.language-sql .keyword-float,
+.language-sql .keyword-int,
+.language-sql .keyword-integer,
+.language-sql .keyword-interval,
+.language-sql .keyword-large,
+.language-sql .keyword-national,
+.language-sql .keyword-nchar,
+.language-sql .keyword-nclob,
+.language-sql .keyword-numeric,
+.language-sql .keyword-object,
+.language-sql .keyword-precision,
+.language-sql .keyword-real,
+.language-sql .keyword-smallint,
+.language-sql .keyword-text,
+.language-sql .keyword-time,
+.language-sql .keyword-timestamp,
+.language-sql .keyword-varchar,
+.language-sql .keyword-varying {
+  color: var(--prism-color-turquoise);
+}
+.language-py .keyword-class,
+.language-py .keyword-def,
+.language-py .keyword-from,
+.language-py .keyword-global,
+.language-py .keyword-lambda,
+.language-py .keyword-nonlocal,
+.language-python .keyword-class,
+.language-python .keyword-def,
+.language-python .keyword-from,
+.language-python .keyword-global,
+.language-python .keyword-lambda,
+.language-python .keyword-nonlocal {
+  color: var(--prism-color-blue);
+}
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+.line-highlight.line-highlight {
+  background: var(--prism-color-highlight-bg);
+  box-shadow: inset 5px 0 0 var(--prism-color-highlight-shadow);
+  z-index: 0;
+}
+.viewer h1 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.viewer h2,
+.viewer h3,
+.viewer h4 {
+  color: var(--gray-200);
+  margin-bottom: 0.5rem;
+}
+.viewer h2 {
+  display: inline-block;
+  font-size: 1.6rem;
+}
+.viewer h3 {
+  font-size: 1.3rem;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary {
+  align-items: baseline;
+  cursor: pointer;
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  margin-left: -0.5rem;
+  padding: 0;
+}
+.details-icon {
+  height: 1rem;
+  width: 1rem;
+}
+details[open] .details-icon {
+  transform: rotate(90deg);
+}
+.details-icon {
+  opacity: 0;
+}
+details:not([open]) .details-icon,
+details[open] summary:hover .details-icon {
+  opacity: 1;
+}
+.viewer p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.viewer pre {
+  background-color: var(--gray-950);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  padding: 1em;
+}
+.viewer pre code {
+  background-color: inherit;
+  color: inherit;
+  overflow-x: auto;
+  padding: 0;
+}
+.viewer input + label {
+  padding-left: 0.25rem;
+}
+.viewer input:checked + label,
+.viewer li:has(> input:checked) > ol > li:not(:has(input[type="checkbox"])),
+.viewer li:has(> input:checked) > ul > li:not(:has(input[type="checkbox"])) {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+.viewer ul {
+  list-style-type: disc;
+}
+.viewer ol {
+  list-style-type: decimal;
+}
+.viewer ol,
+.viewer ul {
+  margin-bottom: 0;
+  margin-left: 2rem;
+}
+.viewer details > ol,
+.viewer details > ul,
+.viewer > ol,
+.viewer > ul {
+  margin-bottom: 1rem;
+}
+.viewer li ol,
+.viewer li ul {
+  margin-top: 0.25rem;
+}
+.viewer li {
+  margin-bottom: 0.25rem;
+}
+.viewer table {
+  margin-bottom: 1rem;
+}
+.viewer th {
+  border-width: 1px;
+  padding: 0 1em;
+}
+.viewer td {
+  border-width: 1px;
+  padding: 0.125rem 1rem;
+}
+.viewer code {
+  background: var(--gray-700);
+  border-radius: 4px;
+  padding: 1px 4px;
+}
+.viewer a {
+  color: var(--blue-400);
+  text-decoration: underline;
+}
+.viewer a:visited {
+  color: var(--blue-300);
+}
+.viewer a:hover {
+  opacity: 0.7;
+}
+.viewer img {
+  border-radius: 5px;
+  margin: auto;
+  max-width: 100%;
+}
+.viewer blockquote {
+  background: var(--gray-950);
+  border-left: 5px solid var(--blue-400);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+.viewer blockquote p:last-child {
+  margin-bottom: 0;
+}
+.viewer video {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.viewer .callout {
+  align-items: center;
+  background: var(--gray-950);
+  border-left: 5px solid var(--gray-500);
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+.viewer .callout.callout-desktop,
+.viewer .callout.callout-mobile {
+  align-items: unset;
+  background: none;
+  border: none;
+  border-radius: 0;
+  display: block;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+.viewer .callout.callout-desktop:before,
+.viewer .callout.callout-mobile:before {
+  content: none;
+}
+.viewer .callout.callout-mobile {
+  display: none;
+}
+.viewer .callout.callout-desktop {
+  display: block;
+}
+@media (max-width: 768px) {
+  .viewer .callout.callout-mobile {
+    display: block;
+  }
+  .viewer .callout.callout-desktop {
+    display: none;
+  }
+}
+.viewer .callout:before {
+  align-self: flex-start;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  content: "";
+  flex-shrink: 0;
+  height: 36px;
+  margin-right: 0.5rem;
+  width: 36px;
+}
+.viewer .callout-prime:before {
+  background-image: url(https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/ZgVcL7Q.jpeg);
+}
+.viewer .callout-lane:before {
+  background-image: url(https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/93XBjAF.jpeg);
+}
+.viewer .callout-teej:before {
+  background-image: url(https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/uNfjPCH.jpeg);
+}
+.viewer .callout-dan:before {
+  background-image: url(https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/EWwZK2G.jpeg);
+}
+.viewer .callout-prime {
+  border-left: 5px solid #fbaa06;
+}
+.viewer .callout-lane {
+  border-left: 5px solid var(--blue-500);
+}
+.viewer .callout-teej {
+  border-left: 5px solid #00b952;
+}
+.viewer .callout-dan {
+  border-left: 5px solid #f7d019;
+}
+.viewer .callout p:last-child {
+  margin-bottom: 0;
+}
+.viewer .callout.callout-danger:before,
+.viewer .callout.callout-info:before,
+.viewer .callout.callout-tip:before,
+.viewer .callout.callout-warning:before {
+  border-radius: 0;
+}
+.viewer .callout.callout-warning {
+  background-color: var(--yellow-950);
+  border-left: 5px solid var(--yellow-500);
+}
+.viewer .callout.callout-warning a {
+  color: var(--yellow-500);
+}
+.viewer .callout.callout-info {
+  background-color: var(--cyan-950);
+  border-left: 5px solid var(--cyan-500);
+}
+.viewer .callout.callout-info a {
+  color: var(--cyan-500);
+}
+.viewer .callout.callout-danger {
+  background-color: var(--red-950);
+  border-left: 5px solid var(--red-500);
+}
+.viewer .callout.callout-danger a {
+  color: var(--red-500);
+}
+.viewer .callout.callout-tip {
+  border-left: 5px solid var(--green-600);
+}
+.viewer .callout.callout-tip a {
+  color: var(--green-600);
+}
+.viewer .callout.callout-warning:before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%23efbb03' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01'/%3E%3C/svg%3E");
+}
+.viewer .callout.callout-info:before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%2342a0ed' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+}
+.viewer .callout.callout-danger:before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%23ed4245' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4M12 16h.01'/%3E%3C/svg%3E");
+}
+.viewer .callout.callout-tip:before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%2311e956' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Cpath d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4'/%3E%3C/svg%3E");
+}
+.viewer .embed-responsive {
+  display: flex;
+  justify-content: center;
+}
+.markdown-it-code-copy img {
+  margin: 5px;
+}
+
+:root {
+  --top-nav-bar-height: 50px;
+}
+.h-full-minus-bar {
+  height: calc(100vh - var(--top-nav-bar-height) - 1px);
+}
+.top-nav-bar-height {
+  height: var(--top-nav-bar-height);
+}
+.under-top-nav-bar {
+  top: calc(var(--top-nav-bar-height) + 1px);
+}
+.text-shadow {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+/* iframe {
+  color-scheme: light;
+} */

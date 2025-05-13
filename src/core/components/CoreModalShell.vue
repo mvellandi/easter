@@ -1,77 +1,35 @@
 <template>
   <div class="ee-container">
     <!-- 1. Overlay (if shown) -->
-    <CoreOverlay
-      :show="
-        !!(
-          reactiveState.activeEggComponent &&
-          !reactiveState.activeEgg?.uiOptions?.hideCoreOverlay
-        )
-      "
-      @backdropClick="handleBackdropClick"
+    <div
+      class="ee-backdrop"
+      :class="{ 'ee-backdrop-visible': isVisible }"
+      @click="handleClose"
     >
-      <!-- Egg content within backdrop if container is hidden (and overlay is shown) -->
-      <template
-        v-if="
-          reactiveState.activeEgg?.uiOptions?.hideCoreContainer &&
-          !reactiveState.activeEgg?.uiOptions?.hideCoreOverlay
-        "
-      >
-        <component
-          :is="reactiveState.activeEggComponent"
-          v-bind="reactiveState.activeEgg?.props"
-          :coreInterface="props.coreInterface"
-        />
-      </template>
-    </CoreOverlay>
+      <!-- For content like an egg when container is hidden -->
+    </div>
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
-    <CoreModalContent
-      :show="
-        !!(
-          reactiveState.activeEggComponent &&
-          !reactiveState.activeEgg?.uiOptions?.hideCoreContainer
-        )
-      "
-      :applyNoOverlayEffect="
-        reactiveState.activeEgg?.uiOptions?.hideCoreOverlay === true
-      "
+    <div
+      class="ee-content bg-image-blue p-8 border border-yellow-700"
+      :class="{ 'ee-content-visible': isVisible }"
     >
-      <template #closeButton>
-        <CoreDefaultCloseButton
-          :show="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
-          @closeClick="closeActiveEgg"
-        />
-      </template>
-      <template #default>
-        <component
-          :is="reactiveState.activeEggComponent"
-          v-bind="reactiveState.activeEgg?.props"
-          :coreInterface="props.coreInterface"
-        />
-      </template>
-    </CoreModalContent>
+      <!-- Use CoreDefaultCloseButton component -->
+      <CoreDefaultCloseButton :show="isVisible" @closeClick="handleClose" />
+
+      <!-- Slot for the default close button -->
+      <slot name="close-button"></slot>
+
+      <!-- Default slot for the egg component -->
+      <component
+        v-if="activeEgg?.component"
+        :is="activeEgg.component"
+        v-bind="activeEgg.props || {}"
+      />
+    </div>
 
     <!-- 3. Floating Elements (if container is hidden) -->
-    <template
-      v-if="
-        reactiveState.activeEggComponent &&
-        reactiveState.activeEgg?.uiOptions?.hideCoreContainer
-      "
-    >
-      <!-- Floating Close Button (fixed to viewport) -->
-      <CoreFloatingCloseButton
-        :show="!reactiveState.activeEgg?.uiOptions?.prefersCustomClose"
-        @closeClick="closeActiveEgg"
-      />
-      <!-- Egg component rendered "bare" if container AND overlay are hidden -->
-      <component
-        v-if="reactiveState.activeEgg?.uiOptions?.hideCoreOverlay"
-        :is="reactiveState.activeEggComponent"
-        v-bind="reactiveState.activeEgg?.props"
-        :coreInterface="props.coreInterface"
-      />
-    </template>
+    <slot name="floating-elements"></slot>
 
     <ErrorModal
       :show="reactiveState.errorModal.show"
@@ -82,7 +40,7 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { computed } from "vue";
 // Assuming ErrorModal.js is in the same directory as CoreModalShell.vue (src/core/components/)
 // If ErrorModal.js is in src/core/components/ and CoreModalShell.vue is also there, path is './ErrorModal.js'
 // From ee-core.js, it's imported as './components/ErrorModal.js'.
@@ -98,36 +56,32 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  // This prop will be the 'unmount' method from the EasterEggCore instance
-  onUnmountRequest: {
-    type: Function,
-    required: true,
-  },
   coreInterface: {
     type: Object,
     required: true,
   },
 });
 
-const handleBackdropClick = () => {
-  // The CoreOverlay component has already confirmed it was a direct click on the backdrop.
-  // No need to check event.target here.
-  console.log(
-    "CoreModalShell: Valid backdrop click received, requesting unmount."
-  );
-  props.onUnmountRequest();
+const isVisible = computed(() => props.reactiveState.activeEgg !== null);
+const activeEgg = computed(() => props.reactiveState.activeEgg);
+
+const handleClose = () => {
+  console.log("CoreModalShell: Close button clicked");
+  console.log("Active egg:", activeEgg.value);
+  console.log("Core interface:", props.coreInterface);
+
+  if (activeEgg.value?.id) {
+    console.log("Calling requestClose with egg ID:", activeEgg.value.id);
+    props.coreInterface.requestClose(activeEgg.value.id);
+  } else {
+    console.warn("No active egg ID found when trying to close");
+  }
 };
 
 const closeErrorModal = () => {
   // Directly mutate the reactive state passed as a prop.
   // This is generally okay in Vue 3 if the source is a reactive object.
   props.reactiveState.errorModal.show = false;
-};
-
-const closeActiveEgg = () => {
-  console.log("[CoreModalShell.vue] closeActiveEgg method called."); // Test log
-  console.log("CoreModalShell: Close button clicked, requesting unmount.");
-  props.onUnmountRequest();
 };
 </script>
 

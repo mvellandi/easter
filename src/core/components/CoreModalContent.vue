@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="show"
-    class="ee-content"
+    class=""
     :class="{ 'no-overlay-content': applyNoOverlayEffect }"
   >
     <slot name="closeButton"></slot>
@@ -11,20 +11,7 @@
   </div>
 </template>
 
-<script setup>
-import { defineProps } from "vue";
-
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-  applyNoOverlayEffect: {
-    type: Boolean,
-    default: false,
-  },
-});
-</script>
+<script setup></script>
 
 <!-- Styles for .ee-content and .no-overlay-content are now in CoreModalContent.css -->
 <style scoped>

@@ -19,8 +19,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
-
 const props = defineProps({
   show: {
     type: Boolean,
@@ -28,10 +26,8 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["closeClick"]);
-
 const handleClick = () => {
-  emit("closeClick");
+  // This function is now empty as the emit is removed
 };
 </script>
 

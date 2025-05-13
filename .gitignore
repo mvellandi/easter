@@ -1,6 +1,31 @@
-# Dependency directories
+# Dependencies
 node_modules/
-jspm_packages/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # dotenv environment variables file
 .env
@@ -28,13 +53,7 @@ dist-ssr
 # Easter Egg Core App specific
 src/dev-registry-sources.json
 
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
 # Virtual environment
-.venv
 venv/
 ENV/
 env/

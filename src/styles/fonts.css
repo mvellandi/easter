@@ -1,0 +1,48 @@
+.font-arial {
+  font-family: arial, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+}
+
+@font-face {
+  font-family: "Arcuata Trial";
+  font-style: italic;
+  font-weight: 500;
+  src: url(@/assets/fonts/Arcuata/ArcuataTrial-MediumItalic.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "Arcuata Trial";
+  font-style: normal;
+  font-weight: 500;
+  src: url(@/assets/fonts/Arcuata/ArcuataTrial-Medium.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(@/assets/fonts/DMSans/DMSans-Regular.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(@/assets/fonts/DMSans/DMSans-Bold.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url(@/assets/fonts/DMSans/DMSans-Bold.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: italic;
+  font-weight: 700;
+  src: url(@/assets/fonts/DMSans/DMSans-BoldItalic.otf) format("otf");
+  text-rendering: optimizeLegibility;
+}

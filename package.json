@@ -1,31 +1,28 @@
 {
-  "name": "easter-egg",
+  "name": "easter-egg-demo",
   "version": "1.0.0",
-  "description": "A modular Easter egg system for web applications",
+  "description": "A static website demonstrating an Easter Egg system",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:core": "vite build",
-    "build:loader": "vite build --config vite.config.loader.js",
     "preview": "vite preview",
-    "build-and-serve": "npm run build && npx serve dist",
-    "serve": "node serve.js"
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "easter-egg",
     "vue",
-    "modular"
+    "static-site"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.5",
-    "tailwindcss": "^4.1.5",
-    "vue": "^3.0.0"
+    "@tailwindcss/vite": "^4.1.6",
+    "tailwindcss": "^4.1.6",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.0.0"
+    "@vitejs/plugin-vue": "^5.2.4",
+    "vite": "^6.3.5"
   }
 }

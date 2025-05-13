@@ -1,0 +1,17 @@
+.textlink {
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.textlink:hover {
+  opacity: 0.7;
+}
+
+.textlink-secondary {
+  cursor: pointer;
+}
+
+.textlink-secondary:hover {
+  opacity: 0.7;
+  text-decoration-line: underline;
+}
