@@ -1,21 +1,22 @@
 <template>
   <button
     v-if="show"
-    class="ee-close-button"
+    class="ee-default-close"
     @click="handleClick"
     aria-label="Close Easter Egg"
   >
     <svg
+      class="w-8 h-8"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 32 32"
+      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <path d="M6 6 L26 26"></path>
-      <path d="M26 6 L6 26"></path>
+      <path d="M6 6 L18 18"></path>
+      <path d="M18 6 L6 18"></path>
     </svg>
   </button>
 </template>
