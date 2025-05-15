@@ -11,9 +11,9 @@
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
-      v-if="showContent"
+      v-if="isVisible"
       class="ee-content bg-image-blue p-8 border border-yellow-700"
-      :class="{ 'ee-content-visible': isVisible }"
+      :class="{ 'ee-content-visible': isVisible && contentReady }"
     >
       <!-- Use CoreDefaultCloseButton component -->
       <CoreDefaultCloseButton :show="isVisible" @closeClick="handleClose" />
@@ -22,7 +22,10 @@
       <slot name="close-button"></slot>
 
       <!-- Default slot for the egg component -->
-      <component :is="activeEgg?.component" v-bind="activeEgg?.props || {}" />
+      <component
+        :is="activeEgg?.component"
+        v-bind="{ ...activeEgg?.props, notifyContentReady } || {}"
+      />
     </div>
 
     <!-- 3. Floating Elements (if container is hidden) -->
@@ -37,7 +40,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 // Assuming ErrorModal.js is in the same directory as CoreModalShell.vue (src/core/components/)
 // If ErrorModal.js is in src/core/components/ and CoreModalShell.vue is also there, path is './ErrorModal.js'
 // From ee-core.js, it's imported as './components/ErrorModal.js'.
@@ -59,12 +62,29 @@ const props = defineProps({
   },
 });
 
+const contentReady = ref(false);
+let readyTimeout = null;
+
 const isVisible = computed(() => props.reactiveState.activeEgg !== null);
 const activeEgg = computed(() => props.reactiveState.activeEgg);
-// Only show content if activeEgg and its component are set
-const showContent = computed(() => {
-  return !!(activeEgg.value && activeEgg.value.component);
-});
+
+// Reset contentReady and start fallback timeout when egg changes
+watch(
+  () => activeEgg.value?.id,
+  () => {
+    contentReady.value = false;
+    if (readyTimeout) clearTimeout(readyTimeout);
+    // Start fallback timer (e.g., 300ms)
+    readyTimeout = setTimeout(() => {
+      contentReady.value = true;
+    }, 200);
+  }
+);
+
+const notifyContentReady = () => {
+  if (readyTimeout) clearTimeout(readyTimeout);
+  contentReady.value = true;
+};
 
 const handleClose = () => {
   console.log("CoreModalShell: Close button clicked");

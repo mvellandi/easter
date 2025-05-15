@@ -1,5 +1,5 @@
 import "./style.css"; // Import Tailwind CSS
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed, onMounted } from "vue";
 
 // Staff Grid Easter Egg
 console.log("Loading staff-grid.js");
@@ -28,9 +28,19 @@ export const StaffGridEggComponent = defineComponent({
         requestClose: () => {},
       }),
     },
+    notifyContentReady: {
+      type: Function,
+      default: null,
+    },
   },
   setup(props) {
     console.log("Staff Grid: Component setup with props:", props);
+
+    const imageLoadCount = ref(0);
+    const totalImages = computed(() => props.staffData.length);
+    const allImagesLoaded = computed(
+      () => imageLoadCount.value >= totalImages.value
+    );
 
     const getAssetUrl = (member) => {
       if (!member || !member.image) {
@@ -41,16 +51,41 @@ export const StaffGridEggComponent = defineComponent({
       return `./eggs/staff-grid/${member.image}`;
     };
 
+    const handleImageLoad = () => {
+      imageLoadCount.value++;
+      if (
+        imageLoadCount.value >= totalImages.value &&
+        props.notifyContentReady
+      ) {
+        props.notifyContentReady();
+      }
+    };
+
     const handleImageError = (member) => {
+      imageLoadCount.value++;
+      if (
+        imageLoadCount.value >= totalImages.value &&
+        props.notifyContentReady
+      ) {
+        props.notifyContentReady();
+      }
       console.warn(
         `Staff Grid: Failed to load image for ${member.name}. Using fallback.`
       );
       return props.assetConfig.fallbackUrl;
     };
 
+    // If there are no images, call notifyContentReady immediately
+    onMounted(() => {
+      if (totalImages.value === 0 && props.notifyContentReady) {
+        props.notifyContentReady();
+      }
+    });
+
     return {
       getAssetUrl,
       handleImageError,
+      handleImageLoad,
     };
   },
   data() {
@@ -96,6 +131,7 @@ export const StaffGridEggComponent = defineComponent({
             <img
               :src="getAssetUrl(member)"
               :alt="member.name"
+              @load="handleImageLoad"
               @error="handleImageError(member)"
               class="rounded-full max-w-[100px] mb-1.5"
             />
