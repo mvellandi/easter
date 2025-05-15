@@ -64,6 +64,9 @@ src/
 - Check animation compatibility with parent website
 - Ensure proper z-index layering with parent website elements
 
+### Modal System
+- The modal fade-in uses a short (200ms) delay before showing content, unless the egg component explicitly signals readiness via a callback. This is a workaround for the lack of a true Vue Suspense or asset preloading mechanism. Eggs with images or assets can call the `notifyContentReady` prop to control when the modal appears, but most eggs will simply fade in after the delay. This may not be robust for long-loading assets.
+
 ## Development
 
 ```bash
