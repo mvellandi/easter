@@ -52,18 +52,6 @@ src/
 
 ## Known Issues
 
-### Styling System
-- Font assets are not loading correctly
-- Graphics and images need proper path resolution
-- Core UI modal is not properly centered on the page
-- Need to verify all design system variable references
-
-### Integration Points
-- Review all CSS variable references to ensure they match the parent website
-- Verify asset paths for images and fonts
-- Check animation compatibility with parent website
-- Ensure proper z-index layering with parent website elements
-
 ### Modal System
 - The modal fade-in uses a short (200ms) delay before showing content, unless the egg component explicitly signals readiness via a callback. This is a workaround for the lack of a true Vue Suspense or asset preloading mechanism. Eggs with images or assets can call the `notifyContentReady` prop to control when the modal appears, but most eggs will simply fade in after the delay. This may not be robust for long-loading assets.
 
@@ -145,30 +133,6 @@ core.registerEgg("staff-grid", StaffGridEggComponent, {
   - You may need to use CSS like `overscroll-behavior-y: contain;` or `touch-action: none;` to improve gesture reliability, but this can affect scrolling UX.
 - **Tap/Swipe sensitivity:** ZingTouch may be more or less sensitive than native events; test on your target devices.
 - **Custom gesture sequences:** If you want to support multi-step gesture sequences, you must implement a state machine or custom handler in your main.js (see code comments for examples).
-
-## Styling System Review Needed
-
-The following areas need attention:
-
-1. **Core UI Positioning**
-   - Modal centering needs to be fixed
-   - Z-index layering needs to be reviewed
-   - Responsive behavior needs to be verified
-
-2. **Asset Loading**
-   - Font loading system needs to be reviewed
-   - Image path resolution needs to be fixed
-   - Asset preloading strategy needs to be implemented
-
-3. **Design System Integration**
-   - CSS variable mapping needs to be documented
-   - Animation compatibility needs to be verified
-   - Color scheme integration needs to be tested
-
-4. **Component Styling**
-   - Review all component-specific styles
-   - Verify scoped vs. global style usage
-   - Check for style conflicts with parent website
 
 ## Contributing
 
