@@ -104,6 +104,48 @@ core.registerEgg("egg-id", EggComponent, {
 registerKeyCombo();
 ```
 
+## Gesture Support (ZingTouch)
+
+Gesture support is provided via [ZingTouch](https://github.com/zingchart/zingtouch). You can configure eggs to be triggered by single gestures (such as swipe, tap, or rotate) in addition to keyboard shortcuts.
+
+### How to Add a Gesture Trigger
+
+Add a gesture trigger to your egg's config:
+
+```js
+trigger: [
+  { type: "keyboard", key: "h", ctrlKey: true },
+  { type: "gesture", gesture: "swipe", direction: "left" }
+]
+```
+- Supported gestures: `swipe`, `tap`, `rotate`
+- For `swipe`, you can specify `direction`: `"left"`, `"right"`, `"up"`, or `"down"`.
+- Only single gestures are supported via config. Gesture sequences (e.g., swipe left then right) require custom logic.
+
+### Example
+```js
+core.registerEgg("staff-grid", StaffGridEggComponent, {
+  title: "Our Team",
+  trigger: [
+    { type: "keyboard", key: "s", ctrlKey: true },
+    { type: "gesture", gesture: "swipe", direction: "left" }
+  ],
+  staffData: staffData,
+  assetConfig: {
+    fallbackUrl: "./eggs/staff-grid/images/fallback.webp",
+  },
+});
+```
+
+### Known Caveats and Limitations
+- **Only single gestures are supported via config.** Gesture sequences (e.g., double-tap then swipe) require custom code in your main.js.
+- **Mobile browser limitations:**
+  - Pull-to-refresh (PTR) and scrolling can interfere with down swipes and pan gestures, especially at the top of the page.
+  - Some gestures may not be detected if the browser intercepts the event (e.g., PTR, navigation gestures).
+  - You may need to use CSS like `overscroll-behavior-y: contain;` or `touch-action: none;` to improve gesture reliability, but this can affect scrolling UX.
+- **Tap/Swipe sensitivity:** ZingTouch may be more or less sensitive than native events; test on your target devices.
+- **Custom gesture sequences:** If you want to support multi-step gesture sequences, you must implement a state machine or custom handler in your main.js (see code comments for examples).
+
 ## Styling System Review Needed
 
 The following areas need attention:

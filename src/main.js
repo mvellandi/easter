@@ -2,6 +2,12 @@ import core, { registerKeyCombo } from "./core/core.js";
 import { HelloWorldEggComponent } from "./eggs/hello-world/index.js";
 import { StaffGridEggComponent } from "./eggs/staff-grid/index.js";
 import staffData from "./eggs/staff-grid/staff-data.json";
+import {
+  registerEggGesture,
+  registerEggSwipeSequence,
+  registerEggTapSequence,
+} from "./core/zingtouch-handler.js";
+import ZingTouch from "zingtouch";
 
 // Configuration object for the Easter Egg system
 const config = {
@@ -21,11 +27,13 @@ const config = {
       component: StaffGridEggComponent,
       options: {
         title: "Our Team",
-        trigger: {
-          type: "keyboard",
-          key: "s",
-          ctrlKey: true,
-        },
+        trigger: [
+          {
+            type: "keyboard",
+            key: "s",
+            ctrlKey: true,
+          },
+        ],
         staffData: staffData,
         assetConfig: {
           fallbackUrl: "./eggs/staff-grid/images/fallback.webp",
@@ -45,19 +53,30 @@ Object.entries(config.eggs).forEach(([eggId, { component, options }]) => {
   // Register the egg with the core system
   core.registerEgg(eggId, component, options);
 
-  // Register trigger if specified
-  if (options.trigger?.type === "keyboard") {
-    core.keyHandler.registerCombination(eggId, {
-      key: options.trigger.key,
-      ctrlKey: options.trigger.ctrlKey,
-    });
+  // Register triggers from config
+  const triggers = Array.isArray(options.trigger)
+    ? options.trigger
+    : [options.trigger];
+  triggers.forEach((trigger) => {
+    if (trigger?.type === "keyboard") {
+      core.keyHandler.registerCombination(eggId, {
+        key: trigger.key,
+        ctrlKey: trigger.ctrlKey,
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key.toLowerCase() === trigger.key) {
+          e.preventDefault();
+          core.showEgg(eggId, options);
+        }
+      });
+    } else if (trigger?.type === "gesture") {
+      registerEggGesture(eggId, trigger.gesture, {
+        direction: trigger.direction,
+        ...options,
+      });
+    }
+  });
 
-    // Add event listener for the key combo
-    document.addEventListener("keydown", (e) => {
-      if (e.ctrlKey && e.key.toLowerCase() === options.trigger.key) {
-        e.preventDefault();
-        core.showEgg(eggId, options);
-      }
-    });
-  }
+  // Custom gesture sequences (tap, swipe, pan, etc.) for staff-grid can be re-enabled here as needed.
+  // Note: Downward gestures may be affected by browser pull-to-refresh or scrolling behavior on mobile.
 });

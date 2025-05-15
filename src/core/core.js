@@ -12,6 +12,7 @@ import {
   ErrorHandler,
 } from "./components/ErrorModal.js";
 import { KeyHandler } from "./key-handler.js";
+import gestureHandler from "./gesture-handler.js";
 
 class EasterEggCore {
   constructor() {
@@ -101,6 +102,10 @@ class EasterEggCore {
     document.addEventListener("keyup", this.handleKeyUp);
     console.log("EasterEggCore: Keyboard event listeners added to document.");
 
+    // Add gesture event listeners
+    gestureHandler.setupGestureListeners();
+    console.log("EasterEggCore: Gesture event listeners added.");
+
     console.log("EasterEggCore: Initialization complete");
   }
 
@@ -120,6 +125,18 @@ class EasterEggCore {
       component,
       options,
       isVisible: false,
+    });
+
+    // Gesture trigger registration
+    const triggers = Array.isArray(options.trigger)
+      ? options.trigger
+      : [options.trigger];
+    triggers.forEach((trigger) => {
+      if (trigger && trigger.type === "gesture" && trigger.gesture) {
+        gestureHandler.registerGesture(eggId, trigger.gesture, (id) => {
+          this.showEgg(id, options);
+        });
+      }
     });
 
     console.log(`EasterEggCore: Successfully registered egg ${eggId}`);
