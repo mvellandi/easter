@@ -11,7 +11,7 @@
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
-      v-if="isVisible"
+      v-if="showContent"
       class="ee-content bg-image-blue p-8 border border-yellow-700"
       :class="{ 'ee-content-visible': isVisible }"
     >
@@ -61,6 +61,10 @@ const props = defineProps({
 
 const isVisible = computed(() => props.reactiveState.activeEgg !== null);
 const activeEgg = computed(() => props.reactiveState.activeEgg);
+// Only show content if activeEgg and its component are set
+const showContent = computed(() => {
+  return !!(activeEgg.value && activeEgg.value.component);
+});
 
 const handleClose = () => {
   console.log("CoreModalShell: Close button clicked");
