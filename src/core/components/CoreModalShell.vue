@@ -12,7 +12,7 @@
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
       v-if="isVisible"
-      class="ee-content bg-image-blue p-8 border border-yellow-700"
+      class="ee-content bg-image-blue"
       :class="{ 'ee-content-visible': isVisible && contentReady }"
     >
       <!-- Use CoreDefaultCloseButton component -->
@@ -106,8 +106,4 @@ const closeErrorModal = () => {
 };
 </script>
 
-<style scoped>
-/* All specific component styles (like .floating-close and .no-overlay-content) have been moved to their respective .css files or are part of their components. */
-/* This block should ideally be empty now, or only contain styles truly unique to the shell IF any remain. */
-/* .no-overlay-content was part of .ee-content logic, so it's in CoreModalContent.css */
-</style>
+<style scoped></style>
