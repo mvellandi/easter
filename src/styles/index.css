@@ -11,3 +11,12 @@ kbd {
   background: var(--color-green-700);
   color: var(--color-gray-100);
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* Prevent scrolling when modal is open */
+  overflow: hidden;
+}

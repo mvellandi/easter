@@ -33,6 +33,10 @@ const config = {
             key: "s",
             ctrlKey: true,
           },
+          {
+            type: "gesture",
+            gesture: "rotate",
+          },
         ],
         staffData: staffData,
         assetConfig: {
