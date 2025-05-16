@@ -6,7 +6,7 @@
     <title>Easter Egg Demo</title>
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
-  <body class="p-8 pt-20 text-gray-400 border-2 border-red-500">
+  <body class="p-8 pt-20 text-gray-400">
     <div
       class="px-8 absolute top-0 left-0 w-full h-[50px] bg-gray-900 border-b border-b-gray-700 flex justify-between items-center"
     >
@@ -52,7 +52,7 @@
     </div>
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl mb-4">Easter Egg Demo</h1>
-      <div class="space-y-4">
+      <div class="space-y-6">
         <p>
           Press <kbd class="px-2 py-1 bg-gray-200 rounded">Ctrl</kbd> +
           <kbd class="px-2 py-1 bg-gray-200 rounded">H</kbd> to trigger the
@@ -60,14 +60,15 @@
         </p>
         <p>
           Press <kbd class="px-2 py-1 bg-gray-200 rounded">Ctrl</kbd> +
-          <kbd class="px-2 py-1 bg-gray-200 rounded">T</kbd>, OR click on the
-          player avatar 5 time to see the Boot Team.
+          <kbd class="px-2 py-1 bg-gray-200 rounded">T</kbd> to see the Boot
+          Team
         </p>
+        <p>Click on the player avatar 5 times to pull up the joystick.</p>
       </div>
     </div>
 
     <!-- Easter Egg System Mount Point -->
-    <div id="easter-egg-root-container" class="border-2 border-blue-500"></div>
+    <div id="easter-egg-root-container"></div>
 
     <script type="module" src="./main.js"></script>
   </body>
