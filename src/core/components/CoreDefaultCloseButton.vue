@@ -33,7 +33,6 @@ const props = defineProps({
 const emit = defineEmits(["closeClick"]);
 
 const handleClick = () => {
-  console.log("Close button clicked or tapped");
   emit("closeClick");
 };
 </script>

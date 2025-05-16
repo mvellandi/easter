@@ -2,12 +2,6 @@ import core, { registerKeyCombo } from "./core/core.js";
 import { HelloWorldEggComponent } from "./eggs/hello-world/index.js";
 import { StaffGridEggComponent } from "./eggs/staff-grid/index.js";
 import staffData from "./eggs/staff-grid/staff-data.json";
-import {
-  registerEggGesture,
-  registerEggSwipeSequence,
-  registerEggTapSequence,
-} from "./core/zingtouch-handler.js";
-import ZingTouch from "zingtouch";
 
 // Configuration object for the Easter Egg system
 const config = {
@@ -32,10 +26,6 @@ const config = {
             type: "keyboard",
             key: "s",
             ctrlKey: true,
-          },
-          {
-            type: "gesture",
-            gesture: "rotate",
           },
         ],
         staffData: staffData,

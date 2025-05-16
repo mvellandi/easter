@@ -88,15 +88,10 @@ const notifyContentReady = () => {
 };
 
 const handleClose = () => {
-  console.log("Backdrop or close button clicked/tapped");
-  console.log("Active egg:", activeEgg.value);
-  console.log("Core interface:", props.coreInterface);
-
   if (activeEgg.value?.id) {
-    console.log("Calling requestClose with egg ID:", activeEgg.value.id);
     props.coreInterface.requestClose(activeEgg.value.id);
   } else {
-    console.warn("No active egg ID found when trying to close");
+    // No active egg ID found when trying to close
   }
 };
 
