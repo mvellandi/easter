@@ -3,6 +3,7 @@
     v-if="show"
     class="ee-default-close"
     @click="handleClick"
+    @touchend="handleClick"
     aria-label="Close Easter Egg"
   >
     <svg
@@ -32,6 +33,7 @@ const props = defineProps({
 const emit = defineEmits(["closeClick"]);
 
 const handleClick = () => {
+  console.log("Close button clicked or tapped");
   emit("closeClick");
 };
 </script>
