@@ -5,6 +5,7 @@
       class="ee-backdrop"
       :class="{ 'ee-backdrop-visible': isVisible }"
       @click="handleClose"
+      @touchend="handleClose"
     >
       <!-- For content like an egg when container is hidden -->
     </div>
@@ -87,7 +88,7 @@ const notifyContentReady = () => {
 };
 
 const handleClose = () => {
-  console.log("CoreModalShell: Close button clicked");
+  console.log("Backdrop or close button clicked/tapped");
   console.log("Active egg:", activeEgg.value);
   console.log("Core interface:", props.coreInterface);
 
