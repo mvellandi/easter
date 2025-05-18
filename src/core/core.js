@@ -175,16 +175,16 @@ class EasterEggCore {
           : egg.component;
 
       // Log the staff data
-      console.log("Staff data from options:", options.staffData);
-      console.log("Staff data from egg options:", egg.options.staffData);
+      console.log("Staff data from options:", options.info);
+      console.log("Staff data from egg options:", egg.options.info);
 
       // Ensure all required props are present and properly formatted
       const mergedOptions = {
         title: options.title || egg.options.title || "Our Team",
-        staffData: Array.isArray(options.staffData)
-          ? options.staffData
-          : Array.isArray(egg.options.staffData)
-          ? egg.options.staffData
+        info: Array.isArray(options.info)
+          ? options.info
+          : Array.isArray(egg.options.info)
+          ? egg.options.info
           : [],
         coreInterface: {
           requestClose: () => this.hideEgg(eggId),

@@ -2,7 +2,7 @@ import core, { registerKeyCombo } from "./core/core.js";
 import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger.js";
 import { HelloWorldEggComponent } from "./eggs/hello-world/index.js";
 import { StaffGridEggComponent } from "./eggs/staff-grid/index.js";
-import staffData from "./eggs/staff-grid/staff-data.json";
+import info from "./eggs/staff-grid/staff-data.json";
 
 // Configuration object for the Easter Egg system
 const config = {
@@ -29,7 +29,7 @@ const config = {
             ctrlKey: true,
           },
         ],
-        staffData: staffData,
+        info: info,
       },
     },
   },
