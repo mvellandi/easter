@@ -12,21 +12,30 @@
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
-      v-if="isVisible"
-      class="ee-content bg-image-blue"
-      :class="{ 'ee-content-visible': isVisible && contentReady }"
+      class="ee-modal"
+      :class="{ 'ee-modal-visible': isVisible && contentReady }"
     >
-      <!-- Use CoreDefaultCloseButton component -->
-      <CoreDefaultCloseButton :show="isVisible" @closeClick="handleClose" />
+      <div
+        v-if="isVisible"
+        class="ee-content bg-image-blue"
+        :class="{ 'ee-content-visible': isVisible && contentReady }"
+      >
+        <!-- Use CoreDefaultCloseButton component -->
+        <CoreDefaultCloseButton :show="isVisible" @closeClick="handleClose" />
 
-      <!-- Slot for the default close button -->
-      <slot name="close-button"></slot>
+        <!-- Slot for the default close button -->
+        <slot name="close-button"></slot>
 
-      <!-- Default slot for the egg component -->
-      <component
-        :is="activeEgg?.component"
-        v-bind="{ ...activeEgg?.props, notifyContentReady } || {}"
-      />
+        <!-- Default slot for the egg component -->
+        <component
+          :is="activeEgg?.component"
+          v-bind="{ ...activeEgg?.props, notifyContentReady } || {}"
+        />
+      </div>
+      <!-- Gradient for the bottom of the modal -->
+      <div
+        class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-900 to-transparent lg:h-0"
+      ></div>
     </div>
 
     <!-- 3. Floating Elements (if container is hidden) -->
