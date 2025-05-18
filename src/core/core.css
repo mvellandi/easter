@@ -13,6 +13,7 @@
   align-items: flex-start;
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
+  pointer-events: none; /* Only allow pointer events when modal/backdrop is visible */
 }
 
 .ee-modal-shell {

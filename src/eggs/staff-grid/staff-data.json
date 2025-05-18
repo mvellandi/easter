@@ -1,7 +1,7 @@
 [
   {
     "name": "Alexandre Faria",
-    "role": "Animator / Editor",
+    "role": "Video Producer",
     "image": "images/alexandre_faria.webp"
   },
   {
@@ -31,7 +31,11 @@
   },
   {
     "name": "Stass",
-    "role": "Animator / Editor",
+    "role": "Video Producer",
     "image": "images/stass_editor.webp"
+  },
+  {
+    "name": "Waseem",
+    "role": "Software Engineer"
   }
 ]

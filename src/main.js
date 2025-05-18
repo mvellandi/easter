@@ -1,4 +1,5 @@
 import core, { registerKeyCombo } from "./core/core.js";
+import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger.js";
 import { HelloWorldEggComponent } from "./eggs/hello-world/index.js";
 import { StaffGridEggComponent } from "./eggs/staff-grid/index.js";
 import staffData from "./eggs/staff-grid/staff-data.json";
@@ -73,4 +74,20 @@ Object.entries(config.eggs).forEach(([eggId, { component, options }]) => {
 
   // Custom gesture sequences (tap, swipe, pan, etc.) for staff-grid can be re-enabled here as needed.
   // Note: Downward gestures may be affected by browser pull-to-refresh or scrolling behavior on mobile.
+});
+
+// Attach multi-click trigger to the invisible header button after DOM is ready
+window.addEventListener("DOMContentLoaded", () => {
+  const controllerBtn = document.querySelector(
+    'button[aria-label="staff directory"]'
+  );
+  if (controllerBtn) {
+    registerMultiClickTrigger({
+      element: controllerBtn,
+      count: 5,
+      callback: () => {
+        core.showEgg("staff-grid", config.eggs["staff-grid"].options);
+      },
+    });
+  }
 });
