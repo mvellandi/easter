@@ -30,9 +30,6 @@ const config = {
           },
         ],
         staffData: staffData,
-        assetConfig: {
-          fallbackUrl: "./eggs/staff-grid/images/fallback.webp",
-        },
       },
     },
   },

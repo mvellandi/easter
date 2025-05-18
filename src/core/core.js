@@ -181,12 +181,6 @@ class EasterEggCore {
       // Ensure all required props are present and properly formatted
       const mergedOptions = {
         title: options.title || egg.options.title || "Our Team",
-        assetConfig: {
-          fallbackUrl:
-            options.assetConfig?.fallbackUrl ||
-            egg.options.assetConfig?.fallbackUrl ||
-            "/src/eggs/staff-grid/images/fallback.webp",
-        },
         staffData: Array.isArray(options.staffData)
           ? options.staffData
           : Array.isArray(egg.options.staffData)

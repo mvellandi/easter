@@ -4,6 +4,8 @@ import { defineComponent, ref, computed, onMounted } from "vue";
 // Staff Grid Easter Egg
 console.log("Loading staff-grid.js");
 
+const fallbackUrl = "images/avatar.png";
+
 // Define the component configuration directly
 export const StaffGridEggComponent = defineComponent({
   name: "StaffGridEggComponent",
@@ -11,12 +13,6 @@ export const StaffGridEggComponent = defineComponent({
     title: {
       type: String,
       default: "Our Team",
-    },
-    assetConfig: {
-      type: Object,
-      default: () => ({
-        fallbackUrl: "images/fallback.webp",
-      }),
     },
     staffData: {
       type: Array,
@@ -42,10 +38,12 @@ export const StaffGridEggComponent = defineComponent({
       () => imageLoadCount.value >= totalImages.value
     );
 
+    const erroredImages = ref(new Set());
+
     const getAssetUrl = (member) => {
-      if (!member || !member.image) {
+      if (!member || !member.image || erroredImages.value.has(member.name)) {
         // Prepend the staff-grid directory to the fallback image path
-        return `./eggs/staff-grid/${props.assetConfig.fallbackUrl}`;
+        return `./eggs/staff-grid/${fallbackUrl}`;
       }
       // Prepend the staff-grid directory to the image path from JSON
       return `./eggs/staff-grid/${member.image}`;
@@ -61,7 +59,8 @@ export const StaffGridEggComponent = defineComponent({
       }
     };
 
-    const handleImageError = (member) => {
+    const handleImageError = (member, event) => {
+      erroredImages.value.add(member.name);
       imageLoadCount.value++;
       if (
         imageLoadCount.value >= totalImages.value &&
@@ -72,7 +71,10 @@ export const StaffGridEggComponent = defineComponent({
       console.warn(
         `Staff Grid: Failed to load image for ${member.name}. Using fallback.`
       );
-      return props.assetConfig.fallbackUrl;
+      // Set the fallback image directly on the event target
+      if (event && event.target) {
+        event.target.src = `./eggs/staff-grid/${fallbackUrl}`;
+      }
     };
 
     // If there are no images, call notifyContentReady immediately
@@ -132,7 +134,7 @@ export const StaffGridEggComponent = defineComponent({
               :src="getAssetUrl(member)"
               :alt="member.name"
               @load="handleImageLoad"
-              @error="handleImageError(member)"
+              @error="(event) => handleImageError(member, event)"
               class="rounded-full max-w-[100px] mb-1.5"
             />
           </div>
