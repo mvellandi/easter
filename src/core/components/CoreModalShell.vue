@@ -26,11 +26,16 @@
         <!-- Slot for the default close button -->
         <slot name="close-button"></slot>
 
-        <!-- Default slot for the egg component -->
-        <component
-          :is="activeEgg?.component"
-          v-bind="{ ...activeEgg?.props, notifyContentReady } || {}"
-        />
+        <!-- Modal content based on type -->
+        <template v-if="activeModal?.type === 'egg'">
+          <component
+            :is="activeModal.props?.component"
+            v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
+          />
+        </template>
+        <template v-else-if="activeModal?.type === 'controller'">
+          <div class="controller-placeholder">Controller Placeholder</div>
+        </template>
       </div>
       <!-- Gradient for the bottom of the modal -->
       <div
@@ -75,12 +80,12 @@ const props = defineProps({
 const contentReady = ref(false);
 let readyTimeout = null;
 
-const isVisible = computed(() => props.reactiveState.activeEgg !== null);
-const activeEgg = computed(() => props.reactiveState.activeEgg);
+const isVisible = computed(() => props.reactiveState.activeModal !== null);
+const activeModal = computed(() => props.reactiveState.activeModal);
 
-// Reset contentReady and start fallback timeout when egg changes
+// Reset contentReady and start fallback timeout when modal changes
 watch(
-  () => activeEgg.value?.id,
+  () => activeModal.value?.type + ":" + (activeModal.value?.props?.id || ""),
   () => {
     contentReady.value = false;
     if (readyTimeout) clearTimeout(readyTimeout);
@@ -97,18 +102,30 @@ const notifyContentReady = () => {
 };
 
 const handleClose = () => {
-  if (activeEgg.value?.id) {
-    props.coreInterface.requestClose(activeEgg.value.id);
+  if (activeModal.value?.type === "egg" && activeModal.value?.props?.id) {
+    props.coreInterface.requestClose(activeModal.value.props.id);
+  } else if (activeModal.value?.type === "controller") {
+    // For now, just clear the modal
+    props.reactiveState.activeModal = null;
   } else {
-    // No active egg ID found when trying to close
+    // No active modal found when trying to close
   }
 };
 
 const closeErrorModal = () => {
-  // Directly mutate the reactive state passed as a prop.
-  // This is generally okay in Vue 3 if the source is a reactive object.
   props.reactiveState.errorModal.show = false;
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.controller-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.5rem;
+  color: #fff;
+  background: #222;
+  border-radius: 8px;
+}
+</style>

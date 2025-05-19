@@ -30,9 +30,8 @@ interface Egg {
   isVisible: boolean;
 }
 
-interface ActiveEgg {
-  id: string;
-  component: any;
+interface ActiveModal {
+  type: string; // 'egg', 'controller', etc.
   props: any;
 }
 
@@ -43,7 +42,7 @@ interface ErrorModalState {
 }
 
 interface ReactiveState {
-  activeEgg: ActiveEgg | null;
+  activeModal: ActiveModal | null;
   errorModal: ErrorModalState;
 }
 
@@ -51,7 +50,7 @@ type ErrorHandlerMap = Map<string, Record<string, (error: Error, context?: any) 
 
 class EasterEggCore {
   eggs: Map<string, Egg>;
-  activeEgg: ActiveEgg | null;
+  activeModal: ActiveModal | null;
   vueApp: App<Element> | null;
   container: HTMLDivElement | null;
   isVisible: boolean;
@@ -63,7 +62,7 @@ class EasterEggCore {
 
   constructor() {
     this.eggs = new Map();
-    this.activeEgg = null;
+    this.activeModal = null;
     this.vueApp = null;
     this.container = null;
     this.isVisible = false;
@@ -79,6 +78,7 @@ class EasterEggCore {
     this.mount = this.mount.bind(this);
     this.unmount = this.unmount.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.showController = this.showController.bind(this);
   }
 
   initialize(): void {
@@ -86,7 +86,7 @@ class EasterEggCore {
 
     // 1. Create the reactive state object FIRST
     this.reactiveState = reactive<ReactiveState>({
-      activeEgg: null,
+      activeModal: null,
       errorModal: {
         show: false,
         message: "",
@@ -128,6 +128,9 @@ class EasterEggCore {
       registerEgg: (eggId: string, component: any, options: EggOptions) => {
         console.log(`EasterEggCore: Request to register egg ${eggId} received`);
         this.registerEgg(eggId, component, options);
+      },
+      showController: () => {
+        this.showController();
       },
     };
 
@@ -181,7 +184,7 @@ class EasterEggCore {
     this.keyHandler.handleKeyDown(event);
 
     // Check for Escape key first if an egg is active
-    if (event.key === "Escape" && this.activeEgg) {
+    if (event.key === "Escape" && this.activeModal) {
       console.log("EasterEggCore: Escape key pressed, unmounting active egg.");
       event.preventDefault();
       this.unmount();
@@ -241,11 +244,14 @@ class EasterEggCore {
 
       console.log("Final merged options:", mergedOptions);
 
-      // Update the reactive state to show the egg
-      this.reactiveState!.activeEgg = {
-        id: eggId,
-        component: markRaw(component),
-        props: mergedOptions,
+      // Update the reactive state to show the egg modal
+      this.reactiveState!.activeModal = {
+        type: 'egg',
+        props: {
+          id: eggId,
+          component: markRaw(component),
+          props: mergedOptions,
+        },
       };
 
       // Show the modal
@@ -266,7 +272,22 @@ class EasterEggCore {
   }
 
   /**
-   * Hides an egg
+   * Shows the controller modal (placeholder for now)
+   */
+  showController(): void {
+    this.reactiveState!.activeModal = {
+      type: 'controller',
+      props: {},
+    };
+    this.isVisible = true;
+    const content = this.container!.querySelector(".ee-content");
+    const backdrop = this.container!.querySelector(".ee-backdrop");
+    if (content) content.classList.add("ee-content-visible");
+    if (backdrop) backdrop.classList.add("ee-backdrop-visible");
+  }
+
+  /**
+   * Hides an egg (now hides any modal)
    * @param {string} eggId - The ID of the egg to hide
    */
   hideEgg(eggId: string): void {
@@ -281,8 +302,8 @@ class EasterEggCore {
       return;
     }
 
-    // Clear the active egg
-    this.reactiveState!.activeEgg = null;
+    // Clear the active modal
+    this.reactiveState!.activeModal = null;
 
     // Hide the modal
     this.isVisible = false;
@@ -323,13 +344,15 @@ class EasterEggCore {
       console.error(`EasterEggCore: Attempted to mount unknown egg ${eggId}`);
       return;
     }
-    if (this.activeEgg && this.activeEgg.id !== eggId) {
+    if (this.activeModal && this.activeModal.props.id !== eggId) {
       this.unmount();
     }
     console.log(`EasterEggCore: Mounting egg ${eggId}`, eggToMount);
-    // Provide a default props object for ActiveEgg
-    this.activeEgg = { ...eggToMount, id: eggId, props: eggToMount.options } as ActiveEgg;
-    this.reactiveState!.activeEgg = this.activeEgg;
+    this.activeModal = {
+      type: 'egg',
+      props: { ...eggToMount, id: eggId, props: eggToMount.options },
+    };
+    this.reactiveState!.activeModal = this.activeModal;
     this.isVisible = true;
     console.log(
       `EasterEggCore: Egg ${eggId} is now active and visible (pending Vue render).`
@@ -337,14 +360,14 @@ class EasterEggCore {
   }
 
   unmount(): void {
-    if (!this.activeEgg) return;
-    console.log(`EasterEggCore: Unmounting active egg ${this.activeEgg.id}`);
+    if (!this.activeModal) return;
+    console.log(`EasterEggCore: Unmounting active modal`);
 
-    this.activeEgg = null;
-    this.reactiveState!.activeEgg = null;
+    this.activeModal = null;
+    this.reactiveState!.activeModal = null;
     this.isVisible = false;
     this.keyHandler.reset();
-    console.log("EasterEggCore: Active egg unmounted and hidden.");
+    console.log("EasterEggCore: Active modal unmounted and hidden.");
   }
 
   destroy(): void {
@@ -422,3 +445,61 @@ export function registerKeyCombo() {
 
 // Export the core instance
 export default core;
+
+// --- Generic Modal Trigger System ---
+
+// Types for modal actions and triggers
+export type ModalAction =
+  | { type: 'egg', eggId: string, options?: any }
+  | { type: 'controller' };
+
+export type ModalTrigger =
+  | { type: 'keyboard', key: string, ctrlKey?: boolean, altKey?: boolean, shiftKey?: boolean }
+  | { type: 'click', elementId?: string, selector?: string };
+
+/**
+ * Register a generic modal trigger (keyboard, click, etc.)
+ * @param trigger - The trigger config
+ * @param action - The modal action to perform
+ */
+export function registerModalTrigger({ trigger, action }: { trigger: ModalTrigger, action: ModalAction }) {
+  if (trigger.type === 'keyboard') {
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (
+        e.key.toLowerCase() === trigger.key.toLowerCase() &&
+        (!!trigger.ctrlKey === e.ctrlKey) &&
+        (!!trigger.altKey === e.altKey) &&
+        (!!trigger.shiftKey === e.shiftKey)
+      ) {
+        e.preventDefault();
+        if (action.type === 'egg') core.showEgg(action.eggId, action.options);
+        if (action.type === 'controller') core.showController();
+      }
+    });
+  } else if (trigger.type === 'click') {
+    // Wait for DOMContentLoaded in case the element(s) aren't present yet
+    const setupClick = () => {
+      if (trigger.elementId) {
+        const el = document.getElementById(trigger.elementId);
+        if (el) {
+          el.addEventListener('click', () => {
+            if (action.type === 'egg') core.showEgg(action.eggId, action.options);
+            if (action.type === 'controller') core.showController();
+          });
+        }
+      } else if (trigger.selector) {
+        document.querySelectorAll(trigger.selector).forEach((el) => {
+          el.addEventListener('click', () => {
+            if (action.type === 'egg') core.showEgg(action.eggId, action.options);
+            if (action.type === 'controller') core.showController();
+          });
+        });
+      }
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupClick);
+    } else {
+      setupClick();
+    }
+  }
+}
