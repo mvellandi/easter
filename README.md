@@ -15,7 +15,7 @@ The Easter Egg Core System provides a framework for creating and managing intera
 
 ---
 
-## Existing System Architecture (2024)
+## Architecture
 
 - **Core System (`src/core/`)**
   - Handles modal UI, display, and interaction for eggs.
@@ -35,62 +35,6 @@ The Easter Egg Core System provides a framework for creating and managing intera
 - **Accessibility**
   - Modal visually robust, but may lack full ARIA/focus trap accessibility features.
 
----
-
-## Planned Refactor & Roadmap
-
-### Controller/Remote as a Core Modal
-- Place the controller (Wii/NES remote) component in `core/components/`.
-- Use the same modal/backdrop system as eggs.
-- Trigger it from an invisible, semantic, accessible `<button>`.
-- When the correct sequence is entered, dynamically load and show the corresponding egg.
-
-### Modal System Improvements
-- Refactor modal state to be generic (e.g., `activeModal` with type and props), not just `activeEgg`.
-- Allow the modal shell to render either an egg or the controller, using shared close/backdrop logic.
-- Ensure only one overlay/modal is visible at a time.
-
-### Accessibility
-- Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
-- Implement a focus trap so keyboard users can't tab out of the modal.
-- Ensure the close button is always accessible and labeled.
-
-### Dynamic Egg Imports
-- Refactor egg registration to use dynamic imports (e.g., `() => import('./eggs/hello-world/index.js')`) for performance and bundle size reduction.
-
-### Controller/Remote Features
-- Responsive: Wii remote (vertical) for <1024px screens, NES controller (horizontal) for >=1024px screens.
-- Both remotes are functionally identical (D-pad, A/B, Reset, Enter), but visually different.
-- Display the sequence of button presses, with reset and enter controls.
-- Both remotes respond to keyboard events as well as pointer/touch.
-- The controller emits button sequence events to the core system, which can trigger eggs dynamically.
-
-### General Refactoring
-- Centralize modal state and logic for extensibility.
-- Use a registry or mapping for modal content, so adding new modal types is easy.
-- Decouple trigger logic (keyboard, multi-click, controller) from modal logic.
-
----
-
-*This roadmap is intended to guide the next phase of development, making the system more modular, accessible, and extensible for new input methods and features.*
-
-## Architecture
-
-### Core System
-- Located in `src/core/`
-- Contains the essential UI system for modal display and interaction
-- Uses inlined CSS for core UI components to ensure isolation
-- Relies on the parent website's design system for styling variables and assets
-
-### Eggs
-- Located in `src/eggs/`
-- Each egg is a self-contained module
-- Can utilize the parent website's design system styles
-- Currently includes:
-  - Hello World Egg (Ctrl + H)
-  - Staff Grid Egg (Ctrl + S)
-
-## Integration Requirements
 
 ### Design System Integration
 The system expects the following from the parent website:
@@ -160,14 +104,132 @@ core.registerEgg("egg-id", EggComponent, {
 registerKeyCombo();
 ```
 
-## Contributing
+## Planned Refactor & Roadmap Part 1
+### TypeScript Migration Plan
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+To ensure a robust and maintainable codebase, we will migrate the project to TypeScript before proceeding with major feature refactors. This plan outlines the steps for a smooth transition:
 
-## License
+1. **Update Tooling**
+   - Add TypeScript and necessary types as dev dependencies.
+   - Update Vite config to support `.ts` and `.vue` with TypeScript.
 
-[Your License Here] 
+2. **Rename Files**
+   - Change `.js` files to `.ts` (and `.vue` files to use `<script lang="ts">`).
+
+3. **Add TypeScript Config**
+   - Create a `tsconfig.json` with sensible defaults for Vue 3 + Vite.
+
+4. **Incremental Conversion**
+   - Start with the core system (`src/core/`), then eggs, then utilities.
+   - Add types/interfaces where possible, use `any` as a temporary fallback if needed.
+   - Fix type errors as they arise.
+
+5. **Update Imports/Exports**
+   - Ensure all imports/exports use the correct file extensions and type syntax.
+
+6. **Test the Build**
+   - Run the dev server and build to ensure everything works.
+
+7. **Update README**
+   - Document the new TypeScript setup and any changes to development workflow.
+
+---
+
+
+## Planned Refactor & Roadmap Part 2
+
+### Controller/Remote as a Core Modal
+- Place the controller (Wii/NES remote) component in `core/components/`.
+- Use the same modal/backdrop system as eggs.
+- Trigger it from an invisible, semantic, accessible `<button>`.
+- When the correct sequence is entered, dynamically load and show the corresponding egg.
+
+### Modal System Improvements
+- Refactor modal state to be generic (e.g., `activeModal` with type and props), not just `activeEgg`.
+- Allow the modal shell to render either an egg or the controller, using shared close/backdrop logic.
+- Ensure only one overlay/modal is visible at a time.
+
+### Accessibility
+- Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
+- Implement a focus trap so keyboard users can't tab out of the modal.
+- Ensure the close button is always accessible and labeled.
+
+### Dynamic Egg Imports
+- Refactor egg registration to use dynamic imports (e.g., `() => import('./eggs/hello-world/index.js')`) for performance and bundle size reduction.
+
+### Controller/Remote Features
+- Responsive: Wii remote (vertical) for <1024px screens, NES controller (horizontal) for >=1024px screens.
+- Both remotes are functionally identical (D-pad, A/B, Reset, Enter), but visually different.
+- Display the sequence of button presses, with reset and enter controls.
+- Both remotes respond to keyboard events as well as pointer/touch.
+- The controller emits button sequence events to the core system, which can trigger eggs dynamically.
+
+### General Refactoring
+- Centralize modal state and logic for extensibility.
+- Use a registry or mapping for modal content, so adding new modal types is easy.
+- Decouple trigger logic (keyboard, multi-click, controller) from modal logic.
+
+---
+
+*This roadmap is intended to guide the next phase of development, making the system more modular, accessible, and extensible for new input methods and features.*
+
+### First Commit Plan
+
+**Goal:**
+Refactor the modal system so it can generically handle multiple modal types (not just eggs), laying the groundwork for future features like the controller modal, dynamic imports, and improved accessibility.
+
+#### Steps
+
+1. **Refactor Modal State**
+   - Change the modal state from something like `activeEgg` to a more generic `activeModal`.
+   - `activeModal` should be an object with at least:
+     - `type`: e.g., `"egg"`, `"controller"`, etc.
+     - `props`: any props/data needed for the modal content.
+
+2. **Update Modal Shell**
+   - Refactor the modal shell component to render its content based on `activeModal.type`.
+   - For `"egg"`, render the current egg component.
+   - For `"controller"`, render a placeholder or stub for the controller (even if not implemented yet).
+
+3. **Centralize Modal Logic**
+   - Ensure all open/close logic, backdrop, and close button handling is centralized and works for any modal type.
+
+4. **Maintain Backward Compatibility**
+   - Make sure existing eggs and their triggers still work as before, but now use the new modal state system.
+
+5. **Testing**
+   - Test that:
+     - Eggs still open/close as expected.
+     - The modal shell can handle at least two types (`egg` and a placeholder for `controller`).
+     - No regressions in modal display or interaction.
+
+#### Example State Shape
+
+```js
+// Before:
+activeEgg: 'hello-world' // or null
+
+// After:
+activeModal: {
+  type: 'egg', // or 'controller'
+  props: { eggId: 'hello-world' } // or other props as needed
+} // or null
+```
+
+#### Commit Message Suggestion
+
+```
+refactor: make modal state generic to support multiple modal types
+
+- Replace activeEgg with activeModal (type + props)
+- Update modal shell to render content based on modal type
+- Ensure existing eggs still work with new modal system
+- Prepare for future controller modal and extensibility
+```
+
+This commit will set the stage for all future improvements, making the modal system more flexible and maintainable.
+
+**Next Steps:**
+Once the modal state refactor is complete and stable, proceed to implement the controller modal, dynamic imports, and accessibility improvements as outlined above.
+
+---
