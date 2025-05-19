@@ -33,13 +33,10 @@ export default defineConfig({
 
   // Build options
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, "index.html"),
-      },
       output: {
         manualChunks: {
           vue: ["vue"],
