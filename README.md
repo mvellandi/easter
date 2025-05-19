@@ -6,6 +6,13 @@ A modular Easter Egg system built with Vue 3 and Vite, designed to be integrated
 
 The Easter Egg Core System provides a framework for creating and managing interactive "Easter Eggs" - hidden features that can be triggered by specific user actions. The system is built to integrate seamlessly with a parent website's design system while maintaining its own core UI functionality.
 
+**Tech Stack & Tooling:**
+- **Vue 3** for UI components and reactivity
+- **Vite** for fast development and build tooling
+- **Tailwind CSS v4** for utility-first styling
+  - No configuration file required (zero-config)
+  - Uses the official Vite plugin for Tailwind compilation
+
 ---
 
 ## Existing System Architecture (2024)
