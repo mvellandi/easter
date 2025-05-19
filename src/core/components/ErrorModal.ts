@@ -1,4 +1,5 @@
-// Error Modal Component and Logic
+// Error Modal Logic (UI is now in ErrorModal.vue)
+
 export const ErrorModalStyles = `
   .ee-error-modal {
     position: fixed;
@@ -57,36 +58,17 @@ export const ErrorModalStyles = `
   }
 `;
 
-export const ErrorModalComponent = {
-  template: `
-    <div v-if="show" class="ee-error-modal">
-      <div class="ee-error-content">
-        <h3>Oops! Something went wrong</h3>
-        <p>{{ message }}</p>
-        <p class="ee-error-note">Don't worry, our team has been notified and we're working on it.</p>
-        <button @click="close" class="ee-error-close">Close</button>
-      </div>
-    </div>
-  `,
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    message: {
-      type: String,
-      required: true,
-    },
-  },
-  methods: {
-    close() {
-      this.$emit("close");
-    },
-  },
-};
+export interface ErrorModalState {
+  show: boolean;
+  message: string;
+  eggId: string | null;
+}
 
 export class ErrorHandler {
-  constructor(app) {
+  app: any;
+  errorModal: ErrorModalState;
+
+  constructor(app: any) {
     this.app = app;
     this.errorModal = {
       show: false,
@@ -95,7 +77,7 @@ export class ErrorHandler {
     };
   }
 
-  showError(eggId, errorType, error, context = {}) {
+  showError(eggId: string, errorType: string, error: Error, context: any = {}): void {
     this.errorModal = {
       show: true,
       message: this.getErrorMessage(errorType, eggId),
@@ -104,19 +86,19 @@ export class ErrorHandler {
     this.updateAppData();
   }
 
-  closeError() {
+  closeError(): void {
     this.errorModal.show = false;
     this.updateAppData();
   }
 
-  updateAppData() {
+  updateAppData(): void {
     if (this.app._instance && this.app._instance.data) {
       this.app._instance.data.errorModal = this.errorModal;
     }
   }
 
-  getErrorMessage(errorType, eggId) {
-    const egg = this.app.eggs.get(eggId);
+  getErrorMessage(errorType: string, eggId: string): string {
+    const egg = this.app.eggs?.get(eggId);
     const eggName = egg ? egg.name : eggId;
 
     switch (errorType) {

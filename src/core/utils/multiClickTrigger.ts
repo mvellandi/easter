@@ -1,16 +1,23 @@
 // Utility to detect N consecutive activations (click/tap/keyboard) on an element
 // Resets if the sequence is broken for more than 1 second
 
+interface RegisterMultiClickTriggerOptions {
+  element: HTMLElement;
+  count?: number;
+  callback: (e: MouseEvent | TouchEvent | KeyboardEvent) => void;
+  timeout?: number;
+}
+
 export function registerMultiClickTrigger({
   element,
   count = 5,
   callback,
   timeout = 1000, // ms
-}) {
+}: RegisterMultiClickTriggerOptions): () => void {
   let activationCount = 0;
-  let timer = null;
+  let timer: ReturnType<typeof setTimeout> | null = null;
   let lastActivationTime = 0;
-  let lastEventType = null;
+  let lastEventType: string | null = null;
   const DEDUP_WINDOW = 150; // ms
 
   function reset() {
@@ -23,7 +30,7 @@ export function registerMultiClickTrigger({
     lastEventType = null;
   }
 
-  function isDuplicateEvent(e) {
+  function isDuplicateEvent(e: MouseEvent | TouchEvent | KeyboardEvent): boolean {
     const now = Date.now();
     // If the same event type fires within the dedup window, ignore
     if (lastEventType && now - lastActivationTime < DEDUP_WINDOW) {
@@ -44,12 +51,12 @@ export function registerMultiClickTrigger({
     return false;
   }
 
-  function handleActivation(e) {
+  function handleActivation(e: MouseEvent | TouchEvent | KeyboardEvent) {
     // Only allow left click, touch, or keyboard activation (Enter/Space)
     if (
       e.type === "click" ||
       e.type === "touchend" ||
-      (e.type === "keydown" && (e.key === "Enter" || e.key === " "))
+      (e.type === "keydown" && ((e as KeyboardEvent).key === "Enter" || (e as KeyboardEvent).key === " "))
     ) {
       if (isDuplicateEvent(e)) return;
       activationCount++;

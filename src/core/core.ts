@@ -1,4 +1,8 @@
-import { createApp, reactive, markRaw } from "vue";
+// Add these at the top for type declarations
+// @ts-ignore
+import type {} from 'vue';
+
+import { createApp, reactive, markRaw, App } from "vue";
 
 // Import core UI system styles
 import coreCssString from "./core.css?inline";
@@ -7,13 +11,56 @@ import coreCssString from "./core.css?inline";
 import CoreModalShell from "./components/CoreModalShell.vue";
 
 import {
-  ErrorModalComponent,
   ErrorModalStyles,
   ErrorHandler,
-} from "./components/ErrorModal.js";
-import { KeyHandler } from "./key-handler.js";
+} from "./components/ErrorModal";
+import { KeyHandler } from "./key-handler";
+
+// Interfaces for type safety
+interface EggOptions {
+  title?: string;
+  trigger?: any; // TODO: Define trigger type
+  info?: any;
+  [key: string]: any;
+}
+
+interface Egg {
+  component: any; // Vue component or async import
+  options: EggOptions;
+  isVisible: boolean;
+}
+
+interface ActiveEgg {
+  id: string;
+  component: any;
+  props: any;
+}
+
+interface ErrorModalState {
+  show: boolean;
+  message: string;
+  eggId: string | null;
+}
+
+interface ReactiveState {
+  activeEgg: ActiveEgg | null;
+  errorModal: ErrorModalState;
+}
+
+type ErrorHandlerMap = Map<string, Record<string, (error: Error, context?: any) => void>>;
 
 class EasterEggCore {
+  eggs: Map<string, Egg>;
+  activeEgg: ActiveEgg | null;
+  vueApp: App<Element> | null;
+  container: HTMLDivElement | null;
+  isVisible: boolean;
+  keyHandler: KeyHandler;
+  errorHandlers: ErrorHandlerMap;
+  reactiveState: ReactiveState | null;
+  styleElement: HTMLStyleElement | null;
+  errorHandler: ErrorHandler | null;
+
   constructor() {
     this.eggs = new Map();
     this.activeEgg = null;
@@ -24,6 +71,7 @@ class EasterEggCore {
     this.errorHandlers = new Map();
     this.reactiveState = null;
     this.styleElement = null;
+    this.errorHandler = null;
 
     // Bind methods
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -33,11 +81,11 @@ class EasterEggCore {
     this.handleError = this.handleError.bind(this);
   }
 
-  initialize() {
+  initialize(): void {
     console.log("EasterEggCore: Initializing...");
 
     // 1. Create the reactive state object FIRST
-    this.reactiveState = reactive({
+    this.reactiveState = reactive<ReactiveState>({
       activeEgg: null,
       errorModal: {
         show: false,
@@ -69,15 +117,15 @@ class EasterEggCore {
 
     // Create the core interface with all necessary methods
     const coreInterfaceForEggs = {
-      requestClose: (eggId) => {
+      requestClose: (eggId: string) => {
         console.log(`EasterEggCore: Request to close egg ${eggId} received`);
         this.hideEgg(eggId);
       },
-      showEgg: (eggId, options) => {
+      showEgg: (eggId: string, options: EggOptions) => {
         console.log(`EasterEggCore: Request to show egg ${eggId} received`);
         this.showEgg(eggId, options);
       },
-      registerEgg: (eggId, component, options) => {
+      registerEgg: (eggId: string, component: any, options: EggOptions) => {
         console.log(`EasterEggCore: Request to register egg ${eggId} received`);
         this.registerEgg(eggId, component, options);
       },
@@ -110,7 +158,7 @@ class EasterEggCore {
    * @param {Function|Object} component - The egg component (can be a dynamic import)
    * @param {Object} options - The egg options
    */
-  registerEgg(eggId, component, options = {}) {
+  registerEgg(eggId: string, component: any, options: EggOptions = {}): void {
     console.log(
       `EasterEggCore: Registering egg ${eggId} with options:`,
       options
@@ -129,7 +177,7 @@ class EasterEggCore {
     );
   }
 
-  handleKeyDown(event) {
+  handleKeyDown(event: KeyboardEvent): void {
     this.keyHandler.handleKeyDown(event);
 
     // Check for Escape key first if an egg is active
@@ -149,7 +197,7 @@ class EasterEggCore {
     );
   }
 
-  handleKeyUp(event) {
+  handleKeyUp(event: KeyboardEvent): void {
     this.keyHandler.handleKeyUp(event);
   }
 
@@ -158,7 +206,7 @@ class EasterEggCore {
    * @param {string} eggId - The ID of the egg to show
    * @param {Object} options - Additional options for the egg
    */
-  async showEgg(eggId, options = {}) {
+  async showEgg(eggId: string, options: EggOptions = {}): Promise<void> {
     console.log(`EasterEggCore: Showing egg ${eggId} with options:`, options);
 
     const egg = this.eggs.get(eggId);
@@ -194,7 +242,7 @@ class EasterEggCore {
       console.log("Final merged options:", mergedOptions);
 
       // Update the reactive state to show the egg
-      this.reactiveState.activeEgg = {
+      this.reactiveState!.activeEgg = {
         id: eggId,
         component: markRaw(component),
         props: mergedOptions,
@@ -202,8 +250,8 @@ class EasterEggCore {
 
       // Show the modal
       this.isVisible = true;
-      const content = this.container.querySelector(".ee-content");
-      const backdrop = this.container.querySelector(".ee-backdrop");
+      const content = this.container!.querySelector(".ee-content");
+      const backdrop = this.container!.querySelector(".ee-backdrop");
       if (content) content.classList.add("ee-content-visible");
       if (backdrop) backdrop.classList.add("ee-backdrop-visible");
 
@@ -212,7 +260,7 @@ class EasterEggCore {
         ...egg,
         isVisible: true,
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error(`EasterEggCore: Error showing egg ${eggId}:`, error);
     }
   }
@@ -221,7 +269,7 @@ class EasterEggCore {
    * Hides an egg
    * @param {string} eggId - The ID of the egg to hide
    */
-  hideEgg(eggId) {
+  hideEgg(eggId: string): void {
     console.log(`EasterEggCore: Hiding egg ${eggId}`);
 
     // Get the egg before clearing state
@@ -234,14 +282,14 @@ class EasterEggCore {
     }
 
     // Clear the active egg
-    this.reactiveState.activeEgg = null;
+    this.reactiveState!.activeEgg = null;
 
     // Hide the modal
     this.isVisible = false;
 
     // Remove visibility classes
-    const content = this.container.querySelector(".ee-content");
-    const backdrop = this.container.querySelector(".ee-backdrop");
+    const content = this.container!.querySelector(".ee-content");
+    const backdrop = this.container!.querySelector(".ee-backdrop");
 
     if (content) {
       console.log("Removing ee-content-visible class");
@@ -269,42 +317,37 @@ class EasterEggCore {
     console.log(`EasterEggCore: Egg ${eggId} hidden successfully`);
   }
 
-  mount(eggId) {
+  mount(eggId: string): void {
     const eggToMount = this.eggs.get(eggId);
     if (!eggToMount) {
       console.error(`EasterEggCore: Attempted to mount unknown egg ${eggId}`);
       return;
     }
-
-    // Unmount any currently active egg first
     if (this.activeEgg && this.activeEgg.id !== eggId) {
       this.unmount();
     }
-
     console.log(`EasterEggCore: Mounting egg ${eggId}`, eggToMount);
-    this.activeEgg = { ...eggToMount, id: eggId };
-
-    // Update reactive state for Vue to render the component
-    this.reactiveState.activeEgg = this.activeEgg;
-
+    // Provide a default props object for ActiveEgg
+    this.activeEgg = { ...eggToMount, id: eggId, props: eggToMount.options } as ActiveEgg;
+    this.reactiveState!.activeEgg = this.activeEgg;
     this.isVisible = true;
     console.log(
       `EasterEggCore: Egg ${eggId} is now active and visible (pending Vue render).`
     );
   }
 
-  unmount() {
+  unmount(): void {
     if (!this.activeEgg) return;
     console.log(`EasterEggCore: Unmounting active egg ${this.activeEgg.id}`);
 
     this.activeEgg = null;
-    this.reactiveState.activeEgg = null;
+    this.reactiveState!.activeEgg = null;
     this.isVisible = false;
     this.keyHandler.reset();
     console.log("EasterEggCore: Active egg unmounted and hidden.");
   }
 
-  destroy() {
+  destroy(): void {
     console.log("EasterEggCore: Destroying instance");
     document.removeEventListener("keydown", this.handleKeyDown);
     document.removeEventListener("keyup", this.handleKeyUp);
@@ -320,7 +363,7 @@ class EasterEggCore {
     console.log("EasterEggCore: Cleanup complete");
   }
 
-  handleError(eggId, errorType, error, context = {}) {
+  handleError(eggId: string, errorType: string, error: Error, context: any = {}): boolean {
     console.error(`EasterEggCore: Error in egg ${eggId}:`, errorType, error);
 
     // Check if there's a specific handler for this egg and error type
@@ -342,7 +385,7 @@ class EasterEggCore {
     return false;
   }
 
-  handleDefaultError(eggId, errorType, error, context) {
+  handleDefaultError(eggId: string, errorType: string, error: Error, context: any): void {
     if (this.reactiveState) {
       this.reactiveState.errorModal.eggId = eggId;
       this.reactiveState.errorModal.message = `Error in ${eggId} (${errorType}): ${error.message}`;

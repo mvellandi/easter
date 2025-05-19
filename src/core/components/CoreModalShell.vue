@@ -51,11 +51,11 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
-// Assuming ErrorModal.js is in the same directory as CoreModalShell.vue (src/core/components/)
-// If ErrorModal.js is in src/core/components/ and CoreModalShell.vue is also there, path is './ErrorModal.js'
-// From ee-core.js, it's imported as './components/ErrorModal.js'.
+// Assuming ErrorModal.ts is in the same directory as CoreModalShell.vue (src/core/components/)
+// If ErrorModal.ts is in src/core/components/ and CoreModalShell.vue is also there, path is './ErrorModal.ts'
+// From ee-core.js, it's imported as './components/ErrorModal.ts'.
 // So, if CoreModalShell.vue is in src/core/components, this path should be correct.
-import { ErrorModalComponent as ErrorModal } from "./ErrorModal.js";
+import ErrorModal from "./ErrorModal.vue";
 import CoreOverlay from "./CoreOverlay.vue"; // Import the new component
 import CoreModalContent from "./CoreModalContent.vue"; // Import the new component
 import CoreFloatingCloseButton from "./CoreFloatingCloseButton.vue"; // Import the new component

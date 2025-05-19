@@ -1,7 +1,20 @@
 /**
  * Handles keyboard events and key combination matching for the Easter Egg system
  */
+export interface KeyCombination {
+  type: string;
+  key: string;
+  ctrlKey?: boolean;
+  shiftKey?: boolean;
+  altKey?: boolean;
+  metaKey?: boolean;
+  [key: string]: any;
+}
+
 export class KeyHandler {
+  activeCombinations: Map<string, KeyCombination>;
+  pressedKeys: Set<string>;
+
   constructor() {
     this.activeCombinations = new Map();
     this.pressedKeys = new Set();
@@ -12,150 +25,34 @@ export class KeyHandler {
    * @param {string} key - The key to normalize
    * @returns {string} - The normalized key
    */
-  normalizeKey(key) {
+  normalizeKey(key: string): string {
     // Handle special cases for different keyboard layouts
-    const specialKeyMap = {
-      // Latin characters that might map to 's'
-      Í: "s",
-      í: "s",
-      ß: "s",
-      ś: "s",
-      š: "s",
-      ş: "s",
-      ș: "s",
-      // Latin characters that might map to 'a'
-      á: "a",
-      à: "a",
-      â: "a",
-      ä: "a",
-      ã: "a",
-      å: "a",
-      ā: "a",
-      // Latin characters that might map to 'e'
-      é: "e",
-      è: "e",
-      ê: "e",
-      ë: "e",
-      ē: "e",
-      ę: "e",
-      ė: "e",
-      // Latin characters that might map to 'i'
-      í: "i",
-      ì: "i",
-      î: "i",
-      ï: "i",
-      ī: "i",
-      į: "i",
-      ı: "i",
-      // Latin characters that might map to 'o'
-      ó: "o",
-      ò: "o",
-      ô: "o",
-      ö: "o",
-      õ: "o",
-      ō: "o",
-      ø: "o",
-      // Latin characters that might map to 'u'
-      ú: "u",
-      ù: "u",
-      û: "u",
-      ü: "u",
-      ū: "u",
-      ų: "u",
-      ů: "u",
-      // Latin characters that might map to 'y'
-      ý: "y",
-      ÿ: "y",
-      ŷ: "y",
-      ȳ: "y",
-      // Latin characters that might map to 'c'
-      ç: "c",
-      ć: "c",
-      č: "c",
-      ĉ: "c",
-      ċ: "c",
-      // Latin characters that might map to 'n'
-      ñ: "n",
-      ń: "n",
-      ň: "n",
-      ņ: "n",
-      ŋ: "n",
-      // Latin characters that might map to 'z'
-      ź: "z",
-      ż: "z",
-      ž: "z",
-      ȥ: "z",
-      // Latin characters that might map to 'l'
-      ł: "l",
-      ĺ: "l",
-      ļ: "l",
-      ľ: "l",
-      ŀ: "l",
-      // Latin characters that might map to 'r'
-      ŕ: "r",
-      ř: "r",
-      ŗ: "r",
-      ȑ: "r",
-      ȓ: "r",
-      // Latin characters that might map to 'g'
-      ğ: "g",
-      ġ: "g",
-      ģ: "g",
-      ĝ: "g",
-      ǧ: "g",
-      // Latin characters that might map to 'h'
-      ĥ: "h",
-      ħ: "h",
-      ḧ: "h",
-      ḣ: "h",
-      ḥ: "h",
-      // Latin characters that might map to 'j'
-      ĵ: "j",
-      ǰ: "j",
-      ǧ: "j",
-      // Latin characters that might map to 'k'
-      ķ: "k",
-      ḱ: "k",
-      ḳ: "k",
-      ḵ: "k",
-      // Latin characters that might map to 'm'
-      ḿ: "m",
-      ṁ: "m",
-      ṃ: "m",
-      // Latin characters that might map to 'p'
-      ṕ: "p",
-      ṗ: "p",
-      // Latin characters that might map to 't'
-      ṫ: "t",
-      ṭ: "t",
-      ṯ: "t",
-      ŧ: "t",
-      // Latin characters that might map to 'w'
-      ẁ: "w",
-      ẃ: "w",
-      ẅ: "w",
-      ẇ: "w",
-      ẉ: "w",
-      // Latin characters that might map to 'd'
-      ď: "d",
-      ḋ: "d",
-      ḍ: "d",
-      ḏ: "d",
-      ḑ: "d",
-      ḓ: "d",
-      // Latin characters that might map to 'b'
-      ḃ: "b",
-      ḅ: "b",
-      ḇ: "b",
-      // Latin characters that might map to 'v'
-      ṽ: "v",
-      ṿ: "v",
-      // Latin characters that might map to 'f'
+    const specialKeyMap: Record<string, string> = {
+      Í: "s", í: "s", ß: "s", ś: "s", š: "s", ş: "s", ș: "s",
+      á: "a", à: "a", â: "a", ä: "a", ã: "a", å: "a", ā: "a",
+      é: "e", è: "e", ê: "e", ë: "e", ē: "e", ę: "e", ė: "e",
+      ì: "i", î: "i", ï: "i", ī: "i", į: "i", ı: "i",
+      ó: "o", ò: "o", ô: "o", ö: "o", õ: "o", ō: "o", ø: "o",
+      ú: "u", ù: "u", û: "u", ü: "u", ū: "u", ų: "u", ů: "u",
+      ý: "y", ÿ: "y", ŷ: "y", ȳ: "y",
+      ç: "c", ć: "c", č: "c", ĉ: "c", ċ: "c",
+      ñ: "n", ń: "n", ň: "n", ņ: "n", ŋ: "n",
+      ź: "z", ż: "z", ž: "z", ȥ: "z",
+      ł: "l", ĺ: "l", ļ: "l", ľ: "l", ŀ: "l",
+      ŕ: "r", ř: "r", ŗ: "r", ȑ: "r", ȓ: "r",
+      ğ: "g", ġ: "g", ģ: "g", ĝ: "g", ǧ: "g",
+      ĥ: "h", ħ: "h", ḧ: "h", ḣ: "h", ḥ: "h",
+      ĵ: "j", ǰ: "j",
+      ķ: "k", ḱ: "k", ḳ: "k", ḵ: "k",
+      ḿ: "m", ṁ: "m", ṃ: "m",
+      ṕ: "p", ṗ: "p",
+      ṫ: "t", ṭ: "t", ṯ: "t", ŧ: "t",
+      ẁ: "w", ẃ: "w", ẅ: "w", ẇ: "w", ẉ: "w",
+      ď: "d", ḋ: "d", ḍ: "d", ḏ: "d", ḑ: "d", ḓ: "d",
+      ḃ: "b", ḅ: "b", ḇ: "b",
+      ṽ: "v", ṿ: "v",
       ḟ: "f",
-      // Latin characters that might map to 'x'
-      ẋ: "x",
-      ẍ: "x",
-      // Latin characters that might map to 'q'
+      ẋ: "x", ẍ: "x",
       ɋ: "q",
     };
 
@@ -167,8 +64,8 @@ export class KeyHandler {
    * @param {string} key - The modifier key to normalize
    * @returns {string} - The normalized modifier key
    */
-  normalizeModifierKey(key) {
-    const modifierMap = {
+  normalizeModifierKey(key: string): string {
+    const modifierMap: Record<string, string> = {
       Alt: "Option",
       Option: "Alt",
       Meta: "Command",
@@ -183,7 +80,7 @@ export class KeyHandler {
    * @param {Object} trigger - The trigger configuration
    * @returns {boolean} - Whether the combination matches
    */
-  isKeyCombinationMatch(event, trigger) {
+  isKeyCombinationMatch(event: KeyboardEvent, trigger: KeyCombination): boolean {
     if (!trigger || trigger.type !== "keyboard") return false;
 
     // Check if the pressed key matches
@@ -202,7 +99,7 @@ export class KeyHandler {
    * Handles a key down event
    * @param {KeyboardEvent} event - The keyboard event
    */
-  handleKeyDown(event) {
+  handleKeyDown(event: KeyboardEvent): void {
     this.pressedKeys.add(event.key);
   }
 
@@ -210,14 +107,14 @@ export class KeyHandler {
    * Handles a key up event
    * @param {KeyboardEvent} event - The keyboard event
    */
-  handleKeyUp(event) {
+  handleKeyUp(event: KeyboardEvent): void {
     this.pressedKeys.delete(event.key);
   }
 
   /**
    * Resets the currently pressed keys
    */
-  reset() {
+  reset(): void {
     this.pressedKeys.clear();
   }
 
@@ -226,7 +123,7 @@ export class KeyHandler {
    * @param {string} id - The egg ID
    * @param {Object} combination - The key combination configuration
    */
-  registerCombination(id, combination) {
+  registerCombination(id: string, combination: KeyCombination): void {
     this.activeCombinations.set(id, combination);
   }
 
@@ -234,7 +131,7 @@ export class KeyHandler {
    * Unregisters a key combination for an egg
    * @param {string} id - The egg ID
    */
-  unregisterCombination(id) {
+  unregisterCombination(id: string): void {
     this.activeCombinations.delete(id);
   }
 }

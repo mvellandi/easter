@@ -5,6 +5,6 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // No need for emits since we're using the core UI system
 </script>

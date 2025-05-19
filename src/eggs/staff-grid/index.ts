@@ -1,8 +1,14 @@
 import "./style.css"; // Import Tailwind CSS
-import { defineComponent, ref, computed, onMounted } from "vue";
+import { defineComponent, type PropType } from "vue";
 
 // Staff Grid Easter Egg
 console.log("Loading staff-grid.js");
+
+interface StaffMember {
+  name: string;
+  role: string;
+  image?: string;
+}
 
 export const StaffGridEggComponent = defineComponent({
   name: "StaffGridEggComponent",
@@ -12,34 +18,35 @@ export const StaffGridEggComponent = defineComponent({
       default: "Our Team",
     },
     info: {
-      type: Array,
+      type: Array as PropType<StaffMember[]>,
       default: () => [],
     },
     coreInterface: {
-      type: Object,
+      type: Object as PropType<{ requestClose?: () => void }>,
       default: () => ({
         requestClose: () => {},
       }),
     },
     notifyContentReady: {
-      type: Function,
+      type: Function as PropType<() => void>,
       default: null,
     },
   },
   data() {
     return {
-      imageLoadErrors: new Set(),
+      imageLoadErrors: new Set<string>(),
       fallbackUrl: "images/avatar.png",
-      erroredImages: new Set(),
+      erroredImages: new Set<string>(),
+      imageLoadCount: 0 as number,
     };
   },
   computed: {
-    totalImages() {
+    totalImages(): number {
       return this.info.length;
     },
   },
   methods: {
-    getAssetUrl(member) {
+    getAssetUrl(member: StaffMember) {
       if (!member || !member.image || this.erroredImages.has(member.name)) {
         return `./eggs/staff-grid/${this.fallbackUrl}`;
       }
@@ -52,7 +59,7 @@ export const StaffGridEggComponent = defineComponent({
         this.notifyContentReady();
       }
     },
-    handleImageError(member, event) {
+    handleImageError(member: StaffMember, event: Event) {
       this.erroredImages.add(member.name);
       if (!this.imageLoadCount) this.imageLoadCount = 0;
       this.imageLoadCount++;
@@ -62,8 +69,8 @@ export const StaffGridEggComponent = defineComponent({
       console.warn(
         `Staff Grid: Failed to load image for ${member.name}. Using fallback.`
       );
-      if (event && event.target) {
-        event.target.src = `./eggs/staff-grid/${this.fallbackUrl}`;
+      if (event && (event.target as HTMLImageElement)) {
+        (event.target as HTMLImageElement).src = `./eggs/staff-grid/${this.fallbackUrl}`;
       }
     },
     requestEggClose() {
@@ -98,3 +105,7 @@ export const StaffGridEggComponent = defineComponent({
     </div>
   `,
 });
+
+export default {
+  StaffGridEggComponent,
+};
