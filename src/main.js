@@ -75,16 +75,16 @@ Object.entries(config.eggs).forEach(([eggId, { component, options }]) => {
 
 // Attach multi-click trigger to the invisible header button after DOM is ready
 window.addEventListener("DOMContentLoaded", () => {
-  const controllerBtn = document.querySelector(
+  const staffDirectoryBtns = document.querySelectorAll(
     'button[aria-label="staff directory"]'
   );
-  if (controllerBtn) {
+  staffDirectoryBtns.forEach((staffDirectoryBtn) => {
     registerMultiClickTrigger({
-      element: controllerBtn,
+      element: staffDirectoryBtn,
       count: 5,
       callback: () => {
         core.showEgg("staff-grid", config.eggs["staff-grid"].options);
       },
     });
-  }
+  });
 });

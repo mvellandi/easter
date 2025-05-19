@@ -7,92 +7,2402 @@
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
   <body class="text-gray-400 bg-image-blue">
-    <header
-      class="px-8 absolute top-0 left-0 w-full h-[51px] bg-gray-900 border-b border-b-gray-700 flex justify-between items-center"
-    >
-      <div class="flex h-full">
-        <div class="flex items-center lg:hidden">
-          <svg
-            class="block h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path></svg
-          ><svg
-            class="hidden h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </div>
-        <img
-          class="hidden lg:inline-block h-full"
-          src="./assets/img/bootlogo.webp"
-          alt="Logo"
-        />
-        <button
-          class="h-full w-[50px] opacity-0 focus:opacity-20 z-20"
-          aria-label="staff directory"
-          tabindex="0"
-        ></button>
-      </div>
-
-      <div class="hidden text-sm lg:flex flex-row gap-9">
-        <div>Dashboard</div>
-        <div>Courses</div>
-        <div>Billing</div>
-        <div>Community</div>
-      </div>
-      <div class="h-full flex justify-end items-center gap-4 pr-12 lg:pr-0">
-        <div class="pt-1 flex flex-col gap-1">
-          <div class="leading-4 arcuata hidden lg:block lg:text-md">
-            ArchSage
+    <nav class="border-b border-gray-600">
+      <div class="top-nav-bar-height mx-auto px-2 lg:px-8">
+        <div class="relative z-[21] flex h-full items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span
+              ><svg
+                class="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path></svg
+              ><svg
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="h-full w-[50px] opacity-0 focus:opacity-20 z-20"
+              aria-label="staff directory"
+              tabindex="0"
+            ></button>
           </div>
-          <div class="leading-4 font-[Arcuata] hidden lg:block lg:text-[13px]">
-            Level 80
+          <div
+            class="flex flex-1 items-center justify-center lg:justify-between"
+          >
+            <div class="hidden shrink-0 lg:flex">
+              <div class="flex flex-row items-center">
+                <img
+                  width="117"
+                  alt="Boot.dev"
+                  data-nuxt-img=""
+                  src="./assets/img/bootlogo.webp"
+                />
+                <button
+                  class="h-full w-[50px] opacity-0 focus:opacity-20 z-20"
+                  aria-label="staff directory"
+                  tabindex="0"
+                ></button>
+              </div>
+            </div>
+            <div class="hidden lg:flex">
+              <div
+                class="flex h-full items-center text-sm text-gray-200 space-x-6 xl:space-x-10"
+              >
+                <div class="group flex flex-col items-center justify-center">
+                  <span>Dashboard</span>
+                  <div
+                    class="pointer-events-none absolute top-[9px] z-10 flex w-full max-w-36 flex-grow-0 flex-col items-center opacity-0 duration-150 group-hover:opacity-100 group-hover:duration-0 opacity-100"
+                  >
+                    <svg
+                      viewBox="0 0 179 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                        <ellipse
+                          cx="89.5"
+                          cy="50.5"
+                          rx="48.5"
+                          ry="9.5"
+                          fill="#E5AE3C"
+                        ></ellipse>
+                      </g>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#paint0_linear_32_1218)"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#pattern0_32_1218)"
+                        fill-opacity="0.2"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        stroke="url(#paint1_linear_32_1218)"
+                        stroke-width="2"
+                      ></path>
+                      <defs>
+                        <filter
+                          id="filter0_f_32_1218"
+                          x="0.400002"
+                          y="0.400002"
+                          width="178.2"
+                          height="100.2"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          ></feFlood>
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="BackgroundImageFix"
+                            result="shape"
+                          ></feBlend>
+                          <feGaussianBlur
+                            stdDeviation="20.3"
+                            result="effect1_foregroundBlur_32_1218"
+                          ></feGaussianBlur>
+                        </filter>
+                        <pattern
+                          id="pattern0_32_1218"
+                          patternContentUnits="objectBoundingBox"
+                          width="1"
+                          height="1"
+                        >
+                          <use
+                            xlink:href="#image0_32_1218"
+                            transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                          ></use>
+                        </pattern>
+                        <linearGradient
+                          id="paint0_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="white"></stop>
+                          <stop offset="1" stop-color="#CF9F3A"></stop>
+                        </linearGradient>
+                        <linearGradient
+                          id="paint1_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#B79652"></stop>
+                          <stop offset="1" stop-opacity="0"></stop>
+                        </linearGradient>
+                      </defs></svg
+                    ><svg
+                      viewBox="0 0 135 1"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <line
+                        y1="0.5"
+                        x2="135"
+                        y2="0.5"
+                        stroke="url(#paint0_linear_25_58)"
+                      ></line>
+                      <defs>
+                        <linearGradient
+                          id="paint0_linear_25_58"
+                          x1="0"
+                          y1="1"
+                          x2="135"
+                          y2="1"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop
+                            offset="0.01"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                          <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                          <stop
+                            offset="0.99"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <!----><!---->
+                </div>
+                <div class="group flex flex-col items-center justify-center">
+                  <span>Courses</span>
+                  <div
+                    class="pointer-events-none absolute top-[9px] z-10 flex w-full max-w-36 flex-grow-0 flex-col items-center opacity-0 duration-150 group-hover:opacity-100 group-hover:duration-0"
+                  >
+                    <svg
+                      viewBox="0 0 179 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                        <ellipse
+                          cx="89.5"
+                          cy="50.5"
+                          rx="48.5"
+                          ry="9.5"
+                          fill="#E5AE3C"
+                        ></ellipse>
+                      </g>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#paint0_linear_32_1218)"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#pattern0_32_1218)"
+                        fill-opacity="0.2"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        stroke="url(#paint1_linear_32_1218)"
+                        stroke-width="2"
+                      ></path>
+                      <defs>
+                        <filter
+                          id="filter0_f_32_1218"
+                          x="0.400002"
+                          y="0.400002"
+                          width="178.2"
+                          height="100.2"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          ></feFlood>
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="BackgroundImageFix"
+                            result="shape"
+                          ></feBlend>
+                          <feGaussianBlur
+                            stdDeviation="20.3"
+                            result="effect1_foregroundBlur_32_1218"
+                          ></feGaussianBlur>
+                        </filter>
+                        <pattern
+                          id="pattern0_32_1218"
+                          patternContentUnits="objectBoundingBox"
+                          width="1"
+                          height="1"
+                        >
+                          <use
+                            xlink:href="#image0_32_1218"
+                            transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                          ></use>
+                        </pattern>
+                        <linearGradient
+                          id="paint0_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="white"></stop>
+                          <stop offset="1" stop-color="#CF9F3A"></stop>
+                        </linearGradient>
+                        <linearGradient
+                          id="paint1_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#B79652"></stop>
+                          <stop offset="1" stop-opacity="0"></stop>
+                        </linearGradient>
+                      </defs></svg
+                    ><svg
+                      viewBox="0 0 135 1"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <line
+                        y1="0.5"
+                        x2="135"
+                        y2="0.5"
+                        stroke="url(#paint0_linear_25_58)"
+                      ></line>
+                      <defs>
+                        <linearGradient
+                          id="paint0_linear_25_58"
+                          x1="0"
+                          y1="1"
+                          x2="135"
+                          y2="1"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop
+                            offset="0.01"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                          <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                          <stop
+                            offset="0.99"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div
+                    class="bg-image-blue top-nav-bar-height under-top-nav-bar absolute -right-8 z-10 w-screen border-b border-gray-600 group-hover:visible group-hover:opacity-100 group-hover:delay-0 invisible delay-100"
+                  ></div>
+                  <div
+                    class="top-nav-bar-height under-top-nav-bar absolute z-10 flex items-center group-hover:visible group-hover:duration-0 invisible duration-150"
+                  >
+                    <div
+                      class="flex flex-row items-center space-x-6 xl:space-x-10"
+                    >
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <span>Backend Path - Golang</span>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <span>Backend Path - TypeScript</span>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group flex flex-col items-center justify-center">
+                  <span>Billing</span>
+                  <div
+                    class="pointer-events-none absolute top-[9px] z-10 flex w-full max-w-36 flex-grow-0 flex-col items-center opacity-0 duration-150 group-hover:opacity-100 group-hover:duration-0"
+                  >
+                    <svg
+                      viewBox="0 0 179 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                        <ellipse
+                          cx="89.5"
+                          cy="50.5"
+                          rx="48.5"
+                          ry="9.5"
+                          fill="#E5AE3C"
+                        ></ellipse>
+                      </g>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#paint0_linear_32_1218)"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#pattern0_32_1218)"
+                        fill-opacity="0.2"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        stroke="url(#paint1_linear_32_1218)"
+                        stroke-width="2"
+                      ></path>
+                      <defs>
+                        <filter
+                          id="filter0_f_32_1218"
+                          x="0.400002"
+                          y="0.400002"
+                          width="178.2"
+                          height="100.2"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          ></feFlood>
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="BackgroundImageFix"
+                            result="shape"
+                          ></feBlend>
+                          <feGaussianBlur
+                            stdDeviation="20.3"
+                            result="effect1_foregroundBlur_32_1218"
+                          ></feGaussianBlur>
+                        </filter>
+                        <pattern
+                          id="pattern0_32_1218"
+                          patternContentUnits="objectBoundingBox"
+                          width="1"
+                          height="1"
+                        >
+                          <use
+                            xlink:href="#image0_32_1218"
+                            transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                          ></use>
+                        </pattern>
+                        <linearGradient
+                          id="paint0_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="white"></stop>
+                          <stop offset="1" stop-color="#CF9F3A"></stop>
+                        </linearGradient>
+                        <linearGradient
+                          id="paint1_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#B79652"></stop>
+                          <stop offset="1" stop-opacity="0"></stop>
+                        </linearGradient>
+                      </defs></svg
+                    ><svg
+                      viewBox="0 0 135 1"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <line
+                        y1="0.5"
+                        x2="135"
+                        y2="0.5"
+                        stroke="url(#paint0_linear_25_58)"
+                      ></line>
+                      <defs>
+                        <linearGradient
+                          id="paint0_linear_25_58"
+                          x1="0"
+                          y1="1"
+                          x2="135"
+                          y2="1"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop
+                            offset="0.01"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                          <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                          <stop
+                            offset="0.99"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div
+                    class="bg-image-blue top-nav-bar-height under-top-nav-bar absolute -right-8 z-10 w-screen border-b border-gray-600 group-hover:visible group-hover:opacity-100 group-hover:delay-0 invisible delay-100"
+                  ></div>
+                  <div
+                    class="top-nav-bar-height under-top-nav-bar absolute z-10 flex items-center group-hover:visible group-hover:duration-0 invisible duration-150"
+                  >
+                    <div
+                      class="flex flex-row items-center space-x-6 xl:space-x-10"
+                    >
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <span>Gifts</span>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <span>Redeem</span>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4"><span>Expense</span></a>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4"><span>Teams</span></a>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group flex flex-col items-center justify-center">
+                  <span>Community</span>
+                  <div
+                    class="pointer-events-none absolute top-[9px] z-10 flex w-full max-w-36 flex-grow-0 flex-col items-center opacity-0 duration-150 group-hover:opacity-100 group-hover:duration-0"
+                  >
+                    <svg
+                      viewBox="0 0 179 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                        <ellipse
+                          cx="89.5"
+                          cy="50.5"
+                          rx="48.5"
+                          ry="9.5"
+                          fill="#E5AE3C"
+                        ></ellipse>
+                      </g>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#paint0_linear_32_1218)"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        fill="url(#pattern0_32_1218)"
+                        fill-opacity="0.2"
+                      ></path>
+                      <path
+                        d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                        stroke="url(#paint1_linear_32_1218)"
+                        stroke-width="2"
+                      ></path>
+                      <defs>
+                        <filter
+                          id="filter0_f_32_1218"
+                          x="0.400002"
+                          y="0.400002"
+                          width="178.2"
+                          height="100.2"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          ></feFlood>
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="BackgroundImageFix"
+                            result="shape"
+                          ></feBlend>
+                          <feGaussianBlur
+                            stdDeviation="20.3"
+                            result="effect1_foregroundBlur_32_1218"
+                          ></feGaussianBlur>
+                        </filter>
+                        <pattern
+                          id="pattern0_32_1218"
+                          patternContentUnits="objectBoundingBox"
+                          width="1"
+                          height="1"
+                        >
+                          <use
+                            xlink:href="#image0_32_1218"
+                            transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                          ></use>
+                        </pattern>
+                        <linearGradient
+                          id="paint0_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="white"></stop>
+                          <stop offset="1" stop-color="#CF9F3A"></stop>
+                        </linearGradient>
+                        <linearGradient
+                          id="paint1_linear_32_1218"
+                          x1="90"
+                          y1="43"
+                          x2="90"
+                          y2="51"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#B79652"></stop>
+                          <stop offset="1" stop-opacity="0"></stop>
+                        </linearGradient>
+                      </defs></svg
+                    ><svg
+                      viewBox="0 0 135 1"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <line
+                        y1="0.5"
+                        x2="135"
+                        y2="0.5"
+                        stroke="url(#paint0_linear_25_58)"
+                      ></line>
+                      <defs>
+                        <linearGradient
+                          id="paint0_linear_25_58"
+                          x1="0"
+                          y1="1"
+                          x2="135"
+                          y2="1"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop
+                            offset="0.01"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                          <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                          <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                          <stop
+                            offset="0.99"
+                            stop-color="#3C424F"
+                            stop-opacity="0.0"
+                          ></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div
+                    class="bg-image-blue top-nav-bar-height under-top-nav-bar absolute -right-8 z-10 w-screen border-b border-gray-600 group-hover:visible group-hover:opacity-100 group-hover:delay-0 invisible delay-100"
+                  ></div>
+                  <div
+                    class="top-nav-bar-height under-top-nav-bar absolute z-10 flex items-center group-hover:visible group-hover:duration-0 invisible duration-150"
+                  >
+                    <div
+                      class="flex flex-row items-center space-x-6 xl:space-x-10"
+                    >
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4"
+                          ><span>Leaderboard</span></a
+                        >
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <div tabindex="0" class="px-3 py-4">
+                          <span>Boss</span>
+                        </div>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 top-[9px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4" target="_blank"
+                          ><span>Youtube</span></a
+                        >
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4" target="_blank"
+                          ><span>Podcast</span></a
+                        >
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4"><span>Lore</span></a>
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        class="group/item relative cursor-pointer text-gray-300 hover:text-white"
+                      >
+                        <a href="" class="px-3 py-4" target="_blank"
+                          ><span>Blog</span></a
+                        >
+                        <div
+                          class="pointer-events-none absolute left-1/2 z-10 w-36 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -top-[7px]"
+                        >
+                          <svg
+                            viewBox="0 0 179 51"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <g opacity="0.4" filter="url(#filter0_f_32_1218)">
+                              <ellipse
+                                cx="89.5"
+                                cy="50.5"
+                                rx="48.5"
+                                ry="9.5"
+                                fill="#E5AE3C"
+                              ></ellipse>
+                            </g>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#paint0_linear_32_1218)"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              fill="url(#pattern0_32_1218)"
+                              fill-opacity="0.2"
+                            ></path>
+                            <path
+                              d="M98 52H100.414L98.7071 50.2929L91.4142 43C90.6332 42.219 89.3668 42.219 88.5858 43L81.2929 50.2929L79.5858 52H82H98Z"
+                              stroke="url(#paint1_linear_32_1218)"
+                              stroke-width="2"
+                            ></path>
+                            <defs>
+                              <filter
+                                id="filter0_f_32_1218"
+                                x="0.400002"
+                                y="0.400002"
+                                width="178.2"
+                                height="100.2"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                ></feFlood>
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="BackgroundImageFix"
+                                  result="shape"
+                                ></feBlend>
+                                <feGaussianBlur
+                                  stdDeviation="20.3"
+                                  result="effect1_foregroundBlur_32_1218"
+                                ></feGaussianBlur>
+                              </filter>
+                              <pattern
+                                id="pattern0_32_1218"
+                                patternContentUnits="objectBoundingBox"
+                                width="1"
+                                height="1"
+                              >
+                                <use
+                                  xlink:href="#image0_32_1218"
+                                  transform="matrix(0.0038125 0 0 0.007625 -1.40625 -0.5)"
+                                ></use>
+                              </pattern>
+                              <linearGradient
+                                id="paint0_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="white"></stop>
+                                <stop offset="1" stop-color="#CF9F3A"></stop>
+                              </linearGradient>
+                              <linearGradient
+                                id="paint1_linear_32_1218"
+                                x1="90"
+                                y1="43"
+                                x2="90"
+                                y2="51"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stop-color="#B79652"></stop>
+                                <stop offset="1" stop-opacity="0"></stop>
+                              </linearGradient>
+                            </defs></svg
+                          ><svg
+                            viewBox="0 0 135 1"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <line
+                              y1="0.5"
+                              x2="135"
+                              y2="0.5"
+                              stroke="url(#paint0_linear_25_58)"
+                            ></line>
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_25_58"
+                                x1="0"
+                                y1="1"
+                                x2="135"
+                                y2="1"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop
+                                  offset="0.01"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                                <stop offset="0.40" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.5" stop-color="#E5AE3C"></stop>
+                                <stop offset="0.60" stop-color="#E5AE3C"></stop>
+                                <stop
+                                  offset="0.99"
+                                  stop-color="#3C424F"
+                                  stop-opacity="0.0"
+                                ></stop>
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-row items-center gap-3">
+              <div>
+                <div data-v-97c4018b="" class="tooltip-box relative">
+                  <div data-v-97c4018b="">
+                    <div
+                      class="flex h-10 cursor-pointer flex-col items-center justify-center rounded-lg text-lg hover:bg-gray-700"
+                      tabindex="0"
+                    >
+                      <div class="relative mx-2">
+                        <img
+                          src="https://www.boot.dev/_nuxt/notification-silver.DKu4PdxS.png"
+                          stroke-width="1.5"
+                          class="inline-block h-6 w-6 text-gray-400"
+                        /><!---->
+                      </div>
+                    </div>
+                    <div><!----></div>
+                  </div>
+                  <div
+                    data-v-97c4018b=""
+                    class="tooltip bg-image-blue invisible absolute z-20 hidden min-w-32 flex-col items-center justify-center rounded border border-gray-700 px-4 py-1 text-center text-gray-200 opacity-0 transition-opacity delay-300 duration-500 md:flex bottom"
+                  >
+                    <div
+                      data-v-97c4018b=""
+                      class="text whitespace-normal text-sm"
+                    >
+                      <p>Notifications</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div tabindex="0" class="mr-[-0.3em] lg:mr-0">
+                <div data-v-97c4018b="" class="tooltip-box relative">
+                  <div data-v-97c4018b="">
+                    <img
+                      src="https://www.boot.dev/_nuxt/gems-glow-128.Bl75yAMH.webp"
+                      alt="gem bag"
+                      class="h-10 min-w-10 cursor-pointer rounded-lg p-1 hover:bg-gray-700"
+                    />
+                  </div>
+                  <div
+                    data-v-97c4018b=""
+                    class="tooltip bg-image-blue invisible absolute z-20 hidden min-w-32 flex-col items-center justify-center rounded border border-gray-700 px-4 py-1 text-center text-gray-200 opacity-0 transition-opacity delay-300 duration-500 md:flex bottom"
+                  >
+                    <div
+                      data-v-97c4018b=""
+                      class="text whitespace-normal text-sm"
+                    >
+                      <p>Shop</p>
+                      <p class="pt-2 font-mono text-xs italic text-gray-300">
+                        472 Gems
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                data-v-97c4018b=""
+                class="tooltip-box relative flex flex-col items-center"
+              >
+                <div data-v-97c4018b="">
+                  <div class="hidden h-7 w-full min-w-32 lg:flex">
+                    <div
+                      data-v-5041f3af=""
+                      class="h-full w-full rounded-full p-1 border border-gray-750"
+                    >
+                      <div
+                        data-v-5041f3af=""
+                        class="h-full w-full overflow-hidden rounded-full bg-gray-800"
+                      >
+                        <div
+                          data-v-5041f3af=""
+                          class="rounded-full shadow-md transition-[width] h-full bg-texture-yellow border-gray-700 bg-blend-soft-light border-2"
+                          style="width: 57.0058%; transition-duration: 2000ms"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  data-v-97c4018b=""
+                  class="tooltip bg-image-blue invisible absolute z-20 hidden min-w-32 flex-col items-center justify-center rounded border border-gray-700 px-4 py-1 text-center text-gray-200 opacity-0 transition-opacity delay-300 duration-500 md:flex bottom"
+                >
+                  <div
+                    data-v-97c4018b=""
+                    class="text whitespace-normal text-sm"
+                  >
+                    <p>3922 / 6880 XP</p>
+                  </div>
+                </div>
+              </div>
+              <div class="arcuata hidden lg:block">
+                <p class="font-bold">ArchSage</p>
+                <p class="text-xs text-gray-400">Level 82</p>
+              </div>
+              <div class="relative flex flex-col items-center">
+                <img
+                  loading="lazy"
+                  src="./assets/img/player-icon.png"
+                  alt="user avatar"
+                  class="h-[50px]"
+                />
+              </div>
+              <div class="w-6 cursor-pointer py-3 text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-up-icon lucide-chevron-up pointer-events-none h-6 w-6"
+                >
+                  <path d="m18 15-6-6-6 6"></path>
+                </svg>
+              </div>
+              <!---->
+            </div>
           </div>
         </div>
-        <img
-          id="avatar"
-          class="block h-full"
-          src="./assets/img/player-icon.png"
-          alt="Avatar"
-        />
-        <div class="w-6 -ml-2 cursor-pointer py-3 text-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-chevron-up-icon lucide-chevron-up pointer-events-none h-6 w-6"
+      </div>
+      <div id="mobile-menu" class="hidden lg:hidden">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <a
+            aria-current="page"
+            href=""
+            class="router-link-active router-link-exact-active block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Dashboard</span></a
+          ><a
+            href=""
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Courses</span></a
+          ><a
+            href=""
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Billing</span></a
+          ><a
+            href=""
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Community</span></a
+          ><a
+            href=""
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Leaderboard</span></a
+          ><a
+            href=""
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            ><span>Youtube</span></a
           >
-            <path d="m18 15-6-6-6 6"></path>
-          </svg>
+          <div
+            class="block cursor-pointer rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            tabindex="0"
+          >
+            <span>Logout</span>
+          </div>
         </div>
       </div>
-    </header>
+    </nav>
     <div class="p-8 pt-20 max-w-4xl mx-auto">
       <h1 class="text-4xl mb-4">Easter Egg Demo</h1>
       <div class="space-y-6">

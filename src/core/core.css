@@ -44,6 +44,10 @@
 }
 
 .ee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -68,7 +72,6 @@
   opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
-  /* border: 1px solid var(--yellow-700); */
   padding: 2rem;
   width: 100%;
   max-width: 80vw;
