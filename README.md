@@ -23,7 +23,7 @@ The Easter Egg Core System provides a framework for creating and managing intera
   - All Vue components use `<script lang="ts">` for type safety.
   - Type checking is enforced via `npx tsc --noEmit`.
   - Imports/exports use `.ts` extensions for local files.
-  - See the [TypeScript Migration Plan](#typescript-migration-plan) for details.
+  - See the [Changelog & Migration Notes](#changelog--migration-notes) for details.
 
 - **Core System (`src/core/`)**
   - Handles modal UI, display, and interaction for eggs.
@@ -43,12 +43,13 @@ The Easter Egg Core System provides a framework for creating and managing intera
 - **Accessibility**
   - Modal visually robust, but may lack full ARIA/focus trap accessibility features.
 
-### TypeScript Migration Plan (Complete)
-
+### TypeScript Migration (Completed)
 - All core, eggs, and utilities are now in TypeScript.
 - All Vue SFCs use `<script lang="ts">`.
 - Type checking is part of the workflow (`npx tsc --noEmit`).
 - See `tsconfig.json` for configuration.
+
+---
 
 ### Usage Example (TypeScript)
 
@@ -93,18 +94,26 @@ The system expects the following from the parent website:
 src/
 ├── core/               # Core UI system
 │   ├── components/     # Core UI components
-│   ├── core.css       # Core UI styles
-│   └── core.js        # Core system logic
-├── eggs/              # Easter egg modules
-│   ├── hello-world/   # Hello World egg
-│   └── staff-grid/    # Staff Grid egg
-└── styles/            # Design system styles
+│   ├── core.css        # Core UI styles
+│   └── core.ts         # Core system logic
+├── eggs/               # Easter egg modules
+│   ├── hello-world/    # Hello World egg
+│   └── staff-grid/     # Staff Grid egg
+└── styles/             # Design system styles
     ├── animations.css
     ├── backgrounds.css
     ├── colors.css
     ├── extras.css
     ├── fonts.css
     └── utilities.css
+```
+
+## Build Output
+- The production build outputs to a root-level `dist` directory (not inside `src`).
+- To build for production, run:
+
+```bash
+npm run build
 ```
 
 ## Known Issues
@@ -125,63 +134,22 @@ npm run dev
 npm run build
 ```
 
-## Usage
+---
 
-1. Import the core system:
-```javascript
-import core, { registerKeyCombo } from "./core/core.js";
-```
+## Changelog & Migration Notes
 
-2. Register eggs:
-```javascript
-core.registerEgg("egg-id", EggComponent, {
-  title: "Egg Title",
-  trigger: {
-    type: "keyboard",
-    key: "k",
-    ctrlKey: true
-  }
-});
-```
+### TypeScript Migration Plan (Completed)
 
-3. Initialize the system:
-```javascript
-registerKeyCombo();
-```
-
-## Planned Refactor & Roadmap Part 1
-### TypeScript Migration Plan
-
-To ensure a robust and maintainable codebase, we will migrate the project to TypeScript before proceeding with major feature refactors. This plan outlines the steps for a smooth transition:
-
-1. **Update Tooling**
-   - Add TypeScript and necessary types as dev dependencies.
-   - Update Vite config to support `.ts` and `.vue` with TypeScript.
-
-2. **Rename Files**
-   - Change `.js` files to `.ts` (and `.vue` files to use `<script lang="ts">`).
-
-3. **Add TypeScript Config**
-   - Create a `tsconfig.json` with sensible defaults for Vue 3 + Vite.
-
-4. **Incremental Conversion**
-   - Start with the core system (`src/core/`), then eggs, then utilities.
-   - Add types/interfaces where possible, use `any` as a temporary fallback if needed.
-   - Fix type errors as they arise.
-
-5. **Update Imports/Exports**
-   - Ensure all imports/exports use the correct file extensions and type syntax.
-
-6. **Test the Build**
-   - Run the dev server and build to ensure everything works.
-
-7. **Update README**
-   - Document the new TypeScript setup and any changes to development workflow.
+- All core, eggs, and utilities are now in TypeScript.
+- All Vue SFCs use `<script lang="ts">`.
+- Type checking is part of the workflow (`npx tsc --noEmit`).
+- Imports/exports use `.ts` extensions for local files.
+- Updated all usage examples and documentation to reflect TypeScript usage.
+- Build output is now at the root-level `dist` directory.
 
 ---
 
-
-## Planned Refactor & Roadmap Part 2
+## Planned Refactor & Roadmap
 
 ### Controller/Remote as a Core Modal
 - Place the controller (Wii/NES remote) component in `core/components/`.
