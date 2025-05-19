@@ -22,7 +22,7 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   show: {
     type: Boolean,
@@ -32,7 +32,7 @@ const props = defineProps({
 
 const emit = defineEmits(["closeClick"]);
 
-const handleClick = () => {
+const handleClick = (event?: MouseEvent | TouchEvent): void => {
   emit("closeClick");
 };
 </script>

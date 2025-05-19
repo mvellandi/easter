@@ -1,13 +1,21 @@
 // Utility to detect N consecutive activations (click/tap/keyboard) on an element
 // Resets if the sequence is broken for more than 1 second
 
-interface RegisterMultiClickTriggerOptions {
+/**
+ * Options for registerMultiClickTrigger utility.
+ */
+export interface RegisterMultiClickTriggerOptions {
   element: HTMLElement;
   count?: number;
   callback: (e: MouseEvent | TouchEvent | KeyboardEvent) => void;
   timeout?: number;
 }
 
+/**
+ * Detects N consecutive activations (click/tap/keyboard) on an element.
+ * Resets if the sequence is broken for more than 1 second.
+ * Returns a cleanup function to remove event listeners.
+ */
 export function registerMultiClickTrigger({
   element,
   count = 5,
@@ -20,7 +28,7 @@ export function registerMultiClickTrigger({
   let lastEventType: string | null = null;
   const DEDUP_WINDOW = 150; // ms
 
-  function reset() {
+  function reset(): void {
     activationCount = 0;
     if (timer) {
       clearTimeout(timer);
@@ -51,7 +59,7 @@ export function registerMultiClickTrigger({
     return false;
   }
 
-  function handleActivation(e: MouseEvent | TouchEvent | KeyboardEvent) {
+  function handleActivation(e: MouseEvent | TouchEvent | KeyboardEvent): void {
     // Only allow left click, touch, or keyboard activation (Enter/Space)
     if (
       e.type === "click" ||
@@ -75,7 +83,7 @@ export function registerMultiClickTrigger({
   element.addEventListener("keydown", handleActivation);
 
   // Return a cleanup function
-  return () => {
+  return (): void => {
     element.removeEventListener("click", handleActivation);
     element.removeEventListener("touchend", handleActivation);
     element.removeEventListener("keydown", handleActivation);

@@ -145,8 +145,8 @@ class EasterEggCore {
     console.log("EasterEggCore: Vue app mounted.");
 
     // Add keyboard event listeners
-    document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keyup", this.handleKeyUp);
+    document.addEventListener("keydown", this.handleKeyDown as (event: Event) => void);
+    document.addEventListener("keyup", this.handleKeyUp as (event: Event) => void);
     console.log("EasterEggCore: Keyboard event listeners added to document.");
 
     console.log("EasterEggCore: Initialization complete");

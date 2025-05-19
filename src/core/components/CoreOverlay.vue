@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   show: {
     type: Boolean,
@@ -15,7 +15,7 @@ const props = defineProps({
 
 const emit = defineEmits(["backdropClick"]);
 
-const handleClick = (event) => {
+const handleClick = (event: MouseEvent): void => {
   // Only emit if the click is directly on the backdrop, not on slotted children
   if (event.target === event.currentTarget) {
     emit("backdropClick");

@@ -1,6 +1,6 @@
 # Easter Egg Core System
 
-A modular Easter Egg system built with Vue 3 and Vite, designed to be integrated into a specific website with an existing design system.
+A modular Easter Egg system built with Vue 3, Vite, and **TypeScript**, designed to be integrated into a specific website with an existing design system.
 
 ## Overview
 
@@ -9,6 +9,7 @@ The Easter Egg Core System provides a framework for creating and managing intera
 **Tech Stack & Tooling:**
 - **Vue 3** for UI components and reactivity
 - **Vite** for fast development and build tooling
+- **TypeScript** for type safety and maintainability
 - **Tailwind CSS v4** for utility-first styling
   - No configuration file required (zero-config)
   - Uses the official Vite plugin for Tailwind compilation
@@ -17,6 +18,13 @@ The Easter Egg Core System provides a framework for creating and managing intera
 
 ## Architecture
 
+- **TypeScript Support**
+  - All core logic, eggs, and utilities are written in TypeScript (`.ts`).
+  - All Vue components use `<script lang="ts">` for type safety.
+  - Type checking is enforced via `npx tsc --noEmit`.
+  - Imports/exports use `.ts` extensions for local files.
+  - See the [TypeScript Migration Plan](#typescript-migration-plan) for details.
+
 - **Core System (`src/core/`)**
   - Handles modal UI, display, and interaction for eggs.
   - Uses inlined CSS for isolation.
@@ -24,7 +32,7 @@ The Easter Egg Core System provides a framework for creating and managing intera
   - Modal/backdrop logic is currently tied to eggs.
 - **Eggs (`src/eggs/`)**
   - Each egg is a self-contained module/component.
-  - Eggs are currently statically imported in `main.js` and registered with the core system.
+  - Eggs are statically imported in `main.ts` and registered with the core system.
   - Eggs are triggered by keyboard shortcuts (e.g., Ctrl+H for Hello World).
 - **Triggers**
   - Keyboard shortcuts for eggs.
@@ -35,6 +43,43 @@ The Easter Egg Core System provides a framework for creating and managing intera
 - **Accessibility**
   - Modal visually robust, but may lack full ARIA/focus trap accessibility features.
 
+### TypeScript Migration Plan (Complete)
+
+- All core, eggs, and utilities are now in TypeScript.
+- All Vue SFCs use `<script lang="ts">`.
+- Type checking is part of the workflow (`npx tsc --noEmit`).
+- See `tsconfig.json` for configuration.
+
+### Usage Example (TypeScript)
+
+1. Import the core system:
+```typescript
+import core, { registerKeyCombo } from "./core/core.ts";
+```
+
+2. Register eggs:
+```typescript
+import { HelloWorldEggComponent } from "./eggs/hello-world/index.ts";
+import { StaffGridEggComponent } from "./eggs/staff-grid/index.ts";
+
+core.registerEgg("egg-id", HelloWorldEggComponent, {
+  title: "Egg Title",
+  trigger: {
+    type: "keyboard",
+    key: "k",
+    ctrlKey: true
+  }
+});
+```
+
+3. Initialize the system:
+```typescript
+registerKeyCombo();
+```
+
+---
+
+*TypeScript migration is complete. All new features and contributions should use TypeScript and `<script lang="ts">` in Vue SFCs.*
 
 ### Design System Integration
 The system expects the following from the parent website:

@@ -12,7 +12,7 @@
             :src="getAssetUrl(member)"
             :alt="member.name"
             @load="handleImageLoad"
-            @error="(event) => handleImageError(member, event)"
+            @error="(event: Event) => handleImageError(member, event)"
             class="rounded-full max-w-[100px] mb-1.5"
           />
         </div>
@@ -25,12 +25,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-
-interface StaffMember {
-  name: string;
-  role: string;
-  image?: string;
-}
+import type { StaffMember } from "./StaffMember";
 
 const props = defineProps<{
   title?: string;
@@ -52,14 +47,14 @@ function getAssetUrl(member: StaffMember) {
   return `./eggs/staff-grid/${member.image}`;
 }
 
-function handleImageLoad() {
+function handleImageLoad(event?: Event): void {
   imageLoadCount.value++;
   if (imageLoadCount.value >= totalImages.value && props.notifyContentReady) {
     props.notifyContentReady();
   }
 }
 
-function handleImageError(member: StaffMember, event: Event) {
+function handleImageError(member: StaffMember, event: Event): void {
   erroredImages.value.add(member.name);
   imageLoadCount.value++;
   if (imageLoadCount.value >= totalImages.value && props.notifyContentReady) {

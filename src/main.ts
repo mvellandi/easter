@@ -1,11 +1,40 @@
-import core, { registerKeyCombo } from "./core/core.ts";
-import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger.ts";
-import { HelloWorldEggComponent } from "./eggs/hello-world/index.ts";
-import { StaffGridEggComponent } from "./eggs/staff-grid/index.ts";
-import info from "./eggs/staff-grid/staff-data.json";
+import core, { registerKeyCombo } from "./core/core";
+import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger";
+import { HelloWorldEggComponent } from "./eggs/hello-world/index";
+import { StaffGridEggComponent } from "./eggs/staff-grid/index";
+import type { StaffMember } from "./eggs/staff-grid/StaffMember";
+import staffData from "./eggs/staff-grid/staff-data.json";
+
+// --- TypeScript interfaces for triggers and egg configs ---
+interface KeyboardTrigger {
+  type: "keyboard";
+  key: string;
+  ctrlKey?: boolean;
+  shiftKey?: boolean;
+  altKey?: boolean;
+  metaKey?: boolean;
+}
+// If you add gesture support in the future, add a GestureTrigger interface here.
+type EggTrigger = KeyboardTrigger; // | GestureTrigger
+
+interface EggOptions {
+  title: string;
+  trigger: EggTrigger | EggTrigger[];
+  info?: StaffMember[];
+  [key: string]: any;
+}
+
+interface EggConfig {
+  component: any;
+  options: EggOptions;
+}
+
+interface EggsConfig {
+  [eggId: string]: EggConfig;
+}
 
 // Configuration object for the Easter Egg system
-const config = {
+const config: { eggs: EggsConfig } = {
   eggs: {
     "hello-world": {
       component: HelloWorldEggComponent,
@@ -29,7 +58,7 @@ const config = {
             ctrlKey: true,
           },
         ],
-        info: info,
+        info: staffData as StaffMember[],
       },
     },
   },
@@ -51,20 +80,12 @@ Object.entries(config.eggs).forEach(([eggId, { component, options }]) => {
     : [options.trigger];
   triggers.forEach((trigger) => {
     if (trigger?.type === "keyboard") {
-      core.keyHandler.registerCombination(eggId, {
-        key: trigger.key,
-        ctrlKey: trigger.ctrlKey,
-      });
-      document.addEventListener("keydown", (e) => {
+      core.keyHandler.registerCombination(eggId, trigger);
+      document.addEventListener("keydown", (e: KeyboardEvent) => {
         if (e.ctrlKey && e.key.toLowerCase() === trigger.key) {
           e.preventDefault();
           core.showEgg(eggId, options);
         }
-      });
-    } else if (trigger?.type === "gesture") {
-      registerEggGesture(eggId, trigger.gesture, {
-        direction: trigger.direction,
-        ...options,
       });
     }
   });
@@ -74,17 +95,19 @@ Object.entries(config.eggs).forEach(([eggId, { component, options }]) => {
 });
 
 // Attach multi-click trigger to the invisible header button after DOM is ready
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", (event: Event) => {
   const staffDirectoryBtns = document.querySelectorAll(
     'button[aria-label="staff directory"]'
   );
   staffDirectoryBtns.forEach((staffDirectoryBtn) => {
-    registerMultiClickTrigger({
-      element: staffDirectoryBtn,
-      count: 5,
-      callback: () => {
-        core.showEgg("staff-grid", config.eggs["staff-grid"].options);
-      },
-    });
+    if (staffDirectoryBtn instanceof HTMLElement) {
+      registerMultiClickTrigger({
+        element: staffDirectoryBtn,
+        count: 5,
+        callback: () => {
+          core.showEgg("staff-grid", config.eggs["staff-grid"].options);
+        },
+      });
+    }
   });
 });

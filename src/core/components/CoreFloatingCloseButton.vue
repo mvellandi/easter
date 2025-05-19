@@ -18,7 +18,7 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   show: {
     type: Boolean,
@@ -26,7 +26,7 @@ const props = defineProps({
   },
 });
 
-const handleClick = () => {
+const handleClick = (event?: MouseEvent): void => {
   // This function is now empty as the emit is removed
 };
 </script>
