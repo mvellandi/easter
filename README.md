@@ -6,6 +6,67 @@ A modular Easter Egg system built with Vue 3 and Vite, designed to be integrated
 
 The Easter Egg Core System provides a framework for creating and managing interactive "Easter Eggs" - hidden features that can be triggered by specific user actions. The system is built to integrate seamlessly with a parent website's design system while maintaining its own core UI functionality.
 
+---
+
+## Existing System Architecture (2024)
+
+- **Core System (`src/core/`)**
+  - Handles modal UI, display, and interaction for eggs.
+  - Uses inlined CSS for isolation.
+  - Leverages the parent website's design system for variables and assets.
+  - Modal/backdrop logic is currently tied to eggs.
+- **Eggs (`src/eggs/`)**
+  - Each egg is a self-contained module/component.
+  - Eggs are currently statically imported in `main.js` and registered with the core system.
+  - Eggs are triggered by keyboard shortcuts (e.g., Ctrl+H for Hello World).
+- **Triggers**
+  - Keyboard shortcuts for eggs.
+  - Multi-click triggers for some eggs (e.g., staff directory button).
+- **Modal System**
+  - Modal and backdrop are used to display eggs.
+  - Close button logic is part of the modal shell.
+- **Accessibility**
+  - Modal visually robust, but may lack full ARIA/focus trap accessibility features.
+
+---
+
+## Planned Refactor & Roadmap
+
+### Controller/Remote as a Core Modal
+- Place the controller (Wii/NES remote) component in `core/components/`.
+- Use the same modal/backdrop system as eggs.
+- Trigger it from an invisible, semantic, accessible `<button>`.
+- When the correct sequence is entered, dynamically load and show the corresponding egg.
+
+### Modal System Improvements
+- Refactor modal state to be generic (e.g., `activeModal` with type and props), not just `activeEgg`.
+- Allow the modal shell to render either an egg or the controller, using shared close/backdrop logic.
+- Ensure only one overlay/modal is visible at a time.
+
+### Accessibility
+- Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
+- Implement a focus trap so keyboard users can't tab out of the modal.
+- Ensure the close button is always accessible and labeled.
+
+### Dynamic Egg Imports
+- Refactor egg registration to use dynamic imports (e.g., `() => import('./eggs/hello-world/index.js')`) for performance and bundle size reduction.
+
+### Controller/Remote Features
+- Responsive: Wii remote (vertical) for <1024px screens, NES controller (horizontal) for >=1024px screens.
+- Both remotes are functionally identical (D-pad, A/B, Reset, Enter), but visually different.
+- Display the sequence of button presses, with reset and enter controls.
+- Both remotes respond to keyboard events as well as pointer/touch.
+- The controller emits button sequence events to the core system, which can trigger eggs dynamically.
+
+### General Refactoring
+- Centralize modal state and logic for extensibility.
+- Use a registry or mapping for modal content, so adding new modal types is easy.
+- Decouple trigger logic (keyboard, multi-click, controller) from modal logic.
+
+---
+
+*This roadmap is intended to guide the next phase of development, making the system more modular, accessible, and extensible for new input methods and features.*
+
 ## Architecture
 
 ### Core System
