@@ -5,19 +5,17 @@
       <div
         v-for="member in info"
         :key="member.name"
-        class="flex flex-col items-center max-w-[250px]"
+        class="flex flex-col items-center gap-0.5 max-w-[250px]"
       >
-        <div class="">
-          <img
-            :src="getAssetUrl(member)"
-            :alt="member.name"
-            @load="handleImageLoad"
-            @error="(event: Event) => handleImageError(member, event)"
-            class="rounded-full max-w-[100px] mb-1.5"
-          />
-        </div>
-        <h3 class="text-xl">{{ member.name }}</h3>
-        <p class="text-md leading-4">{{ member.role }}</p>
+        <img
+          :src="getAssetUrl(member)"
+          :alt="member.name"
+          @load="handleImageLoad"
+          @error="(event: Event) => handleImageError(member, event)"
+          class="inline-block rounded-full max-w-[100px] mb-1.5"
+        />
+        <h3 class="text-center text-xl leading-5">{{ member.name }}</h3>
+        <p class="text-center text-md leading-5">{{ member.role }}</p>
       </div>
     </div>
   </div>
