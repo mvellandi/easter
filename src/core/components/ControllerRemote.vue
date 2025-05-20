@@ -22,12 +22,17 @@
       <!-- NES Controller: hidden on small screens, visible on lg+ -->
       <NESController v-else :onButtonPress="handleButtonPress" />
     </div>
-    <!-- Success message -->
+    <!-- Success image overlay -->
     <div
-      v-if="successMessage"
-      class="absolute top-4 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg text-xl z-50"
+      v-if="successImage"
+      class="absolute inset-0 flex items-center justify-center bg-black/80 z-50"
     >
-      {{ successMessage }}
+      <img
+        :src="successImage"
+        alt="Success"
+        class="w-full h-auto max-w-full lg:max-h-[700px] lg:w-auto rounded-lg shadow-lg"
+        style="object-fit: contain"
+      />
     </div>
   </div>
 </template>
@@ -39,10 +44,10 @@ import NESController from "./NESController.vue";
 import Display from "./controller/Display.vue";
 import ControllerButton from "./controller/ControllerButton.vue";
 import type { ControllerButton as ButtonType } from "./types";
-
+import successImageUrl from "/assets/img/contra.webp";
 const pressedButtons = ref<ButtonType[]>([]);
 const shake = ref(false);
-const successMessage = ref("");
+const successImage = ref<string | null>(null);
 
 // Example valid sequence
 const validSequences: ButtonType[][] = [
@@ -63,8 +68,8 @@ function handleButtonPress(button: ButtonType) {
         seq.every((val, idx) => val === pressedButtons.value[idx])
     );
     if (match) {
-      successMessage.value = "okay";
-      setTimeout(() => (successMessage.value = ""), 2000);
+      successImage.value = successImageUrl;
+      setTimeout(() => (successImage.value = null), 4000);
       pressedButtons.value = [];
     } else {
       shake.value = true;
@@ -75,7 +80,7 @@ function handleButtonPress(button: ButtonType) {
 
 function resetDisplay() {
   pressedButtons.value = [];
-  successMessage.value = "";
+  successImage.value = null;
   shake.value = false;
 }
 
