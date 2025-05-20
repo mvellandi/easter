@@ -149,100 +149,63 @@ npm run build
 
 ---
 
-## Planned Refactor & Roadmap
+## Completed Tasks
+- Modal state refactor: switched from `activeEgg` to generic `activeModal` (type + props) [**Complete**]
+- Refactored modal shell to render content based on modal type [**Complete**]
+- Centralized modal logic for extensibility [**Complete**]
+- Implemented a generic modal trigger system (keyboard, click, selector-based) [**Complete**]
+- Restored secret multi-click trigger for staff-grid [**Complete**]
 
-### Controller/Remote as a Core Modal
-- Place the controller (Wii/NES remote) component in `core/components/`.
-- Use the same modal/backdrop system as eggs.
-- Trigger it from an invisible, semantic, accessible `<button>`.
-- When the correct sequence is entered, dynamically load and show the corresponding egg.
+## Roadmap / Next Steps
 
-### Modal System Improvements
-- Refactor modal state to be generic (e.g., `activeModal` with type and props), not just `activeEgg`.
-- Allow the modal shell to render either an egg or the controller, using shared close/backdrop logic.
-- Ensure only one overlay/modal is visible at a time.
+1. **Accessibility Improvements**
+   - Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
+   - Implement a focus trap so keyboard users can't tab out of the modal.
+   - Ensure the close button is always accessible and labeled.
 
-### Accessibility
-- Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
-- Implement a focus trap so keyboard users can't tab out of the modal.
-- Ensure the close button is always accessible and labeled.
+2. **Dynamic Egg Imports**
+   - Refactor egg registration to use dynamic imports for performance and bundle size reduction.
 
-### Dynamic Egg Imports
-- Refactor egg registration to use dynamic imports (e.g., `() => import('./eggs/hello-world/index.js')`) for performance and bundle size reduction.
+3. **Controller/Remote Modal** _(Next Task)_
+   - Replace the controller placeholder with the actual Wii/NES remote UI.
+   - Implement sequence entry and event emission to trigger eggs via the controller.
 
-### Controller/Remote Features
-- Responsive: Wii remote (vertical) for <1024px screens, NES controller (horizontal) for >=1024px screens.
-- Both remotes are functionally identical (D-pad, A/B, Reset, Enter), but visually different.
-- Display the sequence of button presses, with reset and enter controls.
-- Both remotes respond to keyboard events as well as pointer/touch.
-- The controller emits button sequence events to the core system, which can trigger eggs dynamically.
+4. **Extending the Generic Trigger System**
+   - Add support for more trigger types (e.g., gestures, multi-click, long-press).
+   - Optionally, unify multi-click into the generic system for even more consistency.
 
-### General Refactoring
-- Centralize modal state and logic for extensibility.
-- Use a registry or mapping for modal content, so adding new modal types is easy.
-- Decouple trigger logic (keyboard, multi-click, controller) from modal logic.
+5. **Modal System Enhancements**
+   - Refactor modal state to allow stacking or queuing of modals (if needed).
+   - Add animation and transition improvements.
+
+6. **Testing & Documentation**
+   - Add unit and integration tests for modal and trigger logic.
+   - Update documentation to reflect the new trigger system and usage patterns.
 
 ---
 
-*This roadmap is intended to guide the next phase of development, making the system more modular, accessible, and extensible for new input methods and features.*
+**Next up:** Begin work on the controller/remote modal (task 3).
 
-### First Commit Plan
+---
 
-**Goal:**
-Refactor the modal system so it can generically handle multiple modal types (not just eggs), laying the groundwork for future features like the controller modal, dynamic imports, and improved accessibility.
+### Controller/Remote Modal UI Design (Planned)
 
-#### Steps
-
-1. **Refactor Modal State**
-   - Change the modal state from something like `activeEgg` to a more generic `activeModal`.
-   - `activeModal` should be an object with at least:
-     - `type`: e.g., `"egg"`, `"controller"`, etc.
-     - `props`: any props/data needed for the modal content.
-
-2. **Update Modal Shell**
-   - Refactor the modal shell component to render its content based on `activeModal.type`.
-   - For `"egg"`, render the current egg component.
-   - For `"controller"`, render a placeholder or stub for the controller (even if not implemented yet).
-
-3. **Centralize Modal Logic**
-   - Ensure all open/close logic, backdrop, and close button handling is centralized and works for any modal type.
-
-4. **Maintain Backward Compatibility**
-   - Make sure existing eggs and their triggers still work as before, but now use the new modal state system.
-
-5. **Testing**
-   - Test that:
-     - Eggs still open/close as expected.
-     - The modal shell can handle at least two types (`egg` and a placeholder for `controller`).
-     - No regressions in modal display or interaction.
-
-#### Example State Shape
-
-```js
-// Before:
-activeEgg: 'hello-world' // or null
-
-// After:
-activeModal: {
-  type: 'egg', // or 'controller'
-  props: { eggId: 'hello-world' } // or other props as needed
-} // or null
-```
-
-#### Commit Message Suggestion
-
-```
-refactor: make modal state generic to support multiple modal types
-
-- Replace activeEgg with activeModal (type + props)
-- Update modal shell to render content based on modal type
-- Ensure existing eggs still work with new modal system
-- Prepare for future controller modal and extensibility
-```
-
-This commit will set the stage for all future improvements, making the modal system more flexible and maintainable.
-
-**Next Steps:**
-Once the modal state refactor is complete and stable, proceed to implement the controller modal, dynamic imports, and accessibility improvements as outlined above.
+- **Hybrid Approach:**
+  - Use SVG for the controller body and decorative elements (scalable, crisp, custom shapes).
+  - Use HTML elements (e.g., `<button>`) for interactive controls (D-pad, A/B, Start/Select, etc.), overlaid or embedded using absolute positioning or `<foreignObject>`.
+- **Styling:**
+  - Leverage Tailwind CSS for all HTML elements.
+  - For SVG, use `fill="currentColor"` and Tailwind's `text-*` classes to control color, or use Tailwind CSS variables in SVG `style` attributes.
+- **Accessibility:**
+  - Use real `<button>` elements for controls to ensure keyboard accessibility, focus, and ARIA labeling.
+  - If using SVG for buttons, add `tabindex`, `role="button"`, and keyboard handlers.
+- **Rationale:**
+  - SVG is ideal for the controller's visual design, while HTML is best for interactivity and accessibility.
+  - This approach is scalable, maintainable, and leverages the strengths of both technologies.
+- **Next Steps:**
+  1. Sketch the controller layout (Wii/NES) in SVG.
+  2. Overlay HTML buttons for D-pad, A/B, Start/Select, etc., using absolute positioning.
+  3. Style everything with Tailwind classes.
+  4. Make each button emit events for sequence entry.
 
 ---
