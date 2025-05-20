@@ -19,4 +19,5 @@ body {
   padding: 0;
   /* Prevent scrolling when modal is open */
   overflow: hidden;
+  touch-action: manipulation;
 }

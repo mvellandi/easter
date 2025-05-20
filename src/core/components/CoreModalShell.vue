@@ -12,6 +12,7 @@
 
     <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
     <div
+      v-if="activeModal?.type !== 'controller'"
       class="ee-modal"
       :class="{ 'ee-modal-visible': isVisible && contentReady }"
     >
@@ -33,9 +34,6 @@
             v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
           />
         </template>
-        <template v-else-if="activeModal?.type === 'controller'">
-          <div class="controller-placeholder">Controller Placeholder</div>
-        </template>
       </div>
       <!-- Gradient for the bottom of the modal -->
       <div
@@ -44,7 +42,22 @@
     </div>
 
     <!-- 3. Floating Elements (if container is hidden) -->
-    <slot name="floating-elements"></slot>
+    <slot name="floating-elements">
+      <template v-if="activeModal?.type === 'controller'">
+        <div
+          class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+        >
+          <div class="pointer-events-auto">
+            <ControllerRemote />
+          </div>
+        </div>
+        <CoreFloatingCloseButton
+          class="ee-floating-close"
+          :show="isVisible"
+          @closeClick="handleClose"
+        />
+      </template>
+    </slot>
 
     <ErrorModal
       :show="reactiveState.errorModal.show"
@@ -65,6 +78,7 @@ import CoreOverlay from "./CoreOverlay.vue"; // Import the new component
 import CoreModalContent from "./CoreModalContent.vue"; // Import the new component
 import CoreFloatingCloseButton from "./CoreFloatingCloseButton.vue"; // Import the new component
 import CoreDefaultCloseButton from "./CoreDefaultCloseButton.vue"; // Import the new component
+import ControllerRemote from "./ControllerRemote.vue";
 
 const props = defineProps({
   reactiveState: {

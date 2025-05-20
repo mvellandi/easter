@@ -26,8 +26,10 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["closeClick"]);
+
 const handleClick = (event?: MouseEvent): void => {
-  // This function is now empty as the emit is removed
+  emit("closeClick");
 };
 </script>
 

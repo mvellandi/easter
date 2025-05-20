@@ -120,4 +120,17 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+  // Controller multi-click trigger
+  document.querySelectorAll('[data-modal-trigger="controller"]').forEach((el) => {
+    if (el instanceof HTMLElement) {
+      registerMultiClickTrigger({
+        element: el,
+        count: 5,
+        callback: () => {
+          core.showController();
+        },
+      });
+    }
+  });
 });
