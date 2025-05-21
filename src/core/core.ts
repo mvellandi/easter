@@ -7,8 +7,8 @@ import { createApp, reactive, markRaw, App } from "vue";
 // Import core UI system styles
 import coreCssString from "./core.css?inline";
 
-// Import the ModalShell component
-import ModalShell from "./components/ModalShell.vue";
+// Import the Core UI
+import Core from "./components/Core.vue";
 
 import {
   ErrorModalStyles,
@@ -134,8 +134,8 @@ class EasterEggCore {
       },
     };
 
-    // Create Vue app using the new ModalShell component
-    this.vueApp = createApp(ModalShell, {
+    // Create Vue app using the Core UI
+    this.vueApp = createApp(Core, {
       reactiveState: this.reactiveState,
       coreInterface: coreInterfaceForEggs,
     });

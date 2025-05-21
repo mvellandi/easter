@@ -67,7 +67,7 @@ import ErrorModal from "./error/ErrorModal.vue";
 import ShellBackdrop from "./shell/ShellBackdrop.vue";
 import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
 import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
-import ControllerRemote from "./ControllerRemote.vue";
+import ControllerRemote from "./controller/ControllerRemote.vue";
 
 const props = defineProps({
   reactiveState: {

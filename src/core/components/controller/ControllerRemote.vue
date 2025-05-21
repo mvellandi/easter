@@ -39,12 +39,12 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import WiiController from "./controller/WiiController.vue";
-import NESController from "./controller/NESController.vue";
-import ControllerDisplay from "./controller/ControllerDisplay.vue";
-import ControllerDPad from "./controller/ControllerDPad.vue";
-import ControllerButton from "./controller/ControllerButton.vue";
-import type { ControllerButton as ButtonType } from "./types";
+import WiiController from "./WiiController.vue";
+import NESController from "./NESController.vue";
+import ControllerDisplay from "./ControllerDisplay.vue";
+import ControllerDPad from "./ControllerDPad.vue";
+import ControllerButton from "./ControllerButton.vue";
+import type { ControllerButton as ButtonType } from "../types";
 import successImageUrl from "/assets/img/contra.webp";
 const pressedButtons = ref<ButtonType[]>([]);
 const shake = ref(false);
