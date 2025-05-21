@@ -5,11 +5,11 @@
     <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
 
     <!-- 2. Main Content Area -->
-    <EggModalShell
+    <EggModalFrame
       v-if="activeModal?.type === 'egg'"
       :visible="isVisible && contentReady"
     >
-      <EggModalContent
+      <EggModalShell
         :isVisible="isVisible"
         :contentReady="contentReady"
         :notifyContentReady="notifyContentReady"
@@ -19,8 +19,8 @@
           :is="activeModal.props?.component"
           v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
         />
-      </EggModalContent>
-    </EggModalShell>
+      </EggModalShell>
+    </EggModalFrame>
 
     <!-- 3. Floating Elements -->
     <slot name="floating-elements">
@@ -53,8 +53,8 @@
 import { computed, ref, watch } from "vue";
 import ErrorModal from "./error/ErrorModal.vue";
 import ShellBackdrop from "./shell/ShellBackdrop.vue";
+import EggModalFrame from "./shell/EggModalFrame.vue";
 import EggModalShell from "./shell/EggModalShell.vue";
-import EggModalContent from "./shell/EggModalContent.vue";
 import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
 import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
 import ControllerRemote from "./controller/ControllerRemote.vue";
