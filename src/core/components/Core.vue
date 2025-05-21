@@ -23,23 +23,21 @@
     </EggModalFrame>
 
     <!-- 3. Floating Elements -->
-    <slot name="floating-elements">
-      <template v-if="activeModal?.type === 'controller'">
-        <!-- Center contents -->
-        <div
-          class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
-        >
-          <div class="pointer-events-auto">
-            <ControllerRemote />
-          </div>
+    <template v-if="activeModal?.type === 'controller'">
+      <!-- Center contents -->
+      <div
+        class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+      >
+        <div class="pointer-events-auto">
+          <ControllerRemote />
         </div>
-        <FloatingCloseButton
-          class="ee-floating-close"
-          :show="isVisible"
-          @closeClick="handleClose"
-        />
-      </template>
-    </slot>
+      </div>
+      <FloatingCloseButton
+        class="ee-floating-close"
+        :show="isVisible"
+        @closeClick="handleClose"
+      />
+    </template>
 
     <ErrorModal
       :show="reactiveState.errorModal.show"
