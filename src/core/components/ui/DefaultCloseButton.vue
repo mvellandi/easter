@@ -39,5 +39,19 @@ const handleClick = (event?: MouseEvent | TouchEvent): void => {
 
 <!-- Styles are in CoreDefaultCloseButton.css -->
 <style scoped>
-/* Component-specific adjustments if any */
+.ee-default-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.5rem;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  pointer-events: auto;
+}
+
+.ee-default-close:hover {
+  color: var(--gray-250);
+  transform: scale(1.05);
+}
 </style>

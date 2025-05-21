@@ -35,5 +35,43 @@ const handleClick = (event?: MouseEvent): void => {
 
 <!-- Styles are in CoreFloatingCloseButton.css -->
 <style scoped>
-/* Component-specific adjustments if any, though most is in the .css file */
+.ee-floating-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  pointer-events: auto;
+}
+
+.ee-floating-close:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.ee-floating-close::before,
+.ee-floating-close::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 2px;
+  background: #333;
+  transform-origin: center;
+}
+
+.ee-floating-close::before {
+  transform: rotate(45deg);
+}
+
+.ee-floating-close::after {
+  transform: rotate(-45deg);
+}
 </style>
