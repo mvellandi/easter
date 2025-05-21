@@ -1,4 +1,5 @@
 <template>
+  <!-- Outer Container with centered content -->
   <div class="flex flex-col items-center justify-center h-full">
     <!-- 1. Backdrop -->
     <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
@@ -14,7 +15,6 @@
         :notifyContentReady="notifyContentReady"
         @close="handleClose"
       >
-        <slot name="close-button"></slot>
         <component
           :is="activeModal.props?.component"
           v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
