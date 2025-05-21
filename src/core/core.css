@@ -1,17 +1,5 @@
 /* Core UI System Styles */
 
-.ee-modal {
-  box-sizing: border-box;
-  position: relative;
-  opacity: 1;
-}
-
-.ee-modal.ee-modal-visible {
-  opacity: 1;
-  border: 1px solid var(--yellow-700);
-  transition: all 0.3s ease-in-out;
-}
-
 /* Modal Content */
 .ee-content {
   position: relative;

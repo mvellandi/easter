@@ -4,35 +4,23 @@
     <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
 
     <!-- 2. Main Content Area -->
-    <div
-      v-if="activeModal?.type !== 'controller'"
-      class="ee-modal"
-      :class="{ 'ee-modal-visible': isVisible && contentReady }"
+    <EggModalShell
+      v-if="activeModal?.type === 'egg'"
+      :visible="isVisible && contentReady"
     >
-      <div
-        v-if="isVisible"
-        class="ee-content bg-image-blue"
-        :class="{ 'ee-content-visible': isVisible && contentReady }"
+      <EggModalContent
+        :isVisible="isVisible"
+        :contentReady="contentReady"
+        :notifyContentReady="notifyContentReady"
+        @close="handleClose"
       >
-        <!-- Use DefaultCloseButton component -->
-        <DefaultCloseButton :show="isVisible" @closeClick="handleClose" />
-
-        <!-- Slot for the default close button -->
         <slot name="close-button"></slot>
-
-        <!-- Modal content based on type -->
-        <template v-if="activeModal?.type === 'egg'">
-          <component
-            :is="activeModal.props?.component"
-            v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
-          />
-        </template>
-      </div>
-      <!-- Gradient for the bottom of the modal -->
-      <div
-        class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-900 to-transparent lg:h-0"
-      ></div>
-    </div>
+        <component
+          :is="activeModal.props?.component"
+          v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
+        />
+      </EggModalContent>
+    </EggModalShell>
 
     <!-- 3. Floating Elements -->
     <slot name="floating-elements">
@@ -65,6 +53,8 @@
 import { computed, ref, watch } from "vue";
 import ErrorModal from "./error/ErrorModal.vue";
 import ShellBackdrop from "./shell/ShellBackdrop.vue";
+import EggModalShell from "./shell/EggModalShell.vue";
+import EggModalContent from "./shell/EggModalContent.vue";
 import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
 import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
 import ControllerRemote from "./controller/ControllerRemote.vue";
