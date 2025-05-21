@@ -26,80 +26,41 @@ The Easter Egg Core System provides a framework for creating and managing intera
   - See the [Changelog & Migration Notes](#changelog--migration-notes) for details.
 
 - **Core System (`src/core/`)**
-  - Handles modal UI, display, and interaction for eggs.
+  - Handles modal UI, display, and interaction for eggs and controllers.
   - Uses inlined CSS for isolation.
   - Leverages the parent website's design system for variables and assets.
-  - Modal/backdrop logic is currently tied to eggs.
+  - Modal/backdrop logic is currently tied to eggs and controllers.
 - **Eggs (`src/eggs/`)**
   - Each egg is a self-contained module/component.
   - Eggs are statically imported in `main.ts` and registered with the core system.
   - Eggs are triggered by keyboard shortcuts (e.g., Ctrl+H for Hello World).
+- **Controllers (`src/core/components/controller/`)**
+  - Contains all controller-related components: Wii, NES, D-pad, display, and buttons.
+  - Controllers are responsive and accessible, with reusable D-pad and button components.
+  - Button sequences and feedback (success image, shake animation) are handled here.
 - **Triggers**
-  - Keyboard shortcuts for eggs.
+  - Keyboard shortcuts for eggs and controllers.
   - Multi-click triggers for some eggs (e.g., staff directory button).
 - **Modal System**
-  - Modal and backdrop are used to display eggs.
+  - Modal and backdrop are used to display eggs and controllers.
   - Close button logic is part of the modal shell.
 - **Accessibility**
-  - Modal visually robust, but may lack full ARIA/focus trap accessibility features.
-
-### TypeScript Migration (Completed)
-- All core, eggs, and utilities are now in TypeScript.
-- All Vue SFCs use `<script lang="ts">`.
-- Type checking is part of the workflow (`npx tsc --noEmit`).
-- See `tsconfig.json` for configuration.
-
----
-
-### Usage Example (TypeScript)
-
-1. Import the core system:
-```typescript
-import core, { registerKeyCombo } from "./core/core.ts";
-```
-
-2. Register eggs:
-```typescript
-import { HelloWorldEggComponent } from "./eggs/hello-world/index.ts";
-import { StaffGridEggComponent } from "./eggs/staff-grid/index.ts";
-
-core.registerEgg("egg-id", HelloWorldEggComponent, {
-  title: "Egg Title",
-  trigger: {
-    type: "keyboard",
-    key: "k",
-    ctrlKey: true
-  }
-});
-```
-
-3. Initialize the system:
-```typescript
-registerKeyCombo();
-```
-
----
-
-*TypeScript migration is complete. All new features and contributions should use TypeScript and `<script lang="ts">` in Vue SFCs.*
-
-### Design System Integration
-The system expects the following from the parent website:
-- CSS variables for colors, spacing, and typography
-- Font assets
-- Image assets
-- Animation definitions
+  - Modal and controllers are visually robust and accessible, with ARIA roles and keyboard support.
 
 ### Directory Structure
 ```
 src/
-├── core/               # Core UI system
-│   ├── components/     # Core UI components
-│   ├── core.css        # Core UI styles
-│   └── core.ts         # Core system logic
-├── eggs/               # Easter egg modules
-│   ├── hello-world/    # Hello World egg
-│   └── staff-grid/     # Staff Grid egg
-└── styles/             # Design system styles
+├── core/
+│   ├── components/
+│   │   ├── controller/         # Controller UI system (Wii, NES, DPad, Display, Buttons)
+│   │   ├── error/
+│   │   ├── shell/
+│   │   └── ui/
+│   ├── utils/
+├── eggs/                      # Easter egg modules
+│   ├── hello-world/
+│   └── staff-grid/
+└── styles/                    # Design system styles
     ├── animations.css
     ├── backgrounds.css
     ├── colors.css
@@ -155,20 +116,31 @@ npm run build
 - Centralized modal logic for extensibility [**Complete**]
 - Implemented a generic modal trigger system (keyboard, click, selector-based) [**Complete**]
 - Restored secret multi-click trigger for staff-grid [**Complete**]
+- **Controller/Remote Modal:**
+  - Wii and NES controller UIs with responsive switching [**Complete**]
+  - Reusable, accessible D-pad and button components [**Complete**]
+  - Button sequence display and reset [**Complete**]
+  - Success/failure feedback (image overlay, shake animation) [**Complete**]
+  - Refactored and organized controller components [**Complete**]
+  - Responsive layout for display and controllers [**Complete**]
+  - Cleaned up unused modal shell components and imports [**Complete**]
 
 ## Roadmap / Next Steps
 
-1. **Accessibility Improvements**
+1. **UI System Cleanup & Refactor**
+   - Review and remove any remaining unused components, slots, or imports.
+   - Consider simplifying the modal shell (e.g., remove unnecessary slots/templates).
+   - Standardize naming conventions for all UI components.
+   - Ensure all controller-related components are in the `controller` directory.
+   - Document the UI system structure and component responsibilities.
+
+2. **Accessibility Improvements**
    - Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
    - Implement a focus trap so keyboard users can't tab out of the modal.
    - Ensure the close button is always accessible and labeled.
 
-2. **Dynamic Egg Imports**
+3. **Dynamic Egg Imports**
    - Refactor egg registration to use dynamic imports for performance and bundle size reduction.
-
-3. **Controller/Remote Modal** _(Next Task)_
-   - Replace the controller placeholder with the actual Wii/NES remote UI.
-   - Implement sequence entry and event emission to trigger eggs via the controller.
 
 4. **Extending the Generic Trigger System**
    - Add support for more trigger types (e.g., gestures, multi-click, long-press).

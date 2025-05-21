@@ -1,16 +1,18 @@
 <template>
   <div class="ee-container">
-    <!-- 1. Overlay (if shown) -->
+    <!-- 1. Backdrop -->
     <div
-      class="ee-backdrop"
-      :class="{ 'ee-backdrop-visible': isVisible }"
+      :class="[
+        'fixed top-0 left-0 w-full h-full bg-black/70 transition-opacity duration-300',
+        isVisible
+          ? 'opacity-100 pointer-events-auto'
+          : 'opacity-0 pointer-events-none',
+      ]"
       @click="handleClose"
       @touchend="handleClose"
-    >
-      <!-- For content like an egg when container is hidden -->
-    </div>
+    ></div>
 
-    <!-- 2. Main Content Area (renders .ee-content if container is not hidden) -->
+    <!-- 2. Main Content Area -->
     <div
       v-if="activeModal?.type !== 'controller'"
       class="ee-modal"
@@ -21,8 +23,8 @@
         class="ee-content bg-image-blue"
         :class="{ 'ee-content-visible': isVisible && contentReady }"
       >
-        <!-- Use CoreDefaultCloseButton component -->
-        <CoreDefaultCloseButton :show="isVisible" @closeClick="handleClose" />
+        <!-- Use DefaultCloseButton component -->
+        <DefaultCloseButton :show="isVisible" @closeClick="handleClose" />
 
         <!-- Slot for the default close button -->
         <slot name="close-button"></slot>
@@ -41,9 +43,10 @@
       ></div>
     </div>
 
-    <!-- 3. Floating Elements (if container is hidden) -->
+    <!-- 3. Floating Elements -->
     <slot name="floating-elements">
       <template v-if="activeModal?.type === 'controller'">
+        <!-- Center contents -->
         <div
           class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
         >
@@ -51,7 +54,7 @@
             <ControllerRemote />
           </div>
         </div>
-        <CoreFloatingCloseButton
+        <FloatingCloseButton
           class="ee-floating-close"
           :show="isVisible"
           @closeClick="handleClose"
@@ -69,15 +72,10 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
-// Assuming ErrorModal.ts is in the same directory as CoreModalShell.vue (src/core/components/)
-// If ErrorModal.ts is in src/core/components/ and CoreModalShell.vue is also there, path is './ErrorModal.ts'
-// From ee-core.js, it's imported as './components/ErrorModal.ts'.
-// So, if CoreModalShell.vue is in src/core/components, this path should be correct.
-import ErrorModal from "./ErrorModal.vue";
-import CoreOverlay from "./CoreOverlay.vue"; // Import the new component
-import CoreModalContent from "./CoreModalContent.vue"; // Import the new component
-import CoreFloatingCloseButton from "./CoreFloatingCloseButton.vue"; // Import the new component
-import CoreDefaultCloseButton from "./CoreDefaultCloseButton.vue"; // Import the new component
+import ErrorModal from "./error/ErrorModal.vue";
+// import ShellModalContent from "./shell/ShellModalContent.vue"; // Removed unused import
+import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
+import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
 import ControllerRemote from "./ControllerRemote.vue";
 
 const props = defineProps({
@@ -131,15 +129,4 @@ const closeErrorModal = () => {
 };
 </script>
 
-<style scoped>
-.controller-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  font-size: 1.5rem;
-  color: #fff;
-  background: #222;
-  border-radius: 8px;
-}
-</style>
+<style scoped></style>

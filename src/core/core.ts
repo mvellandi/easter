@@ -7,13 +7,13 @@ import { createApp, reactive, markRaw, App } from "vue";
 // Import core UI system styles
 import coreCssString from "./core.css?inline";
 
-// Import the new CoreModalShell component
-import CoreModalShell from "./components/CoreModalShell.vue";
+// Import the ModalShell component
+import ModalShell from "./components/ModalShell.vue";
 
 import {
   ErrorModalStyles,
   ErrorHandler,
-} from "./components/ErrorModal";
+} from "./components/error/ErrorModal";
 import { KeyHandler } from "./key-handler";
 
 // Interfaces for type safety
@@ -134,8 +134,8 @@ class EasterEggCore {
       },
     };
 
-    // Create Vue app using the new CoreModalShell component
-    this.vueApp = createApp(CoreModalShell, {
+    // Create Vue app using the new ModalShell component
+    this.vueApp = createApp(ModalShell, {
       reactiveState: this.reactiveState,
       coreInterface: coreInterfaceForEggs,
     });

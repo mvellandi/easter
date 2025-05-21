@@ -3,7 +3,11 @@
     class="relative flex flex-col items-center select-none bg-gray-50 rounded-xl p-3 py-6 border-4 border-gray-400"
   >
     <!-- D-pad -->
-    <DPad :onDirection="onButtonPress" size="w-30 h-30" class="mb-6" />
+    <ControllerDPad
+      :onDirection="onButtonPress"
+      size="w-30 h-30"
+      class="mb-6"
+    />
 
     <div class="flex flex-col items-center gap-6">
       <!-- A Button -->
@@ -42,8 +46,8 @@ import type {
   ControllerButton as ButtonType,
   ButtonPressHandler,
 } from "./types";
-import DPad from "./controller/DPad.vue";
-import ControllerButton from "./controller/ControllerButton.vue";
+import ControllerDPad from "./ControllerDPad.vue";
+import ControllerButton from "./ControllerButton.vue";
 const props = defineProps<{ onButtonPress: ButtonPressHandler }>();
 const onButtonPress = props.onButtonPress;
 </script>

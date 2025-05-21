@@ -6,7 +6,7 @@
     ]"
   >
     <!-- Display and Reset Button -->
-    <Display :pressedButtons="pressedButtons" class="flex-1">
+    <ControllerDisplay :pressedButtons="pressedButtons" class="flex-1">
       <ControllerButton
         label="RESET"
         color="bg-blue-400"
@@ -15,7 +15,7 @@
         class=""
         :onPress="resetDisplay"
       />
-    </Display>
+    </ControllerDisplay>
     <!-- Wii Controller: visible on small screens, hidden on lg+ -->
     <div :class="[shake ? 'animate-shakeHorizontal' : '', 'flex-1']">
       <WiiController v-if="!isLargeScreen" :onButtonPress="handleButtonPress" />
@@ -39,9 +39,10 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import WiiController from "./WiiController.vue";
-import NESController from "./NESController.vue";
-import Display from "./controller/Display.vue";
+import WiiController from "./controller/WiiController.vue";
+import NESController from "./controller/NESController.vue";
+import ControllerDisplay from "./controller/ControllerDisplay.vue";
+import ControllerDPad from "./controller/ControllerDPad.vue";
 import ControllerButton from "./controller/ControllerButton.vue";
 import type { ControllerButton as ButtonType } from "./types";
 import successImageUrl from "/assets/img/contra.webp";
