@@ -129,4 +129,12 @@ const closeErrorModal = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.ee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+</style>

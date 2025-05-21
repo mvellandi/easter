@@ -16,14 +16,6 @@
   pointer-events: none; /* Only allow pointer events when modal/backdrop is visible */
 }
 
-.ee-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
 .ee-modal-shell {
   position: fixed;
   top: 0;
