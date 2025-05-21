@@ -1,5 +1,5 @@
 <template>
-  <div class="ee-container">
+  <div class="flex flex-col items-center justify-center h-full">
     <!-- 1. Backdrop -->
     <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
 
@@ -120,12 +120,4 @@ const closeErrorModal = () => {
 };
 </script>
 
-<style scoped>
-.ee-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-</style>
+<style scoped></style>
