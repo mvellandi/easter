@@ -1,16 +1,7 @@
 <template>
   <div class="ee-container">
     <!-- 1. Backdrop -->
-    <div
-      :class="[
-        'fixed top-0 left-0 w-full h-full bg-black/70 transition-opacity duration-300',
-        isVisible
-          ? 'opacity-100 pointer-events-auto'
-          : 'opacity-0 pointer-events-none',
-      ]"
-      @click="handleClose"
-      @touchend="handleClose"
-    ></div>
+    <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
 
     <!-- 2. Main Content Area -->
     <div
@@ -73,7 +64,7 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import ErrorModal from "./error/ErrorModal.vue";
-// import ShellModalContent from "./shell/ShellModalContent.vue"; // Removed unused import
+import ShellBackdrop from "./shell/ShellBackdrop.vue";
 import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
 import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
 import ControllerRemote from "./ControllerRemote.vue";
