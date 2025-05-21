@@ -96,8 +96,8 @@ class EasterEggCore {
 
     // Create container element
     this.container = document.createElement("div");
-    this.container.id = "easter-egg-root-container";
-    this.container.className = "ee-root-container";
+    this.container.id = "easter-root";
+    this.container.className = "easter-root";
     document.body.appendChild(this.container);
     console.log("EasterEggCore: Root container appended to body");
 
