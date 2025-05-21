@@ -25,51 +25,34 @@ const emit = defineEmits<{
 <style scoped>
 .ee-error-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: auto;
-}
-.ee-error-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
-  padding: 30px;
+  padding: 2rem;
   border-radius: 8px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  max-width: 90vw;
+  width: 400px;
 }
-.ee-error-content h3 {
-  margin: 0 0 15px 0;
-  color: #e74c3c;
-  font-size: 24px;
+
+.ee-error-message {
+  color: #dc2626;
+  margin-bottom: 1rem;
 }
-.ee-error-content p {
-  margin: 0 0 15px 0;
-  color: #333;
-  font-size: 16px;
-  line-height: 1.5;
-}
-.ee-error-note {
-  font-size: 14px;
-  color: #666;
-  font-style: italic;
-}
+
 .ee-error-close {
-  background: #3498db;
+  background: #dc2626;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background 0.2s;
+  transition: all 0.2s ease-in-out;
 }
+
 .ee-error-close:hover {
-  background: #2980b9;
+  background: #b91c1c;
 }
 </style>

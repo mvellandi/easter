@@ -1,35 +1,27 @@
 /* Core UI System Styles */
 
-/* Error Modal */
-.ee-error-modal {
+.easter-root {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10001;
-  max-width: 90vw;
-  width: 400px;
-}
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  pointer-events: none; /* Only allow pointer events when modal/backdrop is visible */
 
-.ee-error-message {
-  color: #dc2626;
-  margin-bottom: 1rem;
-}
-
-.ee-error-close {
-  background: #dc2626;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.ee-error-close:hover {
-  background: #b91c1c;
+  @media (min-width: 640px) {
+    align-items: flex-start;
+    padding-top: 3rem;
+    padding-bottom: 0;
+  }
+  @media (min-width: 768px) {
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
