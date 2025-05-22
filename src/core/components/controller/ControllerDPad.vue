@@ -1,6 +1,7 @@
 <template>
   <div :class="[size]">
     <div class="grid grid-cols-3 grid-rows-3 w-full h-full">
+      <!-- Empty cell -->
       <div></div>
       <!-- Up -->
       <button
@@ -20,6 +21,7 @@
           <polyline points="6 15 12 9 18 15" />
         </svg>
       </button>
+      <!-- Empty cell -->
       <div></div>
       <!-- Left -->
       <button
@@ -80,6 +82,7 @@
           <polyline points="6 15 12 9 18 15" />
         </svg>
       </button>
+      <!-- Empty cell -->
       <div></div>
     </div>
   </div>
