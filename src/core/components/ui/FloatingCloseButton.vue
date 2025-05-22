@@ -26,7 +26,6 @@ const handleClick = (event?: MouseEvent): void => {
 };
 </script>
 
-<!-- Styles are in CoreFloatingCloseButton.css -->
 <style scoped>
 .ee-floating-close {
   position: absolute;
