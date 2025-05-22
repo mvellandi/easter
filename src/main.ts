@@ -1,7 +1,7 @@
 import core, { registerKeyCombo, registerModalTrigger } from "./core/core";
 import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger";
-import { HelloWorldEggComponent } from "./eggs/hello-world/index";
-import { StaffGridEggComponent } from "./eggs/staff-grid/index";
+import HelloWorldEgg from "./eggs/hello-world/HelloWorldEgg.vue";
+import StaffGridEgg from "./eggs/staff-grid/StaffGridEgg.vue";
 import type { StaffMember } from "./eggs/staff-grid/StaffMember";
 import staffData from "./eggs/staff-grid/staff-data.json";
 
@@ -37,7 +37,7 @@ interface EggsConfig {
 const config: { eggs: EggsConfig } = {
   eggs: {
     "hello-world": {
-      component: HelloWorldEggComponent,
+      component: HelloWorldEgg,
       options: {
         title: "Hello World Egg",
         trigger: {
@@ -48,7 +48,7 @@ const config: { eggs: EggsConfig } = {
       },
     },
     "staff-grid": {
-      component: StaffGridEggComponent,
+      component: StaffGridEgg,
       options: {
         title: "Our Team",
         trigger: [
