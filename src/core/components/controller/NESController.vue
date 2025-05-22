@@ -3,19 +3,21 @@
     class="relative flex justify-between items-center select-none bg-gray-50 rounded-xl p-6 border-4 border-gray-400 w-[500px] gap-6"
   >
     <!-- D-pad -->
-    <ControllerDPad :onDirection="onButtonPress" size="w-30 h-30" class="" />
+    <ControllerDPad :onDirection="onButtonPress" size="w-120 h-120" class="" />
 
     <!-- Start Button -->
-    <ControllerButton
-      label="START"
-      color="bg-gray-400"
-      :onPress="() => onButtonPress('start')"
-      shape="pill"
-      textColor="text-gray-900"
-      size="w-20 h-8"
-    />
+    <div class="pt-14">
+      <ControllerButton
+        label="START"
+        color="bg-gray-400"
+        :onPress="() => onButtonPress('start')"
+        shape="pill"
+        textColor="text-gray-900"
+        size="w-20 h-8"
+      />
+    </div>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-4 pt-14">
       <!-- A Button -->
       <ControllerButton
         label="A"

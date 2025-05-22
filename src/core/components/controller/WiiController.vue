@@ -9,7 +9,7 @@
       class="mb-6"
     />
 
-    <div class="flex flex-col items-center gap-6">
+    <div class="flex flex-col items-center gap-4 pt-4">
       <!-- A Button -->
       <ControllerButton
         label="A"
@@ -28,15 +28,17 @@
         :onPress="() => onButtonPress('b')"
       />
 
-      <!-- Start Button -->
-      <ControllerButton
-        label="START"
-        color="bg-gray-400"
-        :onPress="() => onButtonPress('start')"
-        shape="pill"
-        textColor="text-gray-900"
-        size="w-22 h-10"
-      />
+      <div class="pt-4">
+        <!-- Start Button -->
+        <ControllerButton
+          label="START"
+          color="bg-gray-400"
+          :onPress="() => onButtonPress('start')"
+          shape="pill"
+          textColor="text-gray-900"
+          size="w-22 h-10"
+        />
+      </div>
     </div>
   </div>
 </template>
