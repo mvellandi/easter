@@ -33,7 +33,7 @@ export default defineConfig({
 
   // Build options
   build: {
-    outDir: "../easter",
+    outDir: "../docs",
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
