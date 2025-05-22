@@ -42,7 +42,6 @@ const handleClick = (event?: MouseEvent): void => {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
-  /* pointer-events: auto; */
 }
 
 .ee-floating-close:hover {

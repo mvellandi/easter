@@ -11,7 +11,6 @@ export const ErrorModalStyles = `
     display: flex;
     justify-content: center;
     align-items: center;
-    // pointer-events: auto;
   }
 
   .ee-error-content {
