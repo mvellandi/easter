@@ -38,7 +38,6 @@ const handleClick = (event?: MouseEvent | TouchEvent): void => {
   color: var(--gray-400);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  /* pointer-events: auto; */
 }
 
 .ee-default-close:hover {
