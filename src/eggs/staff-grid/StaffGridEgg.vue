@@ -75,6 +75,4 @@ if (totalImages.value === 0 && props.notifyContentReady) {
 }
 </script>
 
-<style scoped>
-@import "./style.css";
-</style>
+<style scoped></style>
