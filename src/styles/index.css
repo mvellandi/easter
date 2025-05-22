@@ -15,10 +15,10 @@ kbd {
 html,
 body {
   height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
   /* These two styles are necessary for system to work */
   /* Prevent scrolling when modal is open */
-  overflow: hidden;
   touch-action: manipulation;
 }
