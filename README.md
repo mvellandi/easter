@@ -99,85 +99,38 @@ npm run build
 
 ## Changelog & Migration Notes
 
-### TypeScript Migration Plan (Completed)
+### Recent Modal Shell Refactor
+- Refactored modal shell into composable, layered components (`FixModalFrame`, `FixModalShell`, `ShellBackdrop`, `FloatModalFrame`) for clarity and maintainability.
+- Replaced prop/event drilling for modal close actions with Vue's provide/inject pattern, allowing any modal descendant to close the modal directly.
+- Cleaned up slot usage and removed unnecessary named slots.
+- Improved z-index and pointer-events handling for correct modal layering and interactivity.
+- Renamed modal shell components for semantic clarity.
 
-- All core, eggs, and utilities are now in TypeScript.
-- All Vue SFCs use `<script lang="ts">`.
-- Type checking is part of the workflow (`npx tsc --noEmit`).
-- Imports/exports use `.ts` extensions for local files.
-- Updated all usage examples and documentation to reflect TypeScript usage.
-- Build output is now at the root-level `dist` directory.
-
----
-
-## Completed Tasks
-- Modal state refactor: switched from `activeEgg` to generic `activeModal` (type + props) [**Complete**]
-- Refactored modal shell to render content based on modal type [**Complete**]
-- Centralized modal logic for extensibility [**Complete**]
-- Implemented a generic modal trigger system (keyboard, click, selector-based) [**Complete**]
-- Restored secret multi-click trigger for staff-grid [**Complete**]
-- **Controller/Remote Modal:**
-  - Wii and NES controller UIs with responsive switching [**Complete**]
-  - Reusable, accessible D-pad and button components [**Complete**]
-  - Button sequence display and reset [**Complete**]
-  - Success/failure feedback (image overlay, shake animation) [**Complete**]
-  - Refactored and organized controller components [**Complete**]
-  - Responsive layout for display and controllers [**Complete**]
-  - Cleaned up unused modal shell components and imports [**Complete**]
+### Modal Close Logic
+- Modal close logic now uses provide/inject (no more prop drilling).
+- Modal shell and floating modals are now fully modular and layered.
+- Slot and event usage simplified and clarified.
 
 ## Roadmap / Next Steps
 
-1. **UI System Cleanup & Refactor**
-   - Review and remove any remaining unused components, slots, or imports.
-   - Consider simplifying the modal shell (e.g., remove unnecessary slots/templates).
-   - Standardize naming conventions for all UI components.
-   - Ensure all controller-related components are in the `controller` directory.
-   - Document the UI system structure and component responsibilities.
-
-2. **Accessibility Improvements**
+**Accessibility Improvements**
    - Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and proper labeling to the modal.
    - Implement a focus trap so keyboard users can't tab out of the modal.
    - Ensure the close button is always accessible and labeled.
 
-3. **Dynamic Egg Imports**
+**Dynamic Egg Imports**
    - Refactor egg registration to use dynamic imports for performance and bundle size reduction.
 
-4. **Extending the Generic Trigger System**
+**Extending the Generic Trigger System**
    - Add support for more trigger types (e.g., gestures, multi-click, long-press).
    - Optionally, unify multi-click into the generic system for even more consistency.
 
-5. **Modal System Enhancements**
+**Modal System Enhancements**
    - Refactor modal state to allow stacking or queuing of modals (if needed).
    - Add animation and transition improvements.
 
-6. **Testing & Documentation**
+**Testing & Documentation**
    - Add unit and integration tests for modal and trigger logic.
    - Update documentation to reflect the new trigger system and usage patterns.
-
----
-
-**Next up:** Begin work on the controller/remote modal (task 3).
-
----
-
-### Controller/Remote Modal UI Design (Planned)
-
-- **Hybrid Approach:**
-  - Use SVG for the controller body and decorative elements (scalable, crisp, custom shapes).
-  - Use HTML elements (e.g., `<button>`) for interactive controls (D-pad, A/B, Start/Select, etc.), overlaid or embedded using absolute positioning or `<foreignObject>`.
-- **Styling:**
-  - Leverage Tailwind CSS for all HTML elements.
-  - For SVG, use `fill="currentColor"` and Tailwind's `text-*` classes to control color, or use Tailwind CSS variables in SVG `style` attributes.
-- **Accessibility:**
-  - Use real `<button>` elements for controls to ensure keyboard accessibility, focus, and ARIA labeling.
-  - If using SVG for buttons, add `tabindex`, `role="button"`, and keyboard handlers.
-- **Rationale:**
-  - SVG is ideal for the controller's visual design, while HTML is best for interactivity and accessibility.
-  - This approach is scalable, maintainable, and leverages the strengths of both technologies.
-- **Next Steps:**
-  1. Sketch the controller layout (Wii/NES) in SVG.
-  2. Overlay HTML buttons for D-pad, A/B, Start/Select, etc., using absolute positioning.
-  3. Style everything with Tailwind classes.
-  4. Make each button emit events for sequence entry.
 
 ---
