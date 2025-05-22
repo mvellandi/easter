@@ -1,6 +1,5 @@
 <template>
   <button
-    v-if="show"
     class="ee-default-close"
     @click="handleClick"
     @touchend="handleClick"
@@ -23,21 +22,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["closeClick"]);
+const emit = defineEmits(["close"]);
 
 const handleClick = (event?: MouseEvent | TouchEvent): void => {
-  emit("closeClick");
+  emit("close");
 };
 </script>
 
-<!-- Styles are in CoreDefaultCloseButton.css -->
 <style scoped>
 .ee-default-close {
   position: absolute;
@@ -47,7 +38,7 @@ const handleClick = (event?: MouseEvent | TouchEvent): void => {
   color: var(--gray-400);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  pointer-events: auto;
+  /* pointer-events: auto; */
 }
 
 .ee-default-close:hover {

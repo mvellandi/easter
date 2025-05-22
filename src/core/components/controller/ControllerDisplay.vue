@@ -1,7 +1,9 @@
 <template>
+  <!-- Display Frame -->
   <div
     class="py-6 flex flex-col justify-between items-center gap-2 bg-gray-900 rounded-lg border-2 border-green-800 w-[120px] h-[540px] lg:flex-row lg:w-[940px] lg:h-[120px] lg:items-center lg:px-6 lg:py-0"
   >
+    <!-- Display Content -->
     <div
       class="flex flex-col items-center justify-center gap-1.5 flex-1 lg:flex-row lg:h-[90px]"
     >
@@ -13,6 +15,8 @@
         {{ btn.toUpperCase() }}
       </span>
     </div>
+
+    <!-- Display Controls -->
     <slot />
   </div>
 </template>

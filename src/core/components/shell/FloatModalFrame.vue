@@ -1,18 +1,20 @@
 <template>
   <div
     :class="[
-      'fixed top-0 left-0 w-full h-full bg-black/70 transition-opacity duration-300',
+      'z-10',
       isVisible
-        ? 'opacity-100 pointer-events-auto'
+        ? 'opacity-100 pointer-events-auto transition-all duration-300 ease-in-out'
         : 'opacity-0 pointer-events-none',
     ]"
-    @click="closeModal"
-    @touchend="closeModal"
-  ></div>
+  >
+    <slot />
+    <DefaultCloseButton @close="closeModal" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { inject } from "vue";
+import DefaultCloseButton from "../ui/DefaultCloseButton.vue";
 const props = defineProps<{ isVisible: boolean }>();
 const closeModal = inject("closeModal") as () => void;
 </script>

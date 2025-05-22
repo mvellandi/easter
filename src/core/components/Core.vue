@@ -2,41 +2,26 @@
   <!-- Outer Container with centered content -->
   <div class="flex flex-col items-center justify-center h-full">
     <!-- 1. Backdrop -->
-    <ShellBackdrop :isVisible="isVisible" @close="handleClose" />
+    <ShellBackdrop :isVisible="isVisible" />
 
     <!-- 2. Main Content Area -->
-    <EggModalFrame
+    <FixModalFrame
       v-if="activeModal?.type === 'egg'"
-      :visible="isVisible && contentReady"
+      :isVisible="isVisible && contentReady"
     >
-      <EggModalShell
-        :isVisible="isVisible"
-        :contentReady="contentReady"
-        :notifyContentReady="notifyContentReady"
-        @close="handleClose"
-      >
+      <FixModalShell>
         <component
           :is="activeModal.props?.component"
           v-bind="{ ...activeModal.props?.props, notifyContentReady } || {}"
         />
-      </EggModalShell>
-    </EggModalFrame>
+      </FixModalShell>
+    </FixModalFrame>
 
     <!-- 3. Floating Elements -->
     <template v-if="activeModal?.type === 'controller'">
-      <!-- Center contents -->
-      <div
-        class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
-      >
-        <div class="pointer-events-auto">
-          <ControllerRemote />
-        </div>
-      </div>
-      <FloatingCloseButton
-        class="ee-floating-close"
-        :show="isVisible"
-        @closeClick="handleClose"
-      />
+      <FloatModalFrame :isVisible="isVisible">
+        <ControllerRemote />
+      </FloatModalFrame>
     </template>
 
     <ErrorModal
@@ -48,13 +33,12 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, provide } from "vue";
 import ErrorModal from "./error/ErrorModal.vue";
 import ShellBackdrop from "./shell/ShellBackdrop.vue";
-import EggModalFrame from "./shell/EggModalFrame.vue";
-import EggModalShell from "./shell/EggModalShell.vue";
-import FloatingCloseButton from "./ui/FloatingCloseButton.vue";
-import DefaultCloseButton from "./ui/DefaultCloseButton.vue";
+import FixModalFrame from "./shell/FixModalFrame.vue";
+import FixModalShell from "./shell/FixModalShell.vue";
+import FloatModalFrame from "./shell/FloatModalFrame.vue";
 import ControllerRemote from "./controller/ControllerRemote.vue";
 
 const props = defineProps({
@@ -106,6 +90,8 @@ const handleClose = () => {
 const closeErrorModal = () => {
   props.reactiveState.errorModal.show = false;
 };
+
+provide("closeModal", handleClose);
 </script>
 
 <style scoped></style>

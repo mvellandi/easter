@@ -1,8 +1,8 @@
 <template>
   <button
-    v-if="show"
-    class="floating-close"
+    class="ee-floating-close"
     @click="handleClick"
+    @touchend="handleClick"
     aria-label="Close Easter Egg"
   >
     <svg
@@ -19,17 +19,10 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["closeClick"]);
+const emit = defineEmits(["close"]);
 
 const handleClick = (event?: MouseEvent): void => {
-  emit("closeClick");
+  emit("close");
 };
 </script>
 
@@ -49,7 +42,7 @@ const handleClick = (event?: MouseEvent): void => {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
-  pointer-events: auto;
+  /* pointer-events: auto; */
 }
 
 .ee-floating-close:hover {

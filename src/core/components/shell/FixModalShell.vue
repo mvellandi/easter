@@ -1,22 +1,15 @@
 <template>
-  <div
-    :class="[
-      'ee-content bg-image-blue',
-      isVisible && contentReady && 'ee-content-visible',
-    ]"
-  >
-    <DefaultCloseButton :show="isVisible" @closeClick="$emit('close')" />
+  <div class="ee-content bg-image-blue">
+    <DefaultCloseButton @close="closeModal" />
+    <!-- Egg Content -->
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
+import { inject } from "vue";
 import DefaultCloseButton from "../ui/DefaultCloseButton.vue";
-const props = defineProps<{
-  isVisible: boolean;
-  contentReady: boolean;
-  notifyContentReady: () => void;
-}>();
+const closeModal = inject("closeModal") as () => void;
 </script>
 
 <style scoped>
@@ -25,9 +18,7 @@ const props = defineProps<{
   overflow-y: auto;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  opacity: 0;
   transition: all 0.3s ease-in-out;
-  pointer-events: none;
   padding: 2rem;
   width: 100%;
   max-width: 80vw;
@@ -47,11 +38,5 @@ const props = defineProps<{
   @media (min-width: 1024px) {
     max-width: 70vw;
   }
-}
-
-.ee-content.ee-content-visible {
-  transform: scale(1);
-  opacity: 1;
-  pointer-events: auto;
 }
 </style>

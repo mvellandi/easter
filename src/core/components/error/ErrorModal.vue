@@ -1,6 +1,6 @@
 <template>
   <div v-if="show" class="ee-error-modal">
-    <div class="ee-error-content">
+    <div class="ee-error-content z-30">
       <h3>Oops! Something went wrong</h3>
       <p>{{ message }}</p>
       <p class="ee-error-note">

@@ -5,7 +5,7 @@
       isLargeScreen ? 'flex-col' : 'flex-row',
     ]"
   >
-    <!-- Display and Reset Button -->
+    <!-- Display and Controls -->
     <ControllerDisplay :pressedButtons="pressedButtons" class="flex-1">
       <ControllerButton
         label="RESET"
@@ -16,13 +16,17 @@
         :onPress="resetDisplay"
       />
     </ControllerDisplay>
-    <!-- Wii Controller: visible on small screens, hidden on lg+ -->
+
+    <!-- Controller Frame -->
     <div :class="[shake ? 'animate-shakeHorizontal' : '', 'flex-1']">
+      <!-- Wii Controller: visible on small screens, hidden on lg+ -->
       <WiiController v-if="!isLargeScreen" :onButtonPress="handleButtonPress" />
-      <!-- NES Controller: hidden on small screens, visible on lg+ -->
+
+      <!-- NES Controller: hidden on small screens, visible on lg+ (for now) -->
       <NESController v-else :onButtonPress="handleButtonPress" />
     </div>
-    <!-- Success image overlay -->
+
+    <!-- TEMP REGION: Success image overlay -->
     <div
       v-if="successImage"
       class="absolute inset-0 flex items-center justify-center bg-black/80 z-50"
