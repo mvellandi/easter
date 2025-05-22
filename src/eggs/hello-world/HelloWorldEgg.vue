@@ -4,10 +4,7 @@
     <div class="space-y-2">
       <p>This is a standard modal.</p>
       <p>The shell is a Vue SFC managed by a core UI system.</p>
-      <p>
-        The content is a Vue SFC that can be independently developed and
-        registered
-      </p>
+      <p>The content is a Vue SFC that can be independently developed.</p>
     </div>
   </div>
 </template>
