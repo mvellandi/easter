@@ -1,0 +1,6 @@
+.modal-frame {
+  border: 3px solid var(--color-gray-700);
+}
+.modal-shell {
+  background-color: var(--color-gray-100);
+}

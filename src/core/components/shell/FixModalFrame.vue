@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'relative z-10 box-border border border-yellow-700',
+      'modal-frame relative z-10 box-border',
       isVisible
         ? 'opacity-100 pointer-events-auto transition-all duration-300 ease-in-out'
         : 'opacity-0 pointer-events-none',

@@ -1,5 +1,5 @@
 <template>
-  <div class="ee-content bg-image-blue">
+  <div class="ee-content modal-shell">
     <DefaultCloseButton @close="closeModal" />
     <!-- Egg Content -->
     <slot />

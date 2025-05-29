@@ -6,6 +6,7 @@
 @import "./extras.css";
 @import "./backgrounds.css";
 @import "./typography.css";
+@import "./modals.css";
 
 kbd {
   background: var(--color-green-700);
