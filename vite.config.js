@@ -6,7 +6,9 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   // Base public path when served in development or production
-  base: "/easter/",
+  // base: "/easter/",
+  // Local production testing
+  base: "./",
 
   // Project root directory
   root: "src",

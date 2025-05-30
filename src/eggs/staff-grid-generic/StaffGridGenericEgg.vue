@@ -40,9 +40,9 @@ const totalImages = computed(() => props.info?.length ?? 0);
 
 function getAssetUrl(member: StaffMember) {
   if (!member || !member.image || erroredImages.value.has(member.name)) {
-    return `./eggs/staff-grid/${fallbackUrl}`;
+    return `./eggs/staff-grid-generic/${fallbackUrl}`;
   }
-  return `./eggs/staff-grid/${member.image}`;
+  return `./eggs/staff-grid-generic/${member.image}`;
 }
 
 function handleImageLoad(event?: Event): void {

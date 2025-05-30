@@ -82,6 +82,12 @@ npm run build
 ### Modal System
 - The modal fade-in uses a short (200ms) delay before showing content, unless the egg component explicitly signals readiness via a callback. This is a workaround for the lack of a true Vue Suspense or asset preloading mechanism. Eggs with images or assets can call the `notifyContentReady` prop to control when the modal appears, but most eggs will simply fade in after the delay. This may not be robust for long-loading assets.
 
+### Production Build
+The following assets need to be manually copied over after building:
+- egg directories and their assets, but only their graphic assets
+- src/asset/img files need to be copied to docs/assets, as images reference by CSS files aren't copied
+- custom css files in _temp/bootdev with asset paths differing from the development files, so they resolve correctly in Github Pages
+
 ## Development
 
 ```bash
@@ -133,93 +139,16 @@ npm run build
    - Add unit and integration tests for modal and trigger logic.
    - Update documentation to reflect the new trigger system and usage patterns.
 
----
-
-## Setting Up Separate Entry Points for Page Variants
-
-To allow each HTML page (e.g., company vs. generic portfolio) to load only the eggs it needs, follow these steps:
-
-### 1. Duplicate the Staff Grid Egg
-- Copy your current `src/eggs/staff-grid/` to `src/eggs/staff-grid-generic/`.
-- In `staff-grid-generic`, replace real data/photos with generic names and the default avatar.
-
-### 2. Create a New Entry Script for the Company Page
-- If you don't already have one, create `src/bootdev.ts` (or similar).
-- This file will be similar to your `src/main.ts`, but will import the company-specific eggs.
-
-**Example:**
-```ts
-// src/bootdev.ts
-import { createApp } from 'vue';
-import App from './core/App.vue';
-import staffGrid from './eggs/staff-grid'; // company version
-import helloWorld from './eggs/hello-world';
-// ...import any other company-specific eggs
-
-const app = createApp(App);
-// Register eggs
-app.use(staffGrid);
-app.use(helloWorld);
-// ...register other eggs
-app.mount('#app');
-```
-
-- In your `src/main.ts`, import the generic version:
-```ts
-// src/main.ts
-import { createApp } from 'vue';
-import App from './core/App.vue';
-import staffGridGeneric from './eggs/staff-grid-generic'; // generic version
-import helloWorld from './eggs/hello-world';
-// ...import any other generic eggs
-
-const app = createApp(App);
-// Register eggs
-app.use(staffGridGeneric);
-app.use(helloWorld);
-// ...register other eggs
-app.mount('#app');
-```
-
-### 3. Update HTML Files to Use the Correct Entry Script
-- In `index.html`, make sure the script tag points to `main.js`:
-  ```html
-  <script type="module" src="./main.js"></script>
-  ```
-- In `bootdev.html`, point to `bootdev.js`:
-  ```html
-  <script type="module" src="./bootdev.js"></script>
-  ```
-
-### 4. Configure Vite for Multiple Entry Points
-- Edit `vite.config.js` to support multiple entry points:
-```js
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
-
-export default defineConfig({
-  plugins: [vue()],
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.html'),
-        bootdev: resolve(__dirname, 'src/bootdev.html'),
-      },
-    },
-    outDir: 'dist',
-  },
-});
-```
-- Adjust paths if your HTML files are in a different directory.
-
-### 5. Build and Test
-- Run `npm run build`.
-- Check the `dist/` directory: you should see separate bundles for each HTML file.
-- Deploy to GitHub Pages or your static host.
-
-### 6. (Optional) Clean Up and Document
-- Make sure your README or project docs explain which entry script and eggs are used for each page.
-- Consider adding comments in your entry scripts for clarity.
 
 ---
+
+## License and Asset Usage
+
+**Important:**  
+This project contains a mix of open-source code and third-party or company-copyrighted assets.  
+Some directories and files may contain both open-source and copyrighted materials.
+
+- **Source code** is licensed under the MIT License (see [LICENSE](LICENSE)), except as noted below.
+- **Images, styles, and demo content** derived from [Company Name] are copyright their respective owners and are included for demonstration purposes only. These assets may not be reused, redistributed, or modified without permission.
+
+If you wish to reuse any part of this project, you must review individual files and asset origins to ensure compliance with applicable licenses.

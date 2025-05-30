@@ -15,7 +15,7 @@
     "static-site"
   ],
   "author": "",
-  "license": "MIT",
+  "license": "SEE LICENSE",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.6",
     "tailwindcss": "^4.1.6",
