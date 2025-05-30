@@ -11,7 +11,7 @@
 
 .bg-image-blue,
 .modal-shell {
-  background-color: transparent;
+  background-color: transparent !important;
   background-blend-mode: overlay;
   background-image: url(../assets/maptexture2.webp),
     linear-gradient(var(--gray-950), var(--gray-900));
