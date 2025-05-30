@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Ava Brooks",
+    "role": "Frontend Developer"
+  },
+  {
+    "name": "Ben Carter",
+    "role": "UI/UX Designer"
+  },
+  {
+    "name": "Charlie Diaz",
+    "role": "QA Engineer"
+  },
+  {
+    "name": "Dana Evans",
+    "role": "Project Manager"
+  },
+  {
+    "name": "Eli Fisher",
+    "role": "DevOps Engineer"
+  },
+  {
+    "name": "Harper Green",
+    "role": "Full Stack Developer"
+  },
+  {
+    "name": "Jordan Lee",
+    "role": "Product Owner"
+  },
+  {
+    "name": "Morgan Patel",
+    "role": "Backend Developer"
+  },
+  {
+    "name": "Quinn Taylor",
+    "role": "Content Strategist"
+  },
+  {
+    "name": "Zara Williams",
+    "role": "Marketing Specialist"
+  }
+]

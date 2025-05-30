@@ -134,3 +134,92 @@ npm run build
    - Update documentation to reflect the new trigger system and usage patterns.
 
 ---
+
+## Setting Up Separate Entry Points for Page Variants
+
+To allow each HTML page (e.g., company vs. generic portfolio) to load only the eggs it needs, follow these steps:
+
+### 1. Duplicate the Staff Grid Egg
+- Copy your current `src/eggs/staff-grid/` to `src/eggs/staff-grid-generic/`.
+- In `staff-grid-generic`, replace real data/photos with generic names and the default avatar.
+
+### 2. Create a New Entry Script for the Company Page
+- If you don't already have one, create `src/bootdev.ts` (or similar).
+- This file will be similar to your `src/main.ts`, but will import the company-specific eggs.
+
+**Example:**
+```ts
+// src/bootdev.ts
+import { createApp } from 'vue';
+import App from './core/App.vue';
+import staffGrid from './eggs/staff-grid'; // company version
+import helloWorld from './eggs/hello-world';
+// ...import any other company-specific eggs
+
+const app = createApp(App);
+// Register eggs
+app.use(staffGrid);
+app.use(helloWorld);
+// ...register other eggs
+app.mount('#app');
+```
+
+- In your `src/main.ts`, import the generic version:
+```ts
+// src/main.ts
+import { createApp } from 'vue';
+import App from './core/App.vue';
+import staffGridGeneric from './eggs/staff-grid-generic'; // generic version
+import helloWorld from './eggs/hello-world';
+// ...import any other generic eggs
+
+const app = createApp(App);
+// Register eggs
+app.use(staffGridGeneric);
+app.use(helloWorld);
+// ...register other eggs
+app.mount('#app');
+```
+
+### 3. Update HTML Files to Use the Correct Entry Script
+- In `index.html`, make sure the script tag points to `main.js`:
+  ```html
+  <script type="module" src="./main.js"></script>
+  ```
+- In `bootdev.html`, point to `bootdev.js`:
+  ```html
+  <script type="module" src="./bootdev.js"></script>
+  ```
+
+### 4. Configure Vite for Multiple Entry Points
+- Edit `vite.config.js` to support multiple entry points:
+```js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+
+export default defineConfig({
+  plugins: [vue()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'src/index.html'),
+        bootdev: resolve(__dirname, 'src/bootdev.html'),
+      },
+    },
+    outDir: 'dist',
+  },
+});
+```
+- Adjust paths if your HTML files are in a different directory.
+
+### 5. Build and Test
+- Run `npm run build`.
+- Check the `dist/` directory: you should see separate bundles for each HTML file.
+- Deploy to GitHub Pages or your static host.
+
+### 6. (Optional) Clean Up and Document
+- Make sure your README or project docs explain which entry script and eggs are used for each page.
+- Consider adding comments in your entry scripts for clarity.
+
+---

@@ -1,9 +1,9 @@
 import core, { registerKeyCombo, registerModalTrigger } from "./core/core";
 import { registerMultiClickTrigger } from "./core/utils/multiClickTrigger";
 import HelloWorldEgg from "./eggs/hello-world/HelloWorldEgg.vue";
-import StaffGridGenericEgg from "./eggs/staff-grid-generic/StaffGridGenericEgg.vue";
-import type { StaffMember } from "./eggs/staff-grid-generic/StaffMember";
-import staffData from "./eggs/staff-grid-generic/staff-data-generic.json";
+import StaffGridEgg from "./eggs/staff-grid/StaffGridEgg.vue";
+import type { StaffMember } from "./eggs/staff-grid/StaffMember";
+import staffData from "./eggs/staff-grid/staff-data.json";
 
 // --- TypeScript interfaces for triggers and egg configs ---
 interface KeyboardTrigger {
@@ -48,7 +48,7 @@ const config: { eggs: EggsConfig } = {
       },
     },
     "staff-grid": {
-      component: StaffGridGenericEgg,
+      component: StaffGridEgg,
       options: {
         title: "Our Team",
         trigger: [

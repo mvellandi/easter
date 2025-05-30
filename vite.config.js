@@ -37,6 +37,10 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, "src/index.html"),
+        bootdev: resolve(__dirname, "src/bootdev.html"),
+      },
       output: {
         manualChunks: {
           vue: ["vue"],
