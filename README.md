@@ -87,6 +87,7 @@ The following assets need to be manually copied over after building:
 - egg directories and their assets, but only their graphic assets
 - src/asset/img files need to be copied to docs/assets, as images reference by CSS files aren't copied
 - custom css files in _temp/bootdev with asset paths differing from the development files, so they resolve correctly in Github Pages
+- bootdev.html needs updating custom theme file to: "./bootdev/index.css"
 
 ## Development
 
