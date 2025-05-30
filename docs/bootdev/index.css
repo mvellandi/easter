@@ -6,7 +6,7 @@
 }
 
 .modal-frame {
-  border: 1px solid var(--color-yellow-700);
+  border: 1px solid var(--color-yellow-700) !important;
 }
 
 .bg-image-blue,
