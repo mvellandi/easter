@@ -8,6 +8,26 @@
 @import "./typography.css";
 @import "./modals.css";
 
+:root {
+  --egg-pattern-width: 300px;
+  --egg-border-height: 90px;
+  --egg-bottom-offset: -30px;
+}
+
+
+.easter-egg-border {
+  position: absolute;
+  bottom: var(--egg-bottom-offset);
+  left: 0;
+  width: 100%;
+  height: var(--egg-border-height);
+  background-image: url("./easter-eggs.svg");
+  background-repeat: repeat-x;
+  background-size: var(--egg-pattern-width) var(--egg-border-height);
+  z-index: 25;
+  pointer-events: none;
+}
+
 kbd {
   background: var(--color-green-700);
   color: var(--color-gray-100);

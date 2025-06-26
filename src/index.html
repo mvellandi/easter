@@ -10,15 +10,15 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
   </head>
-  <body class="text-gray-800 bg-gray-100 min-h-screen">
-    <nav class="border-b border-gray-600 relative">
+  <body class="text-[#320b5c] bg-blue-100 min-h-screen">
+    <nav class="bg-green-200 relative border-b-4 border-dotted border-green-700">
       <div class="top-nav-bar-height mx-auto px-2 lg:px-8">
         <div class="relative z-[21] flex h-full items-center justify-between">
           <!-- mobile nav -->
           <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
             <button
               type="button"
-              class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              class="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -66,7 +66,7 @@
             <!-- LOGO -->
             <div class="hidden shrink-0 lg:flex">
               <div class="flex flex-row items-center">
-                <span class="text-xl">Sample Logo</span>
+                <span class="text-2xl it">Easter Logo</span>
                 <button
                   class="h-full w-[50px] opacity-0 focus:opacity-20 z-20"
                   aria-label="staff directory"
@@ -93,11 +93,12 @@
         tabindex="1"
         data-modal-trigger="controller"
       ></button>
+      <div class="easter-egg-border"></div>
     </nav>
 
-    <div class="p-8 pt-10 max-w-4xl mx-auto z-1 text-lg">
+    <div class="p-8 pt-16 max-w-4xl mx-auto z-1 text-lg">
       <!-- TITLE -->
-      <h1 class="text-5xl mb-3">Easter 🐇</h1>
+      <h1 class="text-5xl mb-3 !text-fuchsia-800">Easter 🐇</h1>
       <!-- DESCRIPTION -->
       <p class="mb-5">
         A project by <a href="http://www.vellandi.net" class="textlink">Mario Vellandi</a>
@@ -110,13 +111,13 @@
         <a href="bootdev.html" class="textlink">Click here</a> for a sample prototype modeled after the tech educational platform Boot.dev.
       </p>
       <!-- TAKEAWAY -->
-      <h2 class="text-3xl mb-2">Big Picture</h2>
+      <h2 class="text-3xl mb-2 !text-fuchsia-800">Big Picture</h2>
       <p class="mb-5">
         Like embedded video and analytics services, Easter media can be distributed on any webpage using an imported script. When combined with custom triggers and interactions, it
         allows being helpful and sparking intrigue, surprise, and joy. Although Easter can streamline lightweight media distribution across multiple internal web domains, perhaps the larger opportunity is with 3rd parties who can easily include content, promotions, games, or application functionality.
       </p>
       <!-- INSTRUCTIONS -->
-      <h2 class="text-3xl mb-3">Instructions</h2>
+      <h2 class="text-3xl mb-3 !text-fuchsia-800">Instructions</h2>
       <div class="space-y-4">
         <p>
           <span
@@ -145,8 +146,8 @@
         </p>
       </div>
 
-      <h2 class="text-3xl mt-8 mb-3">Dive Deeper</h2>
-      <h3 class="text-2xl mb-1">Process</h3>
+      <h2 class="text-3xl mt-8 mb-3 !text-fuchsia-800">Dive Deeper</h2>
+      <h3 class="text-2xl mb-1 !text-fuchsia-900">Process</h3>
       <div class="space-y-4 mb-8">
         <p>
           Easter's first implementation was inspired by the zsh plugin system,
@@ -167,7 +168,7 @@
         </p>
       </div>
 
-      <h3 class="text-2xl mb-1">Technical Details</h3>
+      <h3 class="text-2xl mb-1 !text-fuchsia-900">Technical Details</h3>
       <div class="space-y-4 mb-8">
         <p>
           Built with TypeScript, VueJS, and Vite. The system can display,
@@ -180,7 +181,7 @@
           demand.
         </p>
       </div>
-      <h3 class="text-2xl mb-1">Known Issues</h3>
+      <h3 class="text-2xl mb-1 !text-fuchsia-900">Known Issues</h3>
       <div class="space-y-4 mb-8">
         <p>
           The modal fade-in uses a short (200ms) delay before showing content,
@@ -192,9 +193,9 @@
           long-loading assets.
         </p>
       </div>
-      <h3 class="text-2xl mb-1">Improvement Opportunities</h3>
+      <h3 class="text-2xl mb-1 !text-fuchsia-900">Improvement Opportunities</h3>
       <div class="space-y-4 mb-8">
-        <h4 class="text-xl mb-1">Accessibility</h4>
+        <h4 class="text-xl mb-1 !text-fuchsia-900">Accessibility</h4>
         <ul class="list-disc list-inside">
           <li>
             Add ARIA roles (e.g., `role="dialog"`), `aria-modal="true"`, and
@@ -207,7 +208,7 @@
         </ul>
       </div>
       <div class="space-y-4 mb-8">
-        <h4 class="text-xl mb-1">Dynamic Egg Imports</h4>
+        <h4 class="text-xl mb-1 !text-fuchsia-900">Dynamic Egg Imports</h4>
         <p>
           Refactor egg registration to use dynamic imports for performance and
           bundle size reduction. Consider using a web server to list and serve
@@ -215,7 +216,7 @@
         </p>
       </div>
       <div class="space-y-4 mb-8">
-        <h4 class="text-xl mb-1">Extending the Generic Trigger System</h4>
+        <h4 class="text-xl mb-1 !text-fuchsia-900">Extending the Generic Trigger System</h4>
         <ul class="list-disc list-inside">
           <li>
             Add support for more trigger types (e.g. multi-click, long-press).
