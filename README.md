@@ -83,11 +83,11 @@ npm run build
 - The modal fade-in uses a short (200ms) delay before showing content, unless the egg component explicitly signals readiness via a callback. This is a workaround for the lack of a true Vue Suspense or asset preloading mechanism. Eggs with images or assets can call the `notifyContentReady` prop to control when the modal appears, but most eggs will simply fade in after the delay. This may not be robust for long-loading assets.
 
 ### Production Build (docs directory) for GitHub Pages
-- bootdev.html needs updating custom theme file to: "./bootdev/index.css" (leave core and helloworldegg)
+- bootdev.html needs updating custom theme file to: `./bootdev/index.css` (leave core and helloworldegg)
 ## THE FOLLOWING ASSETS NEED TO BE MANUALLY COPIED FROM SRC TO DOCS AFTER BUILDING:
 - `src/eggs` need to be copied to `docs/eggs`. Only images will be loaded anyway.
 - image FILES in `src/asset/img` need to be copied INTO `docs/assets`. (Reason: images reference by CSS files aren't copied by vite).
-- `src/styles/bootdev-prod/` needs to be copied renamed to `docs/bootdev` and  (Reason: asset paths in development resolve differently than in production).
+- `src/styles/bootdev-prod/` needs to be copied and renamed to `docs/bootdev` and  (Reason: asset paths in development resolve differently than in production).
 
 ## Development
 
