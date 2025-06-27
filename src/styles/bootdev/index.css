@@ -3,6 +3,7 @@
 
 :root {
   color-scheme: dark;
+  --top-nav-bar-height: 50px;
 }
 
 .modal-frame {

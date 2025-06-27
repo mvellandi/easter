@@ -12,8 +12,8 @@
   --egg-pattern-width: 300px;
   --egg-border-height: 90px;
   --egg-bottom-offset: -30px;
+  --top-nav-bar-height: 70px;
 }
-
 
 .easter-egg-border {
   position: absolute;
