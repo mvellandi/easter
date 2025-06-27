@@ -74,7 +74,7 @@ function handleButtonPress(button: ButtonType) {
     );
     if (match) {
       successImage.value = successImageUrl;
-      setTimeout(() => (successImage.value = null), 2000);
+      setTimeout(() => (successImage.value = null), 4000);
       pressedButtons.value = [];
     } else {
       shake.value = true;
