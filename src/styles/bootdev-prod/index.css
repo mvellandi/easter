@@ -7,14 +7,14 @@
 }
 
 .modal-frame {
-  border: 1px solid var(--color-yellow-700) !important;
+  border: 1px solid var(--color-yellow-700);
 }
 
 .bg-image-blue,
 .modal-shell {
-  background-color: transparent !important;
+  background-color: transparent;
   background-blend-mode: overlay;
-  background-image: url(../assets/maptexture2.webp),
+  background-image: url(./assets/img/maptexture2.webp),
     linear-gradient(var(--gray-950), var(--gray-900));
   background-attachment: fixed;
   background-position: 50%;
